@@ -2,12 +2,13 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>⚙️ GIMBOT JADUL - Kolektor Baut ⚙️</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>🤖 GIMBOT JADUL - Mobile Edition 🤖</title>
     <style>
         * {
             user-select: none;
             -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
         }
 
         body {
@@ -18,110 +19,148 @@
             align-items: center;
             font-family: 'Courier New', 'VT323', monospace;
             margin: 0;
-            padding: 20px;
+            padding: 16px;
+            touch-action: pan-x pan-y; /* agar tidak zoom saat menyentuh tombol */
         }
 
-        .game-wrapper {
-            background: #000000aa;
-            border-radius: 28px;
-            padding: 20px;
-            box-shadow: 0 0 0 4px #7c5e3a, 0 12px 28px black;
+        .game-container {
+            max-width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
         }
 
         canvas {
             display: block;
-            margin: 0 auto;
+            width: 100%;
+            height: auto;
+            max-width: 800px;
+            border-radius: 20px;
             box-shadow: 0 0 0 3px #f3c26b, 0 8px 20px black;
             image-rendering: crisp-edges;
             image-rendering: pixelated;
-            image-rendering: pixelated;
+            cursor: pointer;
         }
 
+        /* Panel info responsif */
         .info-panel {
             display: flex;
-            justify-content: space-between;
-            margin-top: 16px;
-            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
             background: #1a1f2e;
-            padding: 8px 18px;
-            border-radius: 40px;
+            padding: 10px 16px;
+            border-radius: 60px;
             border: 2px solid #ffcd7e;
             color: #f7ecc7;
             font-weight: bold;
-            font-size: 1.6rem;
+            font-size: 1.2rem;
             text-shadow: 2px 2px 0 #2a2418;
+            width: fit-content;
+            margin: 0 auto;
         }
 
         .info-panel div {
             display: flex;
-            gap: 12px;
+            gap: 8px;
             align-items: baseline;
+            background: #00000066;
+            padding: 4px 12px;
+            border-radius: 40px;
         }
 
         .info-panel span:first-child {
-            font-size: 1.2rem;
-            letter-spacing: 2px;
+            font-size: 1rem;
         }
 
         .info-panel .value {
-            font-size: 2rem;
-            background: #00000099;
-            padding: 0 12px;
-            border-radius: 30px;
+            font-size: 1.6rem;
             font-family: monospace;
             color: #ffd98c;
+            min-width: 40px;
+            text-align: center;
         }
 
-        button {
-            background: #d9a13b;
+        /* TOUCH CONTROLS - Baris tombol untuk HP */
+        .touch-controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 5px;
+            margin-bottom: 8px;
+        }
+
+        .ctrl-btn {
+            background: #2c2f3e;
             border: none;
-            font-family: 'Courier New', monospace;
+            font-size: 2rem;
             font-weight: bold;
-            font-size: 1.2rem;
-            padding: 5px 20px;
-            border-radius: 32px;
+            font-family: monospace;
+            padding: 12px 20px;
+            border-radius: 60px;
+            color: #ffdfa5;
+            box-shadow: 0 5px 0 #121520;
+            transition: 0.05s linear;
+            text-align: center;
+            min-width: 75px;
             cursor: pointer;
-            transition: 0.07s linear;
-            box-shadow: 0 4px 0 #6b3f00;
-            color: #231f1a;
+            touch-action: manipulation;
+            background: #3a3f55;
         }
 
-        button:active {
-            transform: translateY(2px);
-            box-shadow: 0 1px 0 #6b3f00;
+        .ctrl-btn:active {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 #121520;
+        }
+
+        .reset-btn {
+            background: #c97e2a;
+            color: #1f1b10;
+            box-shadow: 0 5px 0 #6b3f00;
+            font-size: 1.4rem;
         }
 
         .status {
-            margin-top: 12px;
-            text-align: center;
             background: #2d2418b3;
-            padding: 5px 10px;
-            border-radius: 24px;
-            font-size: 1rem;
+            backdrop-filter: blur(8px);
+            padding: 8px 14px;
+            border-radius: 40px;
+            font-size: 0.85rem;
             font-weight: bold;
+            text-align: center;
             color: #ffe2a4;
-            backdrop-filter: blur(4px);
+            max-width: 90%;
         }
 
-        @media (max-width: 860px) {
-            .info-panel { font-size: 1rem; }
-            .info-panel .value { font-size: 1.4rem; }
-            .info-panel span:first-child { font-size: 0.9rem; }
+        @media (max-width: 650px) {
+            .ctrl-btn { padding: 10px 16px; font-size: 1.7rem; min-width: 65px; }
+            .info-panel { gap: 8px; }
+            .info-panel .value { font-size: 1.3rem; }
+            .status { font-size: 0.75rem; }
         }
     </style>
 </head>
 <body>
-<div>
-    <div class="game-wrapper">
-        <canvas id="gameCanvas" width="800" height="480"></canvas>
-        <div class="info-panel">
-            <div>🔩 Baut: <span class="value" id="scoreValue">0</span></div>
-            <div>❤️ Nyawa: <span class="value" id="livesValue">3</span></div>
-            <div>🚪 Target: <span class="value" id="targetValue">5</span></div>
-            <button id="resetButton">🌀 RESET</button>
-        </div>
-        <div class="status" id="gameStatus">⬅️  ➡️  |  ↑ / SPASI untuk lompat  |  kumpulkan baut & hindari api!</div>
+<div class="game-container">
+    <canvas id="gameCanvas" width="800" height="480"></canvas>
+
+    <div class="info-panel">
+        <div>🔩 <span class="value" id="scoreValue">0</span></div>
+        <div>❤️ <span class="value" id="livesValue">3</span></div>
+        <div>🚪 <span class="value" id="targetValue">5</span></div>
     </div>
+
+    <!-- Tombol sentuh untuk mobile -->
+    <div class="touch-controls">
+        <button class="ctrl-btn" id="btnLeft">◀ KIRI</button>
+        <button class="ctrl-btn" id="btnRight">KANAN ▶</button>
+        <button class="ctrl-btn" id="btnJump">🦿 LOMPAT</button>
+        <button class="ctrl-btn reset-btn" id="btnReset">🔄 RESET</button>
+    </div>
+
+    <div class="status" id="gameStatus">⬅️ ➡️  |  tekan tombol layar  |  kumpulkan baut & hindari api!</div>
 </div>
 
 <script>
@@ -131,13 +170,12 @@
         const ctx = canvas.getContext('2d');
         canvas.width = 800;
         canvas.height = 480;
-        
+
         // ---------- GAME WORLD ----------
         const GRAVITY = 0.6;
         const JUMP_POWER = -9;
-        const GROUND_Y = 420;   // posisi lantai (y=420 ke bawah)
+        const GROUND_Y = 420;
 
-        // Player (Gimbot)
         let player = {
             x: 80,
             y: GROUND_Y - 28,
@@ -149,63 +187,57 @@
             facingRight: true
         };
 
-        // Level sederhana: platform tetap + collectible + musuh (bola api)
         let platforms = [
-            { x: 0, y: GROUND_Y, w: 800, h: 10 },         // tanah utama
-            { x: 180, y: 360, w: 100, h: 18 },            // platform kiri atas
-            { x: 500, y: 320, w: 100, h: 18 },            // platform kanan atas
-            { x: 350, y: 270, w: 80, h: 18 },             // platform tengah tinggi
-            { x: 640, y: 380, w: 90, h: 18 }              // platform dekat pintu
+            { x: 0, y: GROUND_Y, w: 800, h: 10 },
+            { x: 180, y: 360, w: 100, h: 18 },
+            { x: 500, y: 320, w: 100, h: 18 },
+            { x: 350, y: 270, w: 80, h: 18 },
+            { x: 640, y: 380, w: 90, h: 18 }
         ];
-        
-        // Collectible: baut emas
+
         let bolts = [
             { x: 220, y: 335, w: 14, h: 14, collected: false },
             { x: 540, y: 295, w: 14, h: 14, collected: false },
             { x: 380, y: 245, w: 14, h: 14, collected: false },
             { x: 670, y: 355, w: 14, h: 14, collected: false },
             { x: 110, y: 395, w: 14, h: 14, collected: false },
-            { x: 710, y: 395, w: 14, h: 14, collected: false },  // baut ekstra
+            { x: 710, y: 395, w: 14, h: 14, collected: false }
         ];
-        
-        // Musuh: bola api bergerak horizontal atau diam di platform
+
         let enemies = [
             { x: 240, y: 345, w: 18, h: 18, vx: 0.9, dir: 1, type: 'fire' },
             { x: 550, y: 305, w: 18, h: 18, vx: 1.2, dir: -1, type: 'fire' },
             { x: 380, y: 255, w: 18, h: 18, vx: 0.7, dir: 1, type: 'fire' },
             { x: 680, y: 365, w: 18, h: 18, vx: 1.1, dir: -1, type: 'fire' }
         ];
-        
-        // Pintu keluar / goal (menang jika semua baut terkumpul dan menyentuh)
+
         let exitDoor = { x: 720, y: GROUND_Y - 38, w: 28, h: 38, active: false };
-        
-        // Game state
-        let score = 0;           // jumlah baut terkumpul
+
+        let score = 0;
         let targetBolts = bolts.length;
         let lives = 3;
         let gameActive = true;
         let winFlag = false;
-        let invincibleFrames = 0;   // iframes setelah terkena api
+        let invincibleFrames = 0;
         let animationId = null;
-        
-        // Control flags
+
+        // control state (untuk keyboard & touch)
         const keys = {
             ArrowLeft: false,
             ArrowRight: false,
             jumpPressed: false,
             canJump: true
         };
-        
+
         // DOM elements
         const scoreSpan = document.getElementById('scoreValue');
         const livesSpan = document.getElementById('livesValue');
         const targetSpan = document.getElementById('targetValue');
-        const resetBtn = document.getElementById('resetButton');
+        const resetBtn = document.getElementById('btnReset');
         const statusDiv = document.getElementById('gameStatus');
-        
+
         targetSpan.innerText = targetBolts;
-        
-        // helper update UI
+
         function updateUI() {
             scoreSpan.innerText = score;
             livesSpan.innerText = lives;
@@ -216,13 +248,10 @@
             } else {
                 statusDiv.innerHTML = `🔧 Baut tersisa: ${targetBolts - score}  |  ❤️ nyawa: ${lives}  |  hindari api & capai pintu!`;
             }
-            // update target display
             targetSpan.innerText = targetBolts;
         }
-        
-        // reset penuh
+
         function resetGame() {
-            // reset player
             player = {
                 x: 80,
                 y: GROUND_Y - 28,
@@ -233,64 +262,51 @@
                 onGround: true,
                 facingRight: true
             };
-            // reset bolts
             bolts.forEach(b => b.collected = false);
             score = 0;
             lives = 3;
             gameActive = true;
             winFlag = false;
             invincibleFrames = 0;
-            // reset enemies posisi awal
             enemies = [
                 { x: 240, y: 345, w: 18, h: 18, vx: 0.9, dir: 1, type: 'fire' },
                 { x: 550, y: 305, w: 18, h: 18, vx: 1.2, dir: -1, type: 'fire' },
                 { x: 380, y: 255, w: 18, h: 18, vx: 0.7, dir: 1, type: 'fire' },
                 { x: 680, y: 365, w: 18, h: 18, vx: 1.1, dir: -1, type: 'fire' }
             ];
-            // reset exit active condition
             exitDoor.active = false;
             updateUI();
         }
-        
-        // collision AABB
+
+        // collisions & physics (sama seperti versi sebelumnya)
         function collide(r1, r2) {
-            return !(r2.x > r1.x + r1.w ||
-                r2.x + r2.w < r1.x ||
-                r2.y > r1.y + r1.h ||
-                r2.y + r2.h < r1.y);
+            return !(r2.x > r1.x + r1.w || r2.x + r2.w < r1.x || r2.y > r1.y + r1.h || r2.y + r2.h < r1.y);
         }
-        
-        // platform collision & response
+
         function handleCollisions() {
             player.onGround = false;
-            // simpan posisi lama untuk sliding
             let newX = player.x + player.vx;
             let playerRect = { x: newX, y: player.y, w: player.width, h: player.height };
-            // collision X dengan platform
             for (let plat of platforms) {
                 let platRect = { x: plat.x, y: plat.y, w: plat.w, h: plat.h };
                 if (collide(playerRect, platRect)) {
-                    if (player.vx > 0) {
-                        newX = platRect.x - player.width;
-                    } else if (player.vx < 0) {
-                        newX = platRect.x + platRect.w;
-                    }
+                    if (player.vx > 0) newX = platRect.x - player.width;
+                    else if (player.vx < 0) newX = platRect.x + platRect.w;
                     playerRect.x = newX;
                 }
             }
             player.x = newX;
-            
-            // collision Y
+
             let newY = player.y + player.vy;
             let playerRectY = { x: player.x, y: newY, w: player.width, h: player.height };
             for (let plat of platforms) {
                 let platRect = { x: plat.x, y: plat.y, w: plat.w, h: plat.h };
                 if (collide(playerRectY, platRect)) {
-                    if (player.vy > 0) { // jatuh
+                    if (player.vy > 0) {
                         newY = platRect.y - player.height;
                         player.vy = 0;
                         player.onGround = true;
-                    } else if (player.vy < 0) { // lompat terbentur
+                    } else if (player.vy < 0) {
                         newY = platRect.y + platRect.h;
                         player.vy = 0;
                     }
@@ -298,29 +314,24 @@
                 }
             }
             player.y = newY;
-            
-            // batas bawah (jatuh ke jurang)
+
             if (player.y + player.height > GROUND_Y + 20) {
-                // jatuh, kurangi nyawa
-                if (gameActive && !winFlag) {
-                    loseLife();
-                }
+                if (gameActive && !winFlag) loseLife();
                 resetPlayerPosition();
             }
-            // batas kiri/kanan layar
             if (player.x < 10) player.x = 10;
             if (player.x + player.width > canvas.width - 10) player.x = canvas.width - player.width - 10;
         }
-        
+
         function resetPlayerPosition() {
             player.x = 80;
             player.y = GROUND_Y - 28;
             player.vx = 0;
             player.vy = 0;
             player.onGround = true;
-            invincibleFrames = 25; // i-frame setelah mati
+            invincibleFrames = 25;
         }
-        
+
         function loseLife() {
             if (!gameActive || winFlag) return;
             lives--;
@@ -335,10 +346,8 @@
                 statusDiv.innerHTML = `🔥 TERKENA API! Nyawa sisa: ${lives} 🔥`;
                 setTimeout(() => updateUI(), 200);
             }
-            updateUI();
         }
-        
-        // kumpulkan baut
+
         function collectBolts() {
             for (let i = 0; i < bolts.length; i++) {
                 const b = bolts[i];
@@ -352,43 +361,33 @@
                     }
                 }
             }
-            // cek apakah semua baut terkumpul -> aktifkan pintu
             if (score === targetBolts) {
                 exitDoor.active = true;
                 statusDiv.innerHTML = "✨ PINTU TERBUKA! Capai pintu untuk menang! ✨";
             }
         }
-        
-        // enemy collision (api) dengan iframes
+
         function handleEnemyCollision() {
             if (invincibleFrames > 0) {
                 invincibleFrames--;
                 return;
             }
             let playerRect = { x: player.x, y: player.y, w: player.width, h: player.height };
-            for (let i = 0; i < enemies.length; i++) {
-                const e = enemies[i];
+            for (let e of enemies) {
                 let enemyRect = { x: e.x, y: e.y, w: e.w, h: e.h };
                 if (collide(playerRect, enemyRect)) {
                     loseLife();
-                    invincibleFrames = 30;  // setengah detik aman (60fps kira2)
+                    invincibleFrames = 30;
                     break;
                 }
             }
         }
-        
-        // update musuh: gerak bolak balik di area platform
+
         function updateEnemies() {
             for (let e of enemies) {
-                // gerak horizontal
                 let newX = e.x + e.vx * e.dir;
-                // batas sederhana (tidak keluar platform area sekitar)
-                let leftBound = e.x - 35;
-                let rightBound = e.x + 35;
-                // cek bentur dengan world edge (optional)
                 if (newX < 30) { e.dir = 1; newX = 30; }
                 if (newX + e.w > canvas.width - 30) { e.dir = -1; newX = canvas.width - e.w - 30; }
-                // cek collision dengan platform biar tidak jatuh (sederhana)
                 let onSolid = false;
                 for (let plat of platforms) {
                     if (newX + e.w > plat.x && newX < plat.x + plat.w && Math.abs(e.y + e.h - plat.y) < 10) {
@@ -396,16 +395,11 @@
                         break;
                     }
                 }
-                if (!onSolid && e.y + e.h < GROUND_Y - 5) {
-                    e.dir *= -1;
-                } else {
-                    e.x = newX;
-                }
-                // update posisi y berdasarkan platform? biarkan statis di ketinggian tetap agar sederhana
+                if (!onSolid && e.y + e.h < GROUND_Y - 5) e.dir *= -1;
+                else e.x = newX;
             }
         }
-        
-        // pintu menang
+
         function checkWin() {
             if (!gameActive) return;
             if (exitDoor.active && score === targetBolts) {
@@ -419,8 +413,7 @@
                 }
             }
         }
-        
-        // update input dan fisika player
+
         function updatePlayerMovement() {
             if (!gameActive || winFlag) return;
             const MOVE_ACC = 0.7;
@@ -434,25 +427,18 @@
             } else {
                 player.vx *= 0.92;
             }
-            
-            // lompat
-            if (keys.jumpPressed && keys.canJump && player.onGround && (gameActive && !winFlag)) {
+            if (keys.jumpPressed && keys.canJump && player.onGround) {
                 player.vy = JUMP_POWER;
                 player.onGround = false;
                 keys.canJump = false;
             }
-            if (!keys.jumpPressed) {
-                keys.canJump = true;
-            }
-            
-            // gravitasi
+            if (!keys.jumpPressed) keys.canJump = true;
             player.vy += GRAVITY;
             if (player.vy > 12) player.vy = 12;
         }
-        
-        // ---------- GAMBAR ----------
+
+        // ------------------ GAMBAR ------------------
         function drawPixelGimbot(x, y, w, h, faceRight) {
-            // Robot jadul
             ctx.fillStyle = "#6c8c9e";
             ctx.fillRect(x+4, y+4, w-8, h-8);
             ctx.fillStyle = "#3a5e6b";
@@ -460,14 +446,12 @@
             ctx.fillStyle = "#cab577";
             ctx.fillRect(x+8, y+12, 6, 6);
             ctx.fillRect(x+w-14, y+12, 6, 6);
-            // mata
             ctx.fillStyle = "#fff6cf";
             ctx.fillRect(x+10, y+18, 5, 5);
             ctx.fillRect(x+w-15, y+18, 5, 5);
             ctx.fillStyle = "#000";
-            ctx.fillRect(faceRight? x+13 : x+8, y+20, 2, 2);
-            ctx.fillRect(faceRight? x+w-12 : x+w-17, y+20, 2, 2);
-            // antena
+            ctx.fillRect(faceRight ? x+13 : x+8, y+20, 2, 2);
+            ctx.fillRect(faceRight ? x+w-12 : x+w-17, y+20, 2, 2);
             ctx.fillStyle = "#c97e2a";
             ctx.fillRect(x+12, y-6, 4, 10);
             ctx.fillStyle = "#f0b34b";
@@ -475,24 +459,19 @@
             ctx.arc(x+14, y-6, 5, 0, Math.PI*2);
             ctx.fill();
         }
-        
+
         function draw() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            // latar retro gradien
             ctx.fillStyle = "#111d2b";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             ctx.fillStyle = "#3e5d3e";
-            for(let i=0; i<canvas.width; i+=30) {
-                ctx.fillRect(i, GROUND_Y+5, 15, 5);
-            }
-            // platform
+            for(let i=0; i<canvas.width; i+=30) ctx.fillRect(i, GROUND_Y+5, 15, 5);
             for(let plat of platforms) {
                 ctx.fillStyle = "#8b6946";
                 ctx.fillRect(plat.x, plat.y, plat.w, plat.h);
                 ctx.fillStyle = "#c29a5b";
                 ctx.fillRect(plat.x+2, plat.y-3, plat.w-4, 4);
             }
-            // baut
             for(let b of bolts) {
                 if(!b.collected){
                     ctx.fillStyle = "#f7d44a";
@@ -503,11 +482,9 @@
                     ctx.fillRect(b.x+5, b.y+3, 4, 8);
                 }
             }
-            // musuh api
             for(let e of enemies) {
                 ctx.fillStyle = "#ff6622";
                 ctx.shadowBlur = 8;
-                ctx.shadowColor = "orange";
                 ctx.beginPath();
                 ctx.ellipse(e.x+e.w/2, e.y+e.h/2, e.w/2, e.h/2, 0, 0, Math.PI*2);
                 ctx.fill();
@@ -517,7 +494,6 @@
                 ctx.fill();
                 ctx.shadowBlur = 0;
             }
-            // pintu
             if(exitDoor.active || score === targetBolts){
                 ctx.fillStyle = "#9f7e3c";
                 ctx.fillRect(exitDoor.x, exitDoor.y, exitDoor.w, exitDoor.h);
@@ -528,36 +504,23 @@
                 ctx.arc(exitDoor.x+exitDoor.w/2, exitDoor.y+8, 6, 0, Math.PI*2);
                 ctx.fill();
             }
-            // player dengan iframe blink
-            if(invincibleFrames > 0 && (Math.floor(Date.now()/50)%2 === 0)){
-                ctx.globalAlpha = 0.6;
-            }
+            if(invincibleFrames > 0 && (Math.floor(Date.now()/50)%2 === 0)) ctx.globalAlpha = 0.6;
             drawPixelGimbot(player.x, player.y, player.width, player.height, player.facingRight);
             ctx.globalAlpha = 1;
-            // tulisan if menang/game over
             if(winFlag){
-                ctx.font = "bold 34m monospace";
+                ctx.font = "bold 34px monospace";
                 ctx.fillStyle = "#ffdd77";
-                ctx.shadowBlur = 0;
                 ctx.fillText("WINNER!", canvas.width/2-70, 70);
             } else if(!gameActive && !winFlag){
-                ctx.font = "28m monospace";
+                ctx.font = "28px monospace";
                 ctx.fillStyle = "#ff8866";
                 ctx.fillText("GAME OVER", canvas.width/2-85, 70);
             }
         }
-        
-        // main loop update
+
         function updateGame() {
-            if (!gameActive && !winFlag) {
-                // game over, tidak update gerak
-                draw();
-                return;
-            }
-            if (winFlag) {
-                draw();
-                return;
-            }
+            if (!gameActive && !winFlag) { draw(); return; }
+            if (winFlag) { draw(); return; }
             updatePlayerMovement();
             handleCollisions();
             collectBolts();
@@ -566,15 +529,64 @@
             checkWin();
             draw();
         }
-        
-        // animasi loop
+
         function gameLoop() {
             updateGame();
             animationId = requestAnimationFrame(gameLoop);
         }
-        
-        // keyboard event
-        function initControls() {
+
+        // ---------- KONTROL UNTUK MOBILE (TOUCH BUTTONS) ----------
+        function attachTouchControls() {
+            const leftBtn = document.getElementById('btnLeft');
+            const rightBtn = document.getElementById('btnRight');
+            const jumpBtn = document.getElementById('btnJump');
+            const resetTouchBtn = document.getElementById('btnReset');
+
+            // Event untuk tombol kiri (sentuh mulai & berakhir)
+            leftBtn.addEventListener('touchstart', (e) => { e.preventDefault(); keys.ArrowLeft = true; });
+            leftBtn.addEventListener('touchend', (e) => { e.preventDefault(); keys.ArrowLeft = false; });
+            leftBtn.addEventListener('mousedown', () => { keys.ArrowLeft = true; });
+            leftBtn.addEventListener('mouseup', () => { keys.ArrowLeft = false; });
+            // biar lepas saat mouse leave
+            leftBtn.addEventListener('mouseleave', () => { keys.ArrowLeft = false; });
+
+            rightBtn.addEventListener('touchstart', (e) => { e.preventDefault(); keys.ArrowRight = true; });
+            rightBtn.addEventListener('touchend', (e) => { e.preventDefault(); keys.ArrowRight = false; });
+            rightBtn.addEventListener('mousedown', () => { keys.ArrowRight = true; });
+            rightBtn.addEventListener('mouseup', () => { keys.ArrowRight = false; });
+            rightBtn.addEventListener('mouseleave', () => { keys.ArrowRight = false; });
+
+            // Lompat: saat disentuh, aktifkan jumpPressed, lalu lepas setelah touchend/mouseup
+            function startJump(e) { e.preventDefault(); keys.jumpPressed = true; }
+            function endJump(e) { e.preventDefault(); keys.jumpPressed = false; }
+            jumpBtn.addEventListener('touchstart', startJump);
+            jumpBtn.addEventListener('touchend', endJump);
+            jumpBtn.addEventListener('mousedown', startJump);
+            jumpBtn.addEventListener('mouseup', endJump);
+            jumpBtn.addEventListener('mouseleave', endJump);
+
+            // reset button langsung panggil reset
+            resetTouchBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                resetGame();
+                gameActive = true;
+                winFlag = false;
+                invincibleFrames = 0;
+                updateUI();
+            });
+            // juga support touch
+            resetTouchBtn.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                resetGame();
+                gameActive = true;
+                winFlag = false;
+                invincibleFrames = 0;
+                updateUI();
+            });
+        }
+
+        // Keyboard tetap support untuk debugging
+        function initKeyboard() {
             window.addEventListener('keydown', (e) => {
                 if (e.key === 'ArrowLeft') keys.ArrowLeft = true;
                 if (e.key === 'ArrowRight') keys.ArrowRight = true;
@@ -591,20 +603,17 @@
                     e.preventDefault();
                 }
             });
-            // untuk mobile sentuhan opsional tidak ditambahkan agar fokus keyboard
         }
-        
-        resetBtn.addEventListener('click', () => {
+
+        // inisialisasi game
+        function init() {
             resetGame();
-            gameActive = true;
-            winFlag = false;
-            invincibleFrames = 0;
-            updateUI();
-        });
-        
-        resetGame();
-        initControls();
-        gameLoop();
+            initKeyboard();
+            attachTouchControls();
+            gameLoop();
+        }
+
+        init();
     })();
 </script>
 </body>
