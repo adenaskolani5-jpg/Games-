@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>🎈 Pop the Balloon - Game Klik Cepat</title>
+    <style>
+        * {
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background: linear-gradient(145deg, #1a5f7a 0%, #0d3b4f 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', 'Poppins', system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .game-container {
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 56px;
+            padding: 20px;
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.4), inset 0 1px 4px rgba(255, 255, 255, 0.2);
+        }
+
+        canvas {
+            display: block;
+            margin: 0 auto;
+            border-radius: 32px;
+            box-shadow: 0 12px 28px black;
+            cursor: pointer;
+            background: radial-gradient(circle at 30% 20%, #b7e0ff, #7bb3d0);
+        }
+
+        .info-panel {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-top: 20px;
+            margin-bottom: 15px;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .score-box, .timer-box {
+            background: #0f212e;
+            padding: 8px 24px;
+            border-radius: 80px;
+            color: #f9f3d9;
+            font-weight: bold;
+            text-shadow: 0 2px 0 #00000055;
+            backdrop-filter: blur(4px);
+            box-shadow: inset 0 1px 3px #ffffff30, 0 6px 12px #00000030;
+        }
+
+        .score-box span, .timer-box span {
+            font-size: 1.9rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-right: 12px;
+            color: #ffd966;
+        }
+
+        .score-box .score, .timer-box .timer {
+            font-size: 2.4rem;
+            font-family: monospace;
+            background: #00000066;
+            padding: 0 10px;
+            border-radius: 40px;
+            color: #fee3b8;
+        }
+
+        button {
+            background: #ff9f4a;
+            border: none;
+            font-size: 1.3rem;
+            font-weight: bold;
+            padding: 8px 24px;
+            border-radius: 60px;
+            color: #2d2b1f;
+            cursor: pointer;
+            transition: transform 0.1s ease, background 0.2s;
+            box-shadow: 0 5px 0 #a35100;
+            font-family: inherit;
+        }
+
+        button:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #a35100;
+        }
+
+        .status {
+            background: #2e1e0eaa;
+            backdrop-filter: blur(8px);
+            padding: 6px 16px;
+            border-radius: 32px;
+            font-weight: bold;
+            font-size: 1rem;
+            color: #ffecb3;
+            text-align: center;
+        }
+
+        @media (max-width: 680px) {
+            .score-box span, .timer-box span { font-size: 1.2rem; }
+            .score-box .score, .timer-box .timer { font-size: 1.8rem; }
+            button { font-size: 1rem; padding: 6px 20px; }
+        }
+    </style>
+</head>
+<body>
+<div>
+    <div class="game-container">
+        <canvas id="gameCanvas" width="800" height="500"></canvas>
+        <div class="info-panel">
+            <div class="score-box">
+                <span>🎈 SKOR</span>
+                <span class="score" id="scoreValue">0</span>
+            </div>
+            <div class="timer-box">
+                <span>⏱️ WAKTU</span>
+                <span class="timer" id="timerValue">30</span>
+            </div>
+            <button id="resetButton">🔄 START ULANG</button>
+        </div>
+        <div class="status" id="gameStatusText">
+            ✨ Klik balon sebelum menghilang ✨
+        </div>
+    </div>
+</div>
+
+<script>
+    (function() {
+        // ---------- CANVAS ----------
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Ukuran canvas
+        let width = 800, height = 500;
+        canvas.width = width;
+        canvas.height = height;
+
+        // ---------- GAME STATE ----------
+        let balloons = [];          // array balon: {x, y, radius, speedY, color}
+        let score = 0;
+        let timeLeft = 30;          // detik
+        let gameActive = true;       // jika false, stop animasi & klik
+        let animationId = null;
+        let lastTimestamp = 0;
+        let countdownInterval = null;
+
+        // Parameter balon
+        const BALON_MIN_R = 18;
+        const BALON_MAX_R = 32;
+        const MAX_BALLOONS = 18;
+        const SPAWN_RATE_MS = 550;   // spawn tiap 0.55 detik
+        let lastSpawnTime = 0;
+
+        // Warna-warna ceria
+        const colors = [
+            '#FF5252', '#FF4081', '#E040FB', '#7C4DFF', '#448AFF',
+            '#18FFFF', '#69F0AE', '#FFD740', '#FF6E40', '#F48FB1',
+            '#CE93D8', '#AED581'
+        ];
+
+        // Fungsi random
+        function random(min, max) {
+            return min + Math.random() * (max - min);
+        }
+
+        // Buat balon baru di posisi bawah (dengan sedikit variasi X)
+        function spawnBalloon() {
+            if (!gameActive) return null;
+            if (balloons.length >= MAX_BALLOONS) return null;
+
+            const radius = random(BALON_MIN_R, BALON_MAX_R);
+            const x = random(radius + 10, width - radius - 10);
+            const y = height - radius - random(2, 12);  // muncul dekat bawah
+            const speedY = random(0.7, 1.8);            // kecepatan naik per frame (30-60fps nanti disesuaikan delta)
+            const color = colors[Math.floor(Math.random() * colors.length)];
+
+            balloons.push({
+                x: x,
+                y: y,
+                radius: radius,
+                speedY: speedY,
+                color: color
+            });
+            return true;
+        }
+
+        // Hapus balon berdasarkan index
+        function removeBalloon(index) {
+            if (index >= 0 && index < balloons.length) {
+                balloons.splice(index, 1);
+            }
+        }
+
+        // Update posisi balon berdasarkan delta time (agar kecepatan konsisten di semua fps)
+        function updateBalloons(deltaSec) {
+            for (let i = 0; i < balloons.length; i++) {
+                const b = balloons[i];
+                // gerakan ke atas: speedY (px/detik) * delta detik
+                b.y -= b.speedY * deltaSec;
+
+                // Jika balon melewati batas atas (y - radius <= 0) -> hilang tanpa poin
+                if (b.y + b.radius <= 0 || b.y - b.radius > height) {
+                    removeBalloon(i);
+                    i--; // karena array berubah
+                }
+            }
+        }
+
+        // Deteksi klik pada balon (lingkaran)
+        function handleCanvasClick(e) {
+            if (!gameActive) return;
+
+            // Dapatkan posisi klik relatif terhadap canvas
+            const rect = canvas.getBoundingClientRect();
+            const scaleX = canvas.width / rect.width;   // canvas mungkin di-scale oleh CSS, tapi ukuran asli 800x500
+            const scaleY = canvas.height / rect.height;
+            let mouseX, mouseY;
+
+            if (e.touches) {
+                // sentuhan untuk mobile
+                mouseX = (e.touches[0].clientX - rect.left) * scaleX;
+                mouseY = (e.touches[0].clientY - rect.top) * scaleY;
+                e.preventDefault();
+            } else {
+                mouseX = (e.clientX - rect.left) * scaleX;
+                mouseY = (e.clientY - rect.top) * scaleY;
+            }
+
+            // Cek dari balon teratas (balon yang muncul belakang? indeks terbalik tidak masalah)
+            // Kita loop dari belakang agar klik lebih presisi ke balon yang terlihat depan (tapi semua lingkaran)
+            for (let i = balloons.length-1; i >= 0; i--) {
+                const b = balloons[i];
+                const dx = mouseX - b.x;
+                const dy = mouseY - b.y;
+                const dist = Math.sqrt(dx*dx + dy*dy);
+                if (dist <= b.radius) {
+                    // POP! tambah skor
+                    score++;
+                    document.getElementById('scoreValue').innerText = score;
+                    // efek suara tidak pakai Audio (opsional, bisa ditambah)
+                    // Hapus balon
+                    removeBalloon(i);
+                    // efek visual: sedikit getar canvas? skip
+                    break;
+                }
+            }
+        }
+
+        // Menggambar semua elemen (balon + bayangan)
+        function draw() {
+            if (!ctx) return;
+            ctx.clearRect(0, 0, width, height);
+
+            // Langit gradasi
+            const grad = ctx.createLinearGradient(0, 0, 0, height);
+            grad.addColorStop(0, '#c6e9ff');
+            grad.addColorStop(1, '#a0cce4');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, width, height);
+
+            // Awan-awan simple biar gemas
+            ctx.fillStyle = '#ffffffc0';
+            ctx.shadowBlur = 0;
+            ctx.beginPath();
+            ctx.ellipse(120, 70, 45, 35, 0, 0, Math.PI*2);
+            ctx.ellipse(170, 50, 50, 40, 0, 0, Math.PI*2);
+            ctx.ellipse(210, 70, 40, 32, 0, 0, Math.PI*2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.ellipse(620, 90, 55, 40, 0, 0, Math.PI*2);
+            ctx.ellipse(680, 75, 48, 38, 0, 0, Math.PI*2);
+            ctx.ellipse(730, 95, 42, 34, 0, 0, Math.PI*2);
+            ctx.fill();
+
+            // Gambar semua balon dengan efek shadow & benang
+            for (let b of balloons) {
+                // Benang
+                ctx.beginPath();
+                ctx.moveTo(b.x, b.y + b.radius - 3);
+                ctx.lineTo(b.x - 3, b.y + b.radius + 8);
+                ctx.lineTo(b.x + 3, b.y + b.radius + 8);
+                ctx.fillStyle = '#8B5A2B';
+                ctx.fill();
+                ctx.beginPath();
+                ctx.moveTo(b.x, b.y + b.radius - 3);
+                ctx.lineTo(b.x, b.y + b.radius + 12);
+                ctx.lineWidth = 2;
+                ctx.strokeStyle = '#7a4a1a';
+                ctx.stroke();
+
+                // Bayangan balon
+                ctx.shadowColor = "rgba(0,0,0,0.3)";
+                ctx.shadowBlur = 10;
+                ctx.beginPath();
+                ctx.arc(b.x, b.y, b.radius, 0, Math.PI*2);
+                ctx.fillStyle = b.color;
+                ctx.fill();
+                // pantulan cahaya
+                ctx.shadowBlur = 4;
+                ctx.beginPath();
+                ctx.arc(b.x-3, b.y-3, b.radius*0.2, 0, Math.PI*2);
+                ctx.fillStyle = '#ffffffc0';
+                ctx.fill();
+                // garis lekuk balon
+                ctx.beginPath();
+                ctx.ellipse(b.x-2, b.y+2, b.radius*0.3, b.radius*0.15, 0, 0, Math.PI*2);
+                ctx.fillStyle = '#00000020';
+                ctx.fill();
+            }
+            ctx.shadowBlur = 0;
+            // Tulisan jika game tidak aktif
+            if (!gameActive) {
+                ctx.font = 'bold 38px "Segoe UI", system-ui';
+                ctx.fillStyle = '#2c1a0c';
+                ctx.shadowBlur = 0;
+                ctx.shadowColor = 'transparent';
+                ctx.fillText("⏰ GAME OVER", width/2-145, height/2-40);
+                ctx.font = 'bold 24px monospace';
+                ctx.fillStyle = '#f0cf92';
+                ctx.fillText("Tekan START ULANG", width/2-115, height/2+40);
+            }
+        }
+
+        // ----- LOOP ANIMASI dengan delta time (gerakan halus) -----
+        let lastFrameTime = null;
+
+        function gameLoop(nowMs) {
+            if (!gameActive) {
+                draw();  // tetap gambar state game over
+                animationId = requestAnimationFrame(gameLoop);
+                return;
+            }
+            if (!lastFrameTime) {
+                lastFrameTime = nowMs;
+                animationId = requestAnimationFrame(gameLoop);
+                draw();
+                return;
+            }
+
+            let delta = Math.min(0.05, (nowMs - lastFrameTime) / 1000); // maks 50ms per frame
+            if (delta <= 0) {
+                lastFrameTime = nowMs;
+                animationId = requestAnimationFrame(gameLoop);
+                draw();
+                return;
+            }
+
+            // Update posisi balon berdasarkan delta detik
+            updateBalloons(delta);
+
+            // Spawn balon berdasarkan waktu (menggunakan timer independent)
+            if (gameActive && (nowMs - lastSpawnTime) >= SPAWN_RATE_MS) {
+                spawnBalloon();
+                lastSpawnTime = nowMs;
+                // sedikit variasi spontan: kadang spawn double jika sedikit balon
+                if (balloons.length < 5 && Math.random() < 0.3 && gameActive) {
+                    spawnBalloon();
+                }
+            }
+
+            lastFrameTime = nowMs;
+            draw();
+            animationId = requestAnimationFrame(gameLoop);
+        }
+
+        // Timer countdown (berbasis setInterval agar akurat)
+        function startCountdown() {
+            if (countdownInterval) clearInterval(countdownInterval);
+            countdownInterval = setInterval(() => {
+                if (!gameActive) return;
+                if (timeLeft <= 1) {
+                    // Game over
+                    timeLeft = 0;
+                    document.getElementById('timerValue').innerText = "0";
+                    endGame();
+                } else {
+                    timeLeft--;
+                    document.getElementById('timerValue').innerText = timeLeft;
+                }
+            }, 1000);
+        }
+
+        function endGame() {
+            if (!gameActive) return;
+            gameActive = false;
+            if (countdownInterval) clearInterval(countdownInterval);
+            document.getElementById('gameStatusText').innerHTML = "💥 GAME SELESAI! Klik START ULANG 💥";
+            // Hentikan spawn, namun loop gambar tetap menunjukkan game over
+        }
+
+        // Reset semua state
+        function resetGame() {
+            // Matikan animasi lama (tapi tetap pakai requestAnimationFrame baru)
+            if (animationId) {
+                cancelAnimationFrame(animationId);
+                animationId = null;
+            }
+            if (countdownInterval) {
+                clearInterval(countdownInterval);
+                countdownInterval = null;
+            }
+            // Bersihkan data
+            balloons = [];
+            score = 0;
+            timeLeft = 30;
+            gameActive = true;
+            lastSpawnTime = performance.now();
+            lastFrameTime = null;
+
+            document.getElementById('scoreValue').innerText = "0";
+            document.getElementById('timerValue').innerText = "30";
+            document.getElementById('gameStatusText').innerHTML = "🎈 POP! Klik balon secepatnya! 🎈";
+
+            // spawn beberapa balon awal agar seru
+            for(let i=0; i<4; i++) {
+                spawnBalloon();
+            }
+            // mulai timer
+            startCountdown();
+            // Mulai ulang loop animasi
+            animationId = requestAnimationFrame(gameLoop);
+        }
+
+        // Event listener untuk klik dan sentuh
+        function attachEvents() {
+            canvas.addEventListener('click', handleCanvasClick);
+            canvas.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                const rect = canvas.getBoundingClientRect();
+                if (rect) handleCanvasClick(e);
+            });
+            const resetBtn = document.getElementById('resetButton');
+            resetBtn.addEventListener('click', () => {
+                resetGame();
+            });
+        }
+
+        // Inisialisasi awal
+        function init() {
+            attachEvents();
+            resetGame();  // mulai langsung dengan game aktif
+        }
+
+        init();
+    })();
+</script>
+</body>
+</html>
