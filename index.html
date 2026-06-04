@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>🎈 Pop the Balloon - Game Klik Cepat</title>
+    <title>⚙️ GIMBOT JADUL - Kolektor Baut ⚙️</title>
     <style>
         * {
             user-select: none;
@@ -11,447 +11,600 @@
         }
 
         body {
-            background: linear-gradient(145deg, #1a5f7a 0%, #0d3b4f 100%);
+            background: #0a0f1e;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: 'Segoe UI', 'Poppins', system-ui, -apple-system, sans-serif;
+            font-family: 'Courier New', 'VT323', monospace;
             margin: 0;
             padding: 20px;
         }
 
-        .game-container {
-            background: rgba(0, 0, 0, 0.25);
-            border-radius: 56px;
+        .game-wrapper {
+            background: #000000aa;
+            border-radius: 28px;
             padding: 20px;
-            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.4), inset 0 1px 4px rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 0 4px #7c5e3a, 0 12px 28px black;
         }
 
         canvas {
             display: block;
             margin: 0 auto;
-            border-radius: 32px;
-            box-shadow: 0 12px 28px black;
-            cursor: pointer;
-            background: radial-gradient(circle at 30% 20%, #b7e0ff, #7bb3d0);
+            box-shadow: 0 0 0 3px #f3c26b, 0 8px 20px black;
+            image-rendering: crisp-edges;
+            image-rendering: pixelated;
+            image-rendering: pixelated;
         }
 
         .info-panel {
             display: flex;
             justify-content: space-between;
-            align-items: baseline;
-            margin-top: 20px;
-            margin-bottom: 15px;
+            margin-top: 16px;
             gap: 20px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .score-box, .timer-box {
-            background: #0f212e;
-            padding: 8px 24px;
-            border-radius: 80px;
-            color: #f9f3d9;
-            font-weight: bold;
-            text-shadow: 0 2px 0 #00000055;
-            backdrop-filter: blur(4px);
-            box-shadow: inset 0 1px 3px #ffffff30, 0 6px 12px #00000030;
-        }
-
-        .score-box span, .timer-box span {
-            font-size: 1.9rem;
-            font-weight: 800;
-            letter-spacing: 2px;
-            margin-right: 12px;
-            color: #ffd966;
-        }
-
-        .score-box .score, .timer-box .timer {
-            font-size: 2.4rem;
-            font-family: monospace;
-            background: #00000066;
-            padding: 0 10px;
+            background: #1a1f2e;
+            padding: 8px 18px;
             border-radius: 40px;
-            color: #fee3b8;
+            border: 2px solid #ffcd7e;
+            color: #f7ecc7;
+            font-weight: bold;
+            font-size: 1.6rem;
+            text-shadow: 2px 2px 0 #2a2418;
+        }
+
+        .info-panel div {
+            display: flex;
+            gap: 12px;
+            align-items: baseline;
+        }
+
+        .info-panel span:first-child {
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+        }
+
+        .info-panel .value {
+            font-size: 2rem;
+            background: #00000099;
+            padding: 0 12px;
+            border-radius: 30px;
+            font-family: monospace;
+            color: #ffd98c;
         }
 
         button {
-            background: #ff9f4a;
+            background: #d9a13b;
             border: none;
-            font-size: 1.3rem;
+            font-family: 'Courier New', monospace;
             font-weight: bold;
-            padding: 8px 24px;
-            border-radius: 60px;
-            color: #2d2b1f;
+            font-size: 1.2rem;
+            padding: 5px 20px;
+            border-radius: 32px;
             cursor: pointer;
-            transition: transform 0.1s ease, background 0.2s;
-            box-shadow: 0 5px 0 #a35100;
-            font-family: inherit;
+            transition: 0.07s linear;
+            box-shadow: 0 4px 0 #6b3f00;
+            color: #231f1a;
         }
 
         button:active {
             transform: translateY(2px);
-            box-shadow: 0 2px 0 #a35100;
+            box-shadow: 0 1px 0 #6b3f00;
         }
 
         .status {
-            background: #2e1e0eaa;
-            backdrop-filter: blur(8px);
-            padding: 6px 16px;
-            border-radius: 32px;
-            font-weight: bold;
-            font-size: 1rem;
-            color: #ffecb3;
+            margin-top: 12px;
             text-align: center;
+            background: #2d2418b3;
+            padding: 5px 10px;
+            border-radius: 24px;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #ffe2a4;
+            backdrop-filter: blur(4px);
         }
 
-        @media (max-width: 680px) {
-            .score-box span, .timer-box span { font-size: 1.2rem; }
-            .score-box .score, .timer-box .timer { font-size: 1.8rem; }
-            button { font-size: 1rem; padding: 6px 20px; }
+        @media (max-width: 860px) {
+            .info-panel { font-size: 1rem; }
+            .info-panel .value { font-size: 1.4rem; }
+            .info-panel span:first-child { font-size: 0.9rem; }
         }
     </style>
 </head>
 <body>
 <div>
-    <div class="game-container">
-        <canvas id="gameCanvas" width="800" height="500"></canvas>
+    <div class="game-wrapper">
+        <canvas id="gameCanvas" width="800" height="480"></canvas>
         <div class="info-panel">
-            <div class="score-box">
-                <span>🎈 SKOR</span>
-                <span class="score" id="scoreValue">0</span>
-            </div>
-            <div class="timer-box">
-                <span>⏱️ WAKTU</span>
-                <span class="timer" id="timerValue">30</span>
-            </div>
-            <button id="resetButton">🔄 START ULANG</button>
+            <div>🔩 Baut: <span class="value" id="scoreValue">0</span></div>
+            <div>❤️ Nyawa: <span class="value" id="livesValue">3</span></div>
+            <div>🚪 Target: <span class="value" id="targetValue">5</span></div>
+            <button id="resetButton">🌀 RESET</button>
         </div>
-        <div class="status" id="gameStatusText">
-            ✨ Klik balon sebelum menghilang ✨
-        </div>
+        <div class="status" id="gameStatus">⬅️  ➡️  |  ↑ / SPASI untuk lompat  |  kumpulkan baut & hindari api!</div>
     </div>
 </div>
 
 <script>
-    (function() {
+    (function () {
         // ---------- CANVAS ----------
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
+        canvas.width = 800;
+        canvas.height = 480;
+        
+        // ---------- GAME WORLD ----------
+        const GRAVITY = 0.6;
+        const JUMP_POWER = -9;
+        const GROUND_Y = 420;   // posisi lantai (y=420 ke bawah)
 
-        // Ukuran canvas
-        let width = 800, height = 500;
-        canvas.width = width;
-        canvas.height = height;
+        // Player (Gimbot)
+        let player = {
+            x: 80,
+            y: GROUND_Y - 28,
+            width: 28,
+            height: 28,
+            vx: 0,
+            vy: 0,
+            onGround: true,
+            facingRight: true
+        };
 
-        // ---------- GAME STATE ----------
-        let balloons = [];          // array balon: {x, y, radius, speedY, color}
-        let score = 0;
-        let timeLeft = 30;          // detik
-        let gameActive = true;       // jika false, stop animasi & klik
-        let animationId = null;
-        let lastTimestamp = 0;
-        let countdownInterval = null;
-
-        // Parameter balon
-        const BALON_MIN_R = 18;
-        const BALON_MAX_R = 32;
-        const MAX_BALLOONS = 18;
-        const SPAWN_RATE_MS = 550;   // spawn tiap 0.55 detik
-        let lastSpawnTime = 0;
-
-        // Warna-warna ceria
-        const colors = [
-            '#FF5252', '#FF4081', '#E040FB', '#7C4DFF', '#448AFF',
-            '#18FFFF', '#69F0AE', '#FFD740', '#FF6E40', '#F48FB1',
-            '#CE93D8', '#AED581'
+        // Level sederhana: platform tetap + collectible + musuh (bola api)
+        let platforms = [
+            { x: 0, y: GROUND_Y, w: 800, h: 10 },         // tanah utama
+            { x: 180, y: 360, w: 100, h: 18 },            // platform kiri atas
+            { x: 500, y: 320, w: 100, h: 18 },            // platform kanan atas
+            { x: 350, y: 270, w: 80, h: 18 },             // platform tengah tinggi
+            { x: 640, y: 380, w: 90, h: 18 }              // platform dekat pintu
         ];
-
-        // Fungsi random
-        function random(min, max) {
-            return min + Math.random() * (max - min);
-        }
-
-        // Buat balon baru di posisi bawah (dengan sedikit variasi X)
-        function spawnBalloon() {
-            if (!gameActive) return null;
-            if (balloons.length >= MAX_BALLOONS) return null;
-
-            const radius = random(BALON_MIN_R, BALON_MAX_R);
-            const x = random(radius + 10, width - radius - 10);
-            const y = height - radius - random(2, 12);  // muncul dekat bawah
-            const speedY = random(0.7, 1.8);            // kecepatan naik per frame (30-60fps nanti disesuaikan delta)
-            const color = colors[Math.floor(Math.random() * colors.length)];
-
-            balloons.push({
-                x: x,
-                y: y,
-                radius: radius,
-                speedY: speedY,
-                color: color
-            });
-            return true;
-        }
-
-        // Hapus balon berdasarkan index
-        function removeBalloon(index) {
-            if (index >= 0 && index < balloons.length) {
-                balloons.splice(index, 1);
+        
+        // Collectible: baut emas
+        let bolts = [
+            { x: 220, y: 335, w: 14, h: 14, collected: false },
+            { x: 540, y: 295, w: 14, h: 14, collected: false },
+            { x: 380, y: 245, w: 14, h: 14, collected: false },
+            { x: 670, y: 355, w: 14, h: 14, collected: false },
+            { x: 110, y: 395, w: 14, h: 14, collected: false },
+            { x: 710, y: 395, w: 14, h: 14, collected: false },  // baut ekstra
+        ];
+        
+        // Musuh: bola api bergerak horizontal atau diam di platform
+        let enemies = [
+            { x: 240, y: 345, w: 18, h: 18, vx: 0.9, dir: 1, type: 'fire' },
+            { x: 550, y: 305, w: 18, h: 18, vx: 1.2, dir: -1, type: 'fire' },
+            { x: 380, y: 255, w: 18, h: 18, vx: 0.7, dir: 1, type: 'fire' },
+            { x: 680, y: 365, w: 18, h: 18, vx: 1.1, dir: -1, type: 'fire' }
+        ];
+        
+        // Pintu keluar / goal (menang jika semua baut terkumpul dan menyentuh)
+        let exitDoor = { x: 720, y: GROUND_Y - 38, w: 28, h: 38, active: false };
+        
+        // Game state
+        let score = 0;           // jumlah baut terkumpul
+        let targetBolts = bolts.length;
+        let lives = 3;
+        let gameActive = true;
+        let winFlag = false;
+        let invincibleFrames = 0;   // iframes setelah terkena api
+        let animationId = null;
+        
+        // Control flags
+        const keys = {
+            ArrowLeft: false,
+            ArrowRight: false,
+            jumpPressed: false,
+            canJump: true
+        };
+        
+        // DOM elements
+        const scoreSpan = document.getElementById('scoreValue');
+        const livesSpan = document.getElementById('livesValue');
+        const targetSpan = document.getElementById('targetValue');
+        const resetBtn = document.getElementById('resetButton');
+        const statusDiv = document.getElementById('gameStatus');
+        
+        targetSpan.innerText = targetBolts;
+        
+        // helper update UI
+        function updateUI() {
+            scoreSpan.innerText = score;
+            livesSpan.innerText = lives;
+            if (winFlag) {
+                statusDiv.innerHTML = "✨✨ SELAMAT! GIMBOT MENANG! ✨✨  Tekan RESET untuk main lagi.";
+            } else if (!gameActive) {
+                statusDiv.innerHTML = "💀 GAME OVER 💀  Tekan RESET untuk mencoba lagi.";
+            } else {
+                statusDiv.innerHTML = `🔧 Baut tersisa: ${targetBolts - score}  |  ❤️ nyawa: ${lives}  |  hindari api & capai pintu!`;
             }
+            // update target display
+            targetSpan.innerText = targetBolts;
         }
-
-        // Update posisi balon berdasarkan delta time (agar kecepatan konsisten di semua fps)
-        function updateBalloons(deltaSec) {
-            for (let i = 0; i < balloons.length; i++) {
-                const b = balloons[i];
-                // gerakan ke atas: speedY (px/detik) * delta detik
-                b.y -= b.speedY * deltaSec;
-
-                // Jika balon melewati batas atas (y - radius <= 0) -> hilang tanpa poin
-                if (b.y + b.radius <= 0 || b.y - b.radius > height) {
-                    removeBalloon(i);
-                    i--; // karena array berubah
+        
+        // reset penuh
+        function resetGame() {
+            // reset player
+            player = {
+                x: 80,
+                y: GROUND_Y - 28,
+                width: 28,
+                height: 28,
+                vx: 0,
+                vy: 0,
+                onGround: true,
+                facingRight: true
+            };
+            // reset bolts
+            bolts.forEach(b => b.collected = false);
+            score = 0;
+            lives = 3;
+            gameActive = true;
+            winFlag = false;
+            invincibleFrames = 0;
+            // reset enemies posisi awal
+            enemies = [
+                { x: 240, y: 345, w: 18, h: 18, vx: 0.9, dir: 1, type: 'fire' },
+                { x: 550, y: 305, w: 18, h: 18, vx: 1.2, dir: -1, type: 'fire' },
+                { x: 380, y: 255, w: 18, h: 18, vx: 0.7, dir: 1, type: 'fire' },
+                { x: 680, y: 365, w: 18, h: 18, vx: 1.1, dir: -1, type: 'fire' }
+            ];
+            // reset exit active condition
+            exitDoor.active = false;
+            updateUI();
+        }
+        
+        // collision AABB
+        function collide(r1, r2) {
+            return !(r2.x > r1.x + r1.w ||
+                r2.x + r2.w < r1.x ||
+                r2.y > r1.y + r1.h ||
+                r2.y + r2.h < r1.y);
+        }
+        
+        // platform collision & response
+        function handleCollisions() {
+            player.onGround = false;
+            // simpan posisi lama untuk sliding
+            let newX = player.x + player.vx;
+            let playerRect = { x: newX, y: player.y, w: player.width, h: player.height };
+            // collision X dengan platform
+            for (let plat of platforms) {
+                let platRect = { x: plat.x, y: plat.y, w: plat.w, h: plat.h };
+                if (collide(playerRect, platRect)) {
+                    if (player.vx > 0) {
+                        newX = platRect.x - player.width;
+                    } else if (player.vx < 0) {
+                        newX = platRect.x + platRect.w;
+                    }
+                    playerRect.x = newX;
                 }
             }
-        }
-
-        // Deteksi klik pada balon (lingkaran)
-        function handleCanvasClick(e) {
-            if (!gameActive) return;
-
-            // Dapatkan posisi klik relatif terhadap canvas
-            const rect = canvas.getBoundingClientRect();
-            const scaleX = canvas.width / rect.width;   // canvas mungkin di-scale oleh CSS, tapi ukuran asli 800x500
-            const scaleY = canvas.height / rect.height;
-            let mouseX, mouseY;
-
-            if (e.touches) {
-                // sentuhan untuk mobile
-                mouseX = (e.touches[0].clientX - rect.left) * scaleX;
-                mouseY = (e.touches[0].clientY - rect.top) * scaleY;
-                e.preventDefault();
-            } else {
-                mouseX = (e.clientX - rect.left) * scaleX;
-                mouseY = (e.clientY - rect.top) * scaleY;
+            player.x = newX;
+            
+            // collision Y
+            let newY = player.y + player.vy;
+            let playerRectY = { x: player.x, y: newY, w: player.width, h: player.height };
+            for (let plat of platforms) {
+                let platRect = { x: plat.x, y: plat.y, w: plat.w, h: plat.h };
+                if (collide(playerRectY, platRect)) {
+                    if (player.vy > 0) { // jatuh
+                        newY = platRect.y - player.height;
+                        player.vy = 0;
+                        player.onGround = true;
+                    } else if (player.vy < 0) { // lompat terbentur
+                        newY = platRect.y + platRect.h;
+                        player.vy = 0;
+                    }
+                    playerRectY.y = newY;
+                }
             }
-
-            // Cek dari balon teratas (balon yang muncul belakang? indeks terbalik tidak masalah)
-            // Kita loop dari belakang agar klik lebih presisi ke balon yang terlihat depan (tapi semua lingkaran)
-            for (let i = balloons.length-1; i >= 0; i--) {
-                const b = balloons[i];
-                const dx = mouseX - b.x;
-                const dy = mouseY - b.y;
-                const dist = Math.sqrt(dx*dx + dy*dy);
-                if (dist <= b.radius) {
-                    // POP! tambah skor
-                    score++;
-                    document.getElementById('scoreValue').innerText = score;
-                    // efek suara tidak pakai Audio (opsional, bisa ditambah)
-                    // Hapus balon
-                    removeBalloon(i);
-                    // efek visual: sedikit getar canvas? skip
+            player.y = newY;
+            
+            // batas bawah (jatuh ke jurang)
+            if (player.y + player.height > GROUND_Y + 20) {
+                // jatuh, kurangi nyawa
+                if (gameActive && !winFlag) {
+                    loseLife();
+                }
+                resetPlayerPosition();
+            }
+            // batas kiri/kanan layar
+            if (player.x < 10) player.x = 10;
+            if (player.x + player.width > canvas.width - 10) player.x = canvas.width - player.width - 10;
+        }
+        
+        function resetPlayerPosition() {
+            player.x = 80;
+            player.y = GROUND_Y - 28;
+            player.vx = 0;
+            player.vy = 0;
+            player.onGround = true;
+            invincibleFrames = 25; // i-frame setelah mati
+        }
+        
+        function loseLife() {
+            if (!gameActive || winFlag) return;
+            lives--;
+            updateUI();
+            if (lives <= 0) {
+                gameActive = false;
+                winFlag = false;
+                statusDiv.innerHTML = "💀 GAME OVER - Tekan RESET 💀";
+                updateUI();
+            } else {
+                resetPlayerPosition();
+                statusDiv.innerHTML = `🔥 TERKENA API! Nyawa sisa: ${lives} 🔥`;
+                setTimeout(() => updateUI(), 200);
+            }
+            updateUI();
+        }
+        
+        // kumpulkan baut
+        function collectBolts() {
+            for (let i = 0; i < bolts.length; i++) {
+                const b = bolts[i];
+                if (!b.collected) {
+                    let boltRect = { x: b.x, y: b.y, w: b.w, h: b.h };
+                    let playerRect = { x: player.x, y: player.y, w: player.width, h: player.height };
+                    if (collide(boltRect, playerRect)) {
+                        b.collected = true;
+                        score++;
+                        updateUI();
+                    }
+                }
+            }
+            // cek apakah semua baut terkumpul -> aktifkan pintu
+            if (score === targetBolts) {
+                exitDoor.active = true;
+                statusDiv.innerHTML = "✨ PINTU TERBUKA! Capai pintu untuk menang! ✨";
+            }
+        }
+        
+        // enemy collision (api) dengan iframes
+        function handleEnemyCollision() {
+            if (invincibleFrames > 0) {
+                invincibleFrames--;
+                return;
+            }
+            let playerRect = { x: player.x, y: player.y, w: player.width, h: player.height };
+            for (let i = 0; i < enemies.length; i++) {
+                const e = enemies[i];
+                let enemyRect = { x: e.x, y: e.y, w: e.w, h: e.h };
+                if (collide(playerRect, enemyRect)) {
+                    loseLife();
+                    invincibleFrames = 30;  // setengah detik aman (60fps kira2)
                     break;
                 }
             }
         }
-
-        // Menggambar semua elemen (balon + bayangan)
-        function draw() {
-            if (!ctx) return;
-            ctx.clearRect(0, 0, width, height);
-
-            // Langit gradasi
-            const grad = ctx.createLinearGradient(0, 0, 0, height);
-            grad.addColorStop(0, '#c6e9ff');
-            grad.addColorStop(1, '#a0cce4');
-            ctx.fillStyle = grad;
-            ctx.fillRect(0, 0, width, height);
-
-            // Awan-awan simple biar gemas
-            ctx.fillStyle = '#ffffffc0';
-            ctx.shadowBlur = 0;
-            ctx.beginPath();
-            ctx.ellipse(120, 70, 45, 35, 0, 0, Math.PI*2);
-            ctx.ellipse(170, 50, 50, 40, 0, 0, Math.PI*2);
-            ctx.ellipse(210, 70, 40, 32, 0, 0, Math.PI*2);
-            ctx.fill();
-            ctx.beginPath();
-            ctx.ellipse(620, 90, 55, 40, 0, 0, Math.PI*2);
-            ctx.ellipse(680, 75, 48, 38, 0, 0, Math.PI*2);
-            ctx.ellipse(730, 95, 42, 34, 0, 0, Math.PI*2);
-            ctx.fill();
-
-            // Gambar semua balon dengan efek shadow & benang
-            for (let b of balloons) {
-                // Benang
-                ctx.beginPath();
-                ctx.moveTo(b.x, b.y + b.radius - 3);
-                ctx.lineTo(b.x - 3, b.y + b.radius + 8);
-                ctx.lineTo(b.x + 3, b.y + b.radius + 8);
-                ctx.fillStyle = '#8B5A2B';
-                ctx.fill();
-                ctx.beginPath();
-                ctx.moveTo(b.x, b.y + b.radius - 3);
-                ctx.lineTo(b.x, b.y + b.radius + 12);
-                ctx.lineWidth = 2;
-                ctx.strokeStyle = '#7a4a1a';
-                ctx.stroke();
-
-                // Bayangan balon
-                ctx.shadowColor = "rgba(0,0,0,0.3)";
-                ctx.shadowBlur = 10;
-                ctx.beginPath();
-                ctx.arc(b.x, b.y, b.radius, 0, Math.PI*2);
-                ctx.fillStyle = b.color;
-                ctx.fill();
-                // pantulan cahaya
-                ctx.shadowBlur = 4;
-                ctx.beginPath();
-                ctx.arc(b.x-3, b.y-3, b.radius*0.2, 0, Math.PI*2);
-                ctx.fillStyle = '#ffffffc0';
-                ctx.fill();
-                // garis lekuk balon
-                ctx.beginPath();
-                ctx.ellipse(b.x-2, b.y+2, b.radius*0.3, b.radius*0.15, 0, 0, Math.PI*2);
-                ctx.fillStyle = '#00000020';
-                ctx.fill();
-            }
-            ctx.shadowBlur = 0;
-            // Tulisan jika game tidak aktif
-            if (!gameActive) {
-                ctx.font = 'bold 38px "Segoe UI", system-ui';
-                ctx.fillStyle = '#2c1a0c';
-                ctx.shadowBlur = 0;
-                ctx.shadowColor = 'transparent';
-                ctx.fillText("⏰ GAME OVER", width/2-145, height/2-40);
-                ctx.font = 'bold 24px monospace';
-                ctx.fillStyle = '#f0cf92';
-                ctx.fillText("Tekan START ULANG", width/2-115, height/2+40);
-            }
-        }
-
-        // ----- LOOP ANIMASI dengan delta time (gerakan halus) -----
-        let lastFrameTime = null;
-
-        function gameLoop(nowMs) {
-            if (!gameActive) {
-                draw();  // tetap gambar state game over
-                animationId = requestAnimationFrame(gameLoop);
-                return;
-            }
-            if (!lastFrameTime) {
-                lastFrameTime = nowMs;
-                animationId = requestAnimationFrame(gameLoop);
-                draw();
-                return;
-            }
-
-            let delta = Math.min(0.05, (nowMs - lastFrameTime) / 1000); // maks 50ms per frame
-            if (delta <= 0) {
-                lastFrameTime = nowMs;
-                animationId = requestAnimationFrame(gameLoop);
-                draw();
-                return;
-            }
-
-            // Update posisi balon berdasarkan delta detik
-            updateBalloons(delta);
-
-            // Spawn balon berdasarkan waktu (menggunakan timer independent)
-            if (gameActive && (nowMs - lastSpawnTime) >= SPAWN_RATE_MS) {
-                spawnBalloon();
-                lastSpawnTime = nowMs;
-                // sedikit variasi spontan: kadang spawn double jika sedikit balon
-                if (balloons.length < 5 && Math.random() < 0.3 && gameActive) {
-                    spawnBalloon();
+        
+        // update musuh: gerak bolak balik di area platform
+        function updateEnemies() {
+            for (let e of enemies) {
+                // gerak horizontal
+                let newX = e.x + e.vx * e.dir;
+                // batas sederhana (tidak keluar platform area sekitar)
+                let leftBound = e.x - 35;
+                let rightBound = e.x + 35;
+                // cek bentur dengan world edge (optional)
+                if (newX < 30) { e.dir = 1; newX = 30; }
+                if (newX + e.w > canvas.width - 30) { e.dir = -1; newX = canvas.width - e.w - 30; }
+                // cek collision dengan platform biar tidak jatuh (sederhana)
+                let onSolid = false;
+                for (let plat of platforms) {
+                    if (newX + e.w > plat.x && newX < plat.x + plat.w && Math.abs(e.y + e.h - plat.y) < 10) {
+                        onSolid = true;
+                        break;
+                    }
                 }
-            }
-
-            lastFrameTime = nowMs;
-            draw();
-            animationId = requestAnimationFrame(gameLoop);
-        }
-
-        // Timer countdown (berbasis setInterval agar akurat)
-        function startCountdown() {
-            if (countdownInterval) clearInterval(countdownInterval);
-            countdownInterval = setInterval(() => {
-                if (!gameActive) return;
-                if (timeLeft <= 1) {
-                    // Game over
-                    timeLeft = 0;
-                    document.getElementById('timerValue').innerText = "0";
-                    endGame();
+                if (!onSolid && e.y + e.h < GROUND_Y - 5) {
+                    e.dir *= -1;
                 } else {
-                    timeLeft--;
-                    document.getElementById('timerValue').innerText = timeLeft;
+                    e.x = newX;
                 }
-            }, 1000);
+                // update posisi y berdasarkan platform? biarkan statis di ketinggian tetap agar sederhana
+            }
         }
-
-        function endGame() {
+        
+        // pintu menang
+        function checkWin() {
             if (!gameActive) return;
-            gameActive = false;
-            if (countdownInterval) clearInterval(countdownInterval);
-            document.getElementById('gameStatusText').innerHTML = "💥 GAME SELESAI! Klik START ULANG 💥";
-            // Hentikan spawn, namun loop gambar tetap menunjukkan game over
+            if (exitDoor.active && score === targetBolts) {
+                let doorRect = { x: exitDoor.x, y: exitDoor.y, w: exitDoor.w, h: exitDoor.h };
+                let playerRect = { x: player.x, y: player.y, w: player.width, h: player.height };
+                if (collide(doorRect, playerRect)) {
+                    winFlag = true;
+                    gameActive = false;
+                    statusDiv.innerHTML = "🎉🎉 KEMENANGAN! GIMBOT BERHASIL! 🎉🎉";
+                    updateUI();
+                }
+            }
         }
-
-        // Reset semua state
-        function resetGame() {
-            // Matikan animasi lama (tapi tetap pakai requestAnimationFrame baru)
-            if (animationId) {
-                cancelAnimationFrame(animationId);
-                animationId = null;
+        
+        // update input dan fisika player
+        function updatePlayerMovement() {
+            if (!gameActive || winFlag) return;
+            const MOVE_ACC = 0.7;
+            const MAX_SPEED = 4.2;
+            if (keys.ArrowLeft) {
+                player.vx = Math.max(-MAX_SPEED, player.vx - MOVE_ACC);
+                player.facingRight = false;
+            } else if (keys.ArrowRight) {
+                player.vx = Math.min(MAX_SPEED, player.vx + MOVE_ACC);
+                player.facingRight = true;
+            } else {
+                player.vx *= 0.92;
             }
-            if (countdownInterval) {
-                clearInterval(countdownInterval);
-                countdownInterval = null;
+            
+            // lompat
+            if (keys.jumpPressed && keys.canJump && player.onGround && (gameActive && !winFlag)) {
+                player.vy = JUMP_POWER;
+                player.onGround = false;
+                keys.canJump = false;
             }
-            // Bersihkan data
-            balloons = [];
-            score = 0;
-            timeLeft = 30;
-            gameActive = true;
-            lastSpawnTime = performance.now();
-            lastFrameTime = null;
-
-            document.getElementById('scoreValue').innerText = "0";
-            document.getElementById('timerValue').innerText = "30";
-            document.getElementById('gameStatusText').innerHTML = "🎈 POP! Klik balon secepatnya! 🎈";
-
-            // spawn beberapa balon awal agar seru
-            for(let i=0; i<4; i++) {
-                spawnBalloon();
+            if (!keys.jumpPressed) {
+                keys.canJump = true;
             }
-            // mulai timer
-            startCountdown();
-            // Mulai ulang loop animasi
+            
+            // gravitasi
+            player.vy += GRAVITY;
+            if (player.vy > 12) player.vy = 12;
+        }
+        
+        // ---------- GAMBAR ----------
+        function drawPixelGimbot(x, y, w, h, faceRight) {
+            // Robot jadul
+            ctx.fillStyle = "#6c8c9e";
+            ctx.fillRect(x+4, y+4, w-8, h-8);
+            ctx.fillStyle = "#3a5e6b";
+            ctx.fillRect(x+6, y+2, w-12, 6);
+            ctx.fillStyle = "#cab577";
+            ctx.fillRect(x+8, y+12, 6, 6);
+            ctx.fillRect(x+w-14, y+12, 6, 6);
+            // mata
+            ctx.fillStyle = "#fff6cf";
+            ctx.fillRect(x+10, y+18, 5, 5);
+            ctx.fillRect(x+w-15, y+18, 5, 5);
+            ctx.fillStyle = "#000";
+            ctx.fillRect(faceRight? x+13 : x+8, y+20, 2, 2);
+            ctx.fillRect(faceRight? x+w-12 : x+w-17, y+20, 2, 2);
+            // antena
+            ctx.fillStyle = "#c97e2a";
+            ctx.fillRect(x+12, y-6, 4, 10);
+            ctx.fillStyle = "#f0b34b";
+            ctx.beginPath();
+            ctx.arc(x+14, y-6, 5, 0, Math.PI*2);
+            ctx.fill();
+        }
+        
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            // latar retro gradien
+            ctx.fillStyle = "#111d2b";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "#3e5d3e";
+            for(let i=0; i<canvas.width; i+=30) {
+                ctx.fillRect(i, GROUND_Y+5, 15, 5);
+            }
+            // platform
+            for(let plat of platforms) {
+                ctx.fillStyle = "#8b6946";
+                ctx.fillRect(plat.x, plat.y, plat.w, plat.h);
+                ctx.fillStyle = "#c29a5b";
+                ctx.fillRect(plat.x+2, plat.y-3, plat.w-4, 4);
+            }
+            // baut
+            for(let b of bolts) {
+                if(!b.collected){
+                    ctx.fillStyle = "#f7d44a";
+                    ctx.beginPath();
+                    ctx.ellipse(b.x+7, b.y+7, 6, 6, 0, 0, Math.PI*2);
+                    ctx.fill();
+                    ctx.fillStyle = "#b47c2e";
+                    ctx.fillRect(b.x+5, b.y+3, 4, 8);
+                }
+            }
+            // musuh api
+            for(let e of enemies) {
+                ctx.fillStyle = "#ff6622";
+                ctx.shadowBlur = 8;
+                ctx.shadowColor = "orange";
+                ctx.beginPath();
+                ctx.ellipse(e.x+e.w/2, e.y+e.h/2, e.w/2, e.h/2, 0, 0, Math.PI*2);
+                ctx.fill();
+                ctx.fillStyle = "#ffaa33";
+                ctx.beginPath();
+                ctx.ellipse(e.x+e.w/2-2, e.y+e.h/2-2, 4, 4, 0, 0, Math.PI*2);
+                ctx.fill();
+                ctx.shadowBlur = 0;
+            }
+            // pintu
+            if(exitDoor.active || score === targetBolts){
+                ctx.fillStyle = "#9f7e3c";
+                ctx.fillRect(exitDoor.x, exitDoor.y, exitDoor.w, exitDoor.h);
+                ctx.fillStyle = "#6b4c1c";
+                ctx.fillRect(exitDoor.x+10, exitDoor.y+10, 8, 18);
+                ctx.fillStyle = "#efcd7b";
+                ctx.beginPath();
+                ctx.arc(exitDoor.x+exitDoor.w/2, exitDoor.y+8, 6, 0, Math.PI*2);
+                ctx.fill();
+            }
+            // player dengan iframe blink
+            if(invincibleFrames > 0 && (Math.floor(Date.now()/50)%2 === 0)){
+                ctx.globalAlpha = 0.6;
+            }
+            drawPixelGimbot(player.x, player.y, player.width, player.height, player.facingRight);
+            ctx.globalAlpha = 1;
+            // tulisan if menang/game over
+            if(winFlag){
+                ctx.font = "bold 34m monospace";
+                ctx.fillStyle = "#ffdd77";
+                ctx.shadowBlur = 0;
+                ctx.fillText("WINNER!", canvas.width/2-70, 70);
+            } else if(!gameActive && !winFlag){
+                ctx.font = "28m monospace";
+                ctx.fillStyle = "#ff8866";
+                ctx.fillText("GAME OVER", canvas.width/2-85, 70);
+            }
+        }
+        
+        // main loop update
+        function updateGame() {
+            if (!gameActive && !winFlag) {
+                // game over, tidak update gerak
+                draw();
+                return;
+            }
+            if (winFlag) {
+                draw();
+                return;
+            }
+            updatePlayerMovement();
+            handleCollisions();
+            collectBolts();
+            updateEnemies();
+            handleEnemyCollision();
+            checkWin();
+            draw();
+        }
+        
+        // animasi loop
+        function gameLoop() {
+            updateGame();
             animationId = requestAnimationFrame(gameLoop);
         }
-
-        // Event listener untuk klik dan sentuh
-        function attachEvents() {
-            canvas.addEventListener('click', handleCanvasClick);
-            canvas.addEventListener('touchstart', (e) => {
-                e.preventDefault();
-                const rect = canvas.getBoundingClientRect();
-                if (rect) handleCanvasClick(e);
+        
+        // keyboard event
+        function initControls() {
+            window.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') keys.ArrowLeft = true;
+                if (e.key === 'ArrowRight') keys.ArrowRight = true;
+                if (e.key === 'ArrowUp' || e.key === ' ') {
+                    keys.jumpPressed = true;
+                    e.preventDefault();
+                }
             });
-            const resetBtn = document.getElementById('resetButton');
-            resetBtn.addEventListener('click', () => {
-                resetGame();
+            window.addEventListener('keyup', (e) => {
+                if (e.key === 'ArrowLeft') keys.ArrowLeft = false;
+                if (e.key === 'ArrowRight') keys.ArrowRight = false;
+                if (e.key === 'ArrowUp' || e.key === ' ') {
+                    keys.jumpPressed = false;
+                    e.preventDefault();
+                }
             });
+            // untuk mobile sentuhan opsional tidak ditambahkan agar fokus keyboard
         }
-
-        // Inisialisasi awal
-        function init() {
-            attachEvents();
-            resetGame();  // mulai langsung dengan game aktif
-        }
-
-        init();
+        
+        resetBtn.addEventListener('click', () => {
+            resetGame();
+            gameActive = true;
+            winFlag = false;
+            invincibleFrames = 0;
+            updateUI();
+        });
+        
+        resetGame();
+        initControls();
+        gameLoop();
     })();
 </script>
 </body>
