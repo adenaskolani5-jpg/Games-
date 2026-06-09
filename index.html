@@ -254,10 +254,9 @@
             text-align: center;
             border: 1px solid #39ff7933;
             animation: greenPulse 2.5s infinite ease-in-out;
-            transition: none; /* tidak ada hover effect */
+            transition: none;
         }
 
-        /* tidak ada hover transform atau efek interaksi */
         .stat-label {
             font-size: 0.65rem;
             text-transform: uppercase;
@@ -279,6 +278,15 @@
 
         .stat-value.setoran {
             color: #ffcd94;
+        }
+
+        /* Teks deskripsi kecil di bawah angka statistik - warna terang agar mudah terbaca */
+        .stat-desc {
+            font-size: 0.6rem;
+            color: #d4ffdd;
+            opacity: 0.95;
+            margin-top: 0.2rem;
+            letter-spacing: 0.3px;
         }
 
         .table-wrapper {
@@ -505,17 +513,17 @@
                     <div class="stat-card">
                         <div class="stat-label">PENDAPATAN</div>
                         <div class="stat-value">${formatRupiah(totalIncome)}</div>
-                        <div style="font-size:0.6rem;">total dari semua voucher</div>
+                        <div class="stat-desc">total dari semua voucher</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-label">KEUNTUNGAN</div>
                         <div class="stat-value profit">${formatRupiah(totalProfit)}</div>
-                        <div style="font-size:0.6rem;">komisi penjualan</div>
+                        <div class="stat-desc">komisi penjualan</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-label">SETOR</div>
                         <div class="stat-value setoran">${formatRupiah(totalSetoran)}</div>
-                        <div style="font-size:0.6rem;">yang harus disetorkan</div>
+                        <div class="stat-desc">yang harus disetorkan</div>
                     </div>
                 `;
             }
@@ -551,7 +559,7 @@
             document.getElementById('awal_10000').value = '';
             document.getElementById('akhir_10000').value = '';
             render();
-            // efek animasi kilat pada tombol reset (opsional)
+            // efek animasi kilat pada tombol reset
             const resetBtn = document.getElementById('resetBtn');
             if (resetBtn) {
                 resetBtn.style.transform = 'scale(0.98)';
