@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Voucher Flow | Hitung Setoran & Keuntungan</title>
+    <title>Neo Voucher | Light Saber Edition</title>
     <style>
         * {
             margin: 0;
@@ -12,527 +12,465 @@
         }
 
         body {
-            background: linear-gradient(145deg, #eef2f9 0%, #e0e8f2 100%);
-            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
-            padding: 2rem 1.5rem;
+            background: radial-gradient(circle at 20% 30%, #0a0f0c, #030604);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, 'Poppins', sans-serif;
+            padding: 1.5rem;
         }
 
-        /* main container */
-        .voucher-dashboard {
-            max-width: 1200px;
+        /* kontainer utama neon */
+        .neo-container {
+            max-width: 1000px;
             width: 100%;
-            margin: 0 auto;
-        }
-
-        /* card utama */
-        .card-modern {
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(2px);
+            background: rgba(10, 20, 12, 0.65);
+            backdrop-filter: blur(12px);
             border-radius: 2rem;
-            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.2), 0 1px 3px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(80, 255, 120, 0.3);
+            box-shadow: 0 0 20px rgba(80, 255, 80, 0.2), 0 8px 32px rgba(0, 0, 0, 0.4);
             overflow: hidden;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
         }
 
-        /* header */
-        .card-header {
-            padding: 1.5rem 2rem;
-            background: #ffffff;
-            border-bottom: 1px solid #eef2f9;
-        }
-
-        .title-section {
+        /* header futuristik */
+        .header-saber {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 1.2rem 1.8rem;
+            border-bottom: 1px solid #2aff6e30;
             display: flex;
-            align-items: baseline;
             justify-content: space-between;
             flex-wrap: wrap;
+            gap: 0.8rem;
+            align-items: baseline;
+        }
+
+        .title-glow {
+            display: flex;
+            align-items: center;
             gap: 12px;
         }
 
-        .title-section h1 {
-            font-size: 1.75rem;
+        .title-glow h1 {
+            font-size: 1.6rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #1f3b4c, #2c5a6e);
+            background: linear-gradient(135deg, #b5ffb0, #2eff7a);
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
             letter-spacing: -0.3px;
+            text-shadow: 0 0 5px #2eff7a30;
         }
 
-        .badge-version {
-            background: #eef2ff;
-            padding: 0.3rem 0.8rem;
+        .saber-icon {
+            font-size: 1.8rem;
+            filter: drop-shadow(0 0 4px #5aff85);
+        }
+
+        .badge-future {
+            background: #1e3a2a;
+            padding: 0.2rem 0.8rem;
             border-radius: 40px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: #2c5a6e;
-        }
-
-        .subhead {
-            color: #4b6b7f;
-            font-size: 0.85rem;
-            margin-top: 0.5rem;
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        /* area input utama: dua kolom (awal & akhir) */
-        .input-panels {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.8rem;
-            padding: 2rem 2rem 1.2rem 2rem;
-            background: #fefefe;
-        }
-
-        .panel {
-            flex: 1;
-            min-width: 240px;
-            background: #fafcff;
-            border-radius: 1.5rem;
-            padding: 1.2rem 1.2rem 1.5rem;
-            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.03);
-            border: 1px solid #eef2f8;
-            transition: all 0.2s;
-        }
-
-        .panel:hover {
-            border-color: #d9e2ef;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
-        }
-
-        .panel-title {
-            font-weight: 700;
-            font-size: 1.1rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 1.2rem;
-            padding-bottom: 0.6rem;
-            border-bottom: 2px solid #e9edf4;
-            color: #1f3b4c;
-        }
-
-        .voucher-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 1.2rem;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .voucher-label {
-            font-weight: 600;
-            background: #f0f4fa;
-            padding: 0.3rem 0.8rem;
-            border-radius: 40px;
-            font-size: 0.85rem;
-            color: #1f4662;
-            min-width: 85px;
-            text-align: center;
-        }
-
-        .voucher-label small {
-            font-weight: normal;
             font-size: 0.7rem;
-            color: #ff8c42;
-            display: inline-block;
-            margin-left: 5px;
-        }
-
-        .input-number {
-            width: 130px;
-            padding: 10px 12px;
-            font-size: 0.95rem;
             font-weight: 500;
-            text-align: center;
-            border: 1.5px solid #e2e8f0;
-            border-radius: 60px;
-            background: #ffffff;
-            transition: all 0.2s;
-            font-family: 'Inter', monospace;
+            color: #b5ffbc;
+            border: 1px solid #2eff6e;
+            letter-spacing: 0.5px;
         }
 
-        .input-number:focus {
-            border-color: #ff8c42;
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(255, 140, 66, 0.2);
+        /* area input - minimalis, tidak lebar, horizontal */
+        .input-dual-section {
+            padding: 1.5rem 1.8rem 1rem;
         }
 
-        /* Keuntungan info ringkas */
-        .profit-info {
-            background: #fef7e8;
-            border-radius: 1rem;
-            padding: 0.7rem 1rem;
-            margin-top: 0.8rem;
-            font-size: 0.75rem;
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            color: #b45f2b;
-        }
-
-        .profit-info span strong {
-            color: #d45a1a;
-        }
-
-        /* Tombol aksi */
-        .action-row {
-            padding: 0rem 2rem 1.5rem 2rem;
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            border-top: 1px solid #ecf3f9;
-            background: #ffffff;
-        }
-
-        .btn-group {
-            display: flex;
-            gap: 0.8rem;
-        }
-
-        .btn {
-            border: none;
-            padding: 0.7rem 1.4rem;
-            border-radius: 40px;
-            font-weight: 600;
-            font-size: 0.85rem;
-            cursor: pointer;
+        .input-row {
+            background: rgba(0, 12, 5, 0.6);
+            border-radius: 1.5rem;
+            padding: 1rem 1.2rem;
+            margin-bottom: 1.2rem;
+            border: 1px solid #2aff6e30;
             transition: 0.2s;
-            font-family: inherit;
-            background: #f1f5f9;
-            color: #2c5a6e;
         }
 
-        .btn-primary {
-            background: #ff8c42;
-            color: white;
-            box-shadow: 0 4px 8px rgba(255, 140, 66, 0.25);
+        .row-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 0.8rem;
         }
 
-        .btn-primary:hover {
-            background: #e6762c;
-            transform: translateY(-1px);
+        .row-label span {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            background: #1f3a2a;
+            padding: 0.2rem 0.7rem;
+            border-radius: 20px;
+            color: #b5ffc5;
+            letter-spacing: 1px;
         }
 
-        .btn-secondary {
-            background: #eef2f6;
-            border: 1px solid #dce5ef;
-        }
-
-        .btn-secondary:hover {
-            background: #e2e8f0;
-        }
-
-        .auto-status {
-            font-size: 0.7rem;
-            color: #6f8faa;
-            background: #f0f6fe;
-            padding: 0.3rem 1rem;
-            border-radius: 30px;
-        }
-
-        /* Area hasil */
-        .result-area {
-            padding: 0 2rem 2rem 2rem;
-            background: #ffffff;
-        }
-
-        .summary-cards {
+        .voucher-group {
             display: flex;
             flex-wrap: wrap;
             gap: 1.2rem;
-            margin-bottom: 1.8rem;
+            justify-content: flex-start;
+            align-items: flex-end;
         }
 
-        .stat-card {
-            flex: 1;
-            min-width: 160px;
-            background: #fbfdfe;
-            border-radius: 1.2rem;
-            padding: 1rem 0.8rem;
-            text-align: center;
-            border: 1px solid #edf2f8;
-            transition: all 0.2s;
+        .voucher-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+            min-width: 100px;
         }
 
-        .stat-card .label {
+        .voucher-nama {
             font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #6c86a0;
+            font-weight: 600;
+            color: #9effb0;
+            background: #0e2a1a;
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 16px;
+            width: fit-content;
+            backdrop-filter: blur(4px);
         }
 
-        .stat-card .value {
-            font-size: 1.7rem;
-            font-weight: 800;
-            color: #1f3b4c;
-            margin: 0.3rem 0;
+        .voucher-nama small {
+            color: #7eff8f;
+            font-size: 0.6rem;
+            margin-left: 4px;
         }
 
-        .stat-card.keuntungan .value {
-            color: #2c7a4a;
-        }
-
-        .stat-card.setoran .value {
-            color: #c95a0f;
-        }
-
-        /* tabel detail */
-        .table-wrapper {
-            overflow-x: auto;
+        .input-mini {
+            background: #071c0e;
+            border: 1.5px solid #3eff7a;
             border-radius: 1.2rem;
-            background: #fafdff;
-            border: 1px solid #eef3fc;
+            padding: 0.5rem 0.7rem;
+            width: 90px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-align: center;
+            color: #caffd0;
+            font-family: 'Inter', monospace;
+            transition: all 0.2s;
+            box-shadow: 0 0 3px #52ff7a;
+        }
+
+        .input-mini:focus {
+            outline: none;
+            border-color: #aaffb0;
+            box-shadow: 0 0 8px #4eff6e;
+            background: #0b2416;
+        }
+
+        /* tombol aksi */
+        .action-zone {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            padding: 0.5rem 1.8rem 1.8rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-saber {
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid #4eff7a;
+            padding: 0.6rem 1.4rem;
+            border-radius: 3rem;
+            font-weight: 700;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #d0ffdb;
+            backdrop-filter: blur(4px);
+            font-family: inherit;
+        }
+
+        .btn-saber.primary {
+            background: #1b4a2c;
+            box-shadow: 0 0 8px #2eff6e;
+            color: white;
+        }
+
+        .btn-saber.primary:hover {
+            background: #2a723c;
+            transform: scale(0.97);
+            box-shadow: 0 0 14px #6eff92;
+        }
+
+        .btn-saber.secondary:hover {
+            background: #1f3a2a;
+            border-color: #a5ffb5;
+        }
+
+        /* hasil ringkasan - futuristik */
+        .result-future {
+            padding: 0rem 1.8rem 1.8rem;
+        }
+
+        .stats-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stat-block {
+            flex: 1;
+            background: rgba(0, 20, 5, 0.7);
+            backdrop-filter: blur(8px);
+            border-radius: 1.2rem;
+            padding: 0.8rem 0.6rem;
+            text-align: center;
+            border: 1px solid #39ff7933;
+        }
+
+        .stat-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #8effaa;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #d4ffcf;
+            text-shadow: 0 0 5px #0eff5e;
+            margin: 0.2rem 0;
+        }
+
+        .stat-number.green-profit {
+            color: #b0ffb9;
+            text-shadow: 0 0 4px #00ff66;
+        }
+
+        .stat-number.orange-setor {
+            color: #ffbc7a;
+            text-shadow: 0 0 2px #ffa03a;
+        }
+
+        /* tabel mini */
+        .table-saber {
+            background: rgba(0, 15, 5, 0.7);
+            border-radius: 1.2rem;
+            overflow-x: auto;
+            border: 1px solid #2eff6e40;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
         }
 
         th {
-            background: #f4f9fe;
-            padding: 12px 8px;
-            font-weight: 700;
-            color: #1e3a4b;
+            background: #0e2a1a;
+            padding: 10px 5px;
+            color: #bcffcf;
+            font-weight: 600;
             text-align: center;
         }
 
         td {
-            padding: 11px 6px;
+            padding: 8px 4px;
             text-align: center;
-            border-bottom: 1px solid #eff3f9;
-            font-weight: 500;
+            border-bottom: 1px solid #2eff6e20;
+            color: #cfefd5;
         }
 
-        .voucher-badge {
-            font-weight: 700;
-            background: #ecf3f9;
+        .voucher-tag {
+            background: #183f24;
+            padding: 2px 8px;
+            border-radius: 40px;
             display: inline-block;
-            padding: 2px 12px;
-            border-radius: 30px;
+            font-weight: 600;
         }
 
         .footer-note {
-            margin-top: 1.2rem;
-            font-size: 0.7rem;
+            margin-top: 1rem;
+            font-size: 0.6rem;
             text-align: center;
-            color: #809ab0;
-            border-top: 1px dashed #e2edf7;
-            padding-top: 1rem;
+            color: #6baa7c;
+            border-top: 1px dashed #2eff6e30;
+            padding-top: 0.8rem;
         }
 
-        @media (max-width: 720px) {
-            body {
+        @media (max-width: 640px) {
+            .input-dual-section {
                 padding: 1rem;
             }
-            .input-panels {
-                padding: 1rem;
-                flex-direction: column;
+            .voucher-group {
+                gap: 0.8rem;
             }
-            .action-row {
-                padding: 1rem;
-                flex-direction: column;
-                align-items: stretch;
+            .input-mini {
+                width: 75px;
+                font-size: 0.8rem;
             }
-            .result-area {
-                padding: 0 1rem 1.5rem;
-            }
-            .input-number {
-                width: 100%;
-            }
-            .voucher-row {
-                flex-wrap: wrap;
+            .stat-number {
+                font-size: 1.2rem;
             }
         }
     </style>
 </head>
 <body>
-<div class="voucher-dashboard">
-    <div class="card-modern">
-        <div class="card-header">
-            <div class="title-section">
-                <h1>📋 Voucher<span style="font-weight:500;">Flow</span></h1>
-                <div class="badge-version">keuntungan + setoran instan</div>
-            </div>
-            <div class="subhead">
-                <span>🔹 Voucher 5.000 & 10.000 → untung Rp1.000 / pcs</span>
-                <span>🔸 Voucher 3.000 → untung Rp500 / pcs</span>
-            </div>
+<div class="neo-container">
+    <div class="header-saber">
+        <div class="title-glow">
+            <div class="saber-icon">⚔️</div>
+            <h1>VOUCHER•SABER</h1>
         </div>
+        <div class="badge-future">LIGHT SABER EDITION | HIJAU NEO</div>
+    </div>
 
-        <!-- Panel input: Stok Awal dan Stok Akhir (simpel & rapi) -->
-        <div class="input-panels">
-            <!-- panel kiri: Jumlah sebelumnya (stok awal) -->
-            <div class="panel">
-                <div class="panel-title">
-                    <span>📦</span> Stok Awal (sebelum terjual)
-                </div>
-                <div class="voucher-row">
-                    <span class="voucher-label">Voucher 5.000 <small>+1.000</small></span>
-                    <input type="number" id="awal_5000" class="input-number" value="50" step="1" min="0">
-                </div>
-                <div class="voucher-row">
-                    <span class="voucher-label">Voucher 3.000 <small>+500</small></span>
-                    <input type="number" id="awal_3000" class="input-number" value="50" step="1" min="0">
-                </div>
-                <div class="voucher-row">
-                    <span class="voucher-label">Voucher 10.000 <small>+1.000</small></span>
-                    <input type="number" id="awal_10000" class="input-number" value="50" step="1" min="0">
-                </div>
-                <div class="profit-info">
-                    <span>📌 Keuntungan kamu per voucher:</span>
-                    <span><strong>5k/10k → Rp1.000</strong> | <strong>3k → Rp500</strong></span>
-                </div>
+    <!-- area input minimalis: dua baris (awal & akhir) dengan input kecil horizontal -->
+    <div class="input-dual-section">
+        <!-- Baris 1: Jumlah sebelumnya (stok awal) -->
+        <div class="input-row">
+            <div class="row-label">
+                <span>◢ STOK AWAL</span>
+                <span style="font-size:0.6rem;">sebelum terjual</span>
             </div>
-
-            <!-- panel kanan: Jumlah setelah 2 minggu (stok akhir) -->
-            <div class="panel">
-                <div class="panel-title">
-                    <span>📉</span> Stok Akhir (setelah terjual)
+            <div class="voucher-group">
+                <div class="voucher-item">
+                    <div class="voucher-nama">5.000 <small>+1k</small></div>
+                    <input type="number" id="awal_5000" class="input-mini" value="50" step="1" min="0">
                 </div>
-                <div class="voucher-row">
-                    <span class="voucher-label">Voucher 5.000</span>
-                    <input type="number" id="akhir_5000" class="input-number" value="30" step="1" min="0">
+                <div class="voucher-item">
+                    <div class="voucher-nama">3.000 <small>+500</small></div>
+                    <input type="number" id="awal_3000" class="input-mini" value="50" step="1" min="0">
                 </div>
-                <div class="voucher-row">
-                    <span class="voucher-label">Voucher 3.000</span>
-                    <input type="number" id="akhir_3000" class="input-number" value="30" step="1" min="0">
-                </div>
-                <div class="voucher-row">
-                    <span class="voucher-label">Voucher 10.000</span>
-                    <input type="number" id="akhir_10000" class="input-number" value="20" step="1" min="0">
-                </div>
-                <div class="profit-info">
-                    <span>✨ Terjual = Stok Awal - Stok Akhir</span>
-                    <span>💰 Otomatis hitung pendapatan & setoran</span>
+                <div class="voucher-item">
+                    <div class="voucher-nama">10.000 <small>+1k</small></div>
+                    <input type="number" id="awal_10000" class="input-mini" value="50" step="1" min="0">
                 </div>
             </div>
         </div>
 
-        <!-- Tombol dan status -->
-        <div class="action-row">
-            <div class="btn-group">
-                <button class="btn btn-primary" id="hitungBtn">🔄 Hitung Sekarang</button>
-                <button class="btn btn-secondary" id="resetBtn">↺ Reset ke Contoh</button>
+        <!-- Baris 2: Jumlah setelah 2 minggu (stok akhir) -->
+        <div class="input-row">
+            <div class="row-label">
+                <span>◢ STOK AKHIR</span>
+                <span style="font-size:0.6rem;">setelah 2 minggu</span>
             </div>
-            <div class="auto-status">
-                ⚡ Live update (ubah angka langsung terhitung)
+            <div class="voucher-group">
+                <div class="voucher-item">
+                    <div class="voucher-nama">5.000</div>
+                    <input type="number" id="akhir_5000" class="input-mini" value="30" step="1" min="0">
+                </div>
+                <div class="voucher-item">
+                    <div class="voucher-nama">3.000</div>
+                    <input type="number" id="akhir_3000" class="input-mini" value="30" step="1" min="0">
+                </div>
+                <div class="voucher-item">
+                    <div class="voucher-nama">10.000</div>
+                    <input type="number" id="akhir_10000" class="input-mini" value="20" step="1" min="0">
+                </div>
             </div>
         </div>
+    </div>
 
-        <!-- Area hasil: ringkasan + tabel detail -->
-        <div class="result-area">
-            <div class="summary-cards" id="summaryContainer">
-                <!-- diisi JS -->
-            </div>
-            <div class="table-wrapper">
-                <table id="detailTable">
-                    <thead>
-                        <tr><th>Jenis Voucher</th><th>Terjual</th><th>Total Pendapatan (Rp)</th><th>Keuntungan Anda (Rp)</th><th>Uang Setoran (Rp)</th></tr>
-                    </thead>
-                    <tbody id="tableBody">
-                        <tr><td colspan="5" style="text-align:center;">Memuat data...</td></tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="footer-note">
-                🧾 Cara hitung: Setoran = Total Pendapatan - Keuntungan Anda. Keuntungan anda sesuai ketentuan (5k/10k untung 1.000, 3k untung 500).
-            </div>
+    <!-- tombol aksi -->
+    <div class="action-zone">
+        <button class="btn-saber primary" id="hitungBtn">⟳ HITUNG & UPDATE</button>
+        <button class="btn-saber secondary" id="resetBtn">⚡ RESET CONTOH</button>
+    </div>
+
+    <!-- Hasil perhitungan futuristik -->
+    <div class="result-future">
+        <div class="stats-grid" id="statsGrid">
+            <!-- diisi js -->
+        </div>
+        <div class="table-saber">
+            <table id="detailTable">
+                <thead>
+                    <tr><th>Voucher</th><th>Terjual</th><th>Pendapatan</th><th>Keuntungan Kamu</th><th>Setoran</th></tr>
+                </thead>
+                <tbody id="tableBody">
+                    <tr><td colspan="5" style="text-align:center;">🟢 Masukkan data atau tekan hitung</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="footer-note">
+            ⚡ Keuntungan: 5k/10k = Rp1.000 per voucher | 3k = Rp500 per voucher • Setoran = total pendapatan - keuntungan anda
         </div>
     </div>
 </div>
 
 <script>
     (function() {
-        // konfigurasi voucher
-        const vouchers = [
-            { nominal: 5000, profit: 1000, idAwal: 'awal_5000', idAkhir: 'akhir_5000', name: 'Rp 5.000' },
-            { nominal: 3000, profit: 500,  idAwal: 'awal_3000', idAkhir: 'akhir_3000', name: 'Rp 3.000' },
-            { nominal: 10000, profit: 1000, idAwal: 'awal_10000', idAkhir: 'akhir_10000', name: 'Rp 10.000' }
+        // Konfigurasi voucher
+        const VOUCHER_DATA = [
+            { nominal: 5000, profit: 1000, idAwal: 'awal_5000', idAkhir: 'akhir_5000', nama: 'Rp 5.000' },
+            { nominal: 3000, profit: 500,  idAwal: 'awal_3000', idAkhir: 'akhir_3000', nama: 'Rp 3.000' },
+            { nominal: 10000, profit: 1000, idAwal: 'awal_10000', idAkhir: 'akhir_10000', nama: 'Rp 10.000' }
         ];
 
-        // ambil element
-        function getVal(id) {
+        function getNumber(id) {
             const el = document.getElementById(id);
             if (!el) return 0;
-            let v = parseInt(el.value, 10);
-            return isNaN(v) || v < 0 ? 0 : v;
+            let val = parseInt(el.value, 10);
+            return isNaN(val) || val < 0 ? 0 : val;
         }
 
-        // hitung semua data
-        function computeData() {
-            let results = [];
+        function compute() {
+            let details = [];
             let totalPendapatan = 0;
             let totalKeuntungan = 0;
             let totalSetoran = 0;
 
-            for (let v of vouchers) {
-                const awal = getVal(v.idAwal);
-                const akhir = getVal(v.idAkhir);
+            for (let v of VOUCHER_DATA) {
+                const awal = getNumber(v.idAwal);
+                const akhir = getNumber(v.idAkhir);
                 let terjual = awal - akhir;
-                if (terjual < 0) terjual = 0;   // tidak mungkin negatif, tapi antisipasi
+                if (terjual < 0) terjual = 0;
 
                 const pendapatan = terjual * v.nominal;
                 const keuntungan = terjual * v.profit;
                 const setoran = pendapatan - keuntungan;
 
-                results.push({
-                    name: v.name,
-                    nominal: v.nominal,
+                details.push({
+                    nama: v.nama,
                     terjual: terjual,
                     pendapatan: pendapatan,
                     keuntungan: keuntungan,
-                    setoran: setoran
+                    setoran: setoran,
                 });
-
                 totalPendapatan += pendapatan;
                 totalKeuntungan += keuntungan;
                 totalSetoran += setoran;
             }
-
-            return { results, totalPendapatan, totalKeuntungan, totalSetoran };
+            return { details, totalPendapatan, totalKeuntungan, totalSetoran };
         }
 
-        // format rupiah tanpa desimal
         function formatRp(angka) {
             return 'Rp ' + angka.toLocaleString('id-ID');
         }
 
-        // render summary cards & tabel
-        function renderUI() {
-            const data = computeData();
-            const { results, totalPendapatan, totalKeuntungan, totalSetoran } = data;
+        function render() {
+            const { details, totalPendapatan, totalKeuntungan, totalSetoran } = compute();
 
-            // summary cards
-            const summaryContainer = document.getElementById('summaryContainer');
-            if (summaryContainer) {
-                summaryContainer.innerHTML = `
-                    <div class="stat-card">
-                        <div class="label">💵 TOTAL PENDAPATAN</div>
-                        <div class="value">${formatRp(totalPendapatan)}</div>
-                        <div style="font-size:0.7rem;">dari seluruh voucher terjual</div>
+            // render stat cards
+            const statsGrid = document.getElementById('statsGrid');
+            if (statsGrid) {
+                statsGrid.innerHTML = `
+                    <div class="stat-block">
+                        <div class="stat-label">💚 TOTAL PENDAPATAN</div>
+                        <div class="stat-number">${formatRp(totalPendapatan)}</div>
+                        <div style="font-size:0.6rem;">semua voucher</div>
                     </div>
-                    <div class="stat-card keuntungan">
-                        <div class="label">✅ KEUNTUNGAN ANDA</div>
-                        <div class="value">${formatRp(totalKeuntungan)}</div>
-                        <div style="font-size:0.7rem;">komisi penjualan pribadi</div>
+                    <div class="stat-block">
+                        <div class="stat-label">✨ KEUNTUNGAN ANDA</div>
+                        <div class="stat-number green-profit">${formatRp(totalKeuntungan)}</div>
+                        <div style="font-size:0.6rem;">komisi pribadi</div>
                     </div>
-                    <div class="stat-card setoran">
-                        <div class="label">🏦 SETORAN KE TITIPAN</div>
-                        <div class="value">${formatRp(totalSetoran)}</div>
-                        <div style="font-size:0.7rem;">uang untuk pemilik voucher</div>
+                    <div class="stat-block">
+                        <div class="stat-label">🏦 HARUS DISETORKAN</div>
+                        <div class="stat-number orange-setor">${formatRp(totalSetoran)}</div>
+                        <div style="font-size:0.6rem;">untuk pemilik voucher</div>
                     </div>
                 `;
             }
@@ -541,32 +479,32 @@
             const tbody = document.getElementById('tableBody');
             if (!tbody) return;
             tbody.innerHTML = '';
-            for (let item of results) {
+            for (let item of details) {
                 const row = tbody.insertRow();
-                // Nama voucher
-                const cellName = row.insertCell(0);
-                cellName.innerHTML = `<span class="voucher-badge">${item.name}</span>`;
-                // Terjual
+                // nama voucher
+                const cellNama = row.insertCell(0);
+                cellNama.innerHTML = `<span class="voucher-tag">${item.nama}</span>`;
+                // terjual
                 const cellTerjual = row.insertCell(1);
                 cellTerjual.textContent = item.terjual;
-                cellTerjual.style.fontWeight = '600';
-                // Total pendapatan
-                const cellPendapatan = row.insertCell(2);
-                cellPendapatan.textContent = formatRp(item.pendapatan);
-                // Keuntungan Anda
-                const cellKeuntungan = row.insertCell(3);
-                cellKeuntungan.textContent = formatRp(item.keuntungan);
-                // Setoran
-                const cellSetoran = row.insertCell(4);
-                cellSetoran.textContent = formatRp(item.setoran);
+                cellTerjual.style.fontWeight = 'bold';
+                // pendapatan
+                const cellPend = row.insertCell(2);
+                cellPend.textContent = formatRp(item.pendapatan);
+                // keuntungan kamu
+                const cellProfit = row.insertCell(3);
+                cellProfit.textContent = formatRp(item.keuntungan);
+                // setoran
+                const cellSetor = row.insertCell(4);
+                cellSetor.textContent = formatRp(item.setoran);
             }
 
-            if (results.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="5">Masukkan data stok awal & akhir</td></tr>';
+            if (details.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">🔮 Masukkan stok awal & akhir</td></tr>';
             }
         }
 
-        // reset ke contoh awal (soal: voucher 5.000 awal50 akhir30, 3.000 awal50 akhir30, 10.000 awal50 akhir20)
+        // reset ke nilai contoh: 50/30, 50/30, 50/20
         function resetToExample() {
             document.getElementById('awal_5000').value = 50;
             document.getElementById('akhir_5000').value = 30;
@@ -574,20 +512,20 @@
             document.getElementById('akhir_3000').value = 30;
             document.getElementById('awal_10000').value = 50;
             document.getElementById('akhir_10000').value = 20;
-            renderUI();
+            render();
         }
 
-        // setup event listeners (realtime + tombol)
+        // event binding + realtime (ketika input berubah, langsung update)
         function bindEvents() {
-            const allInputs = document.querySelectorAll('.input-number');
+            const allInputs = document.querySelectorAll('.input-mini');
             for (let inp of allInputs) {
                 inp.addEventListener('input', function() {
-                    renderUI();
+                    render();
                 });
             }
             const hitungBtn = document.getElementById('hitungBtn');
             if (hitungBtn) {
-                hitungBtn.addEventListener('click', () => renderUI());
+                hitungBtn.addEventListener('click', () => render());
             }
             const resetBtn = document.getElementById('resetBtn');
             if (resetBtn) {
@@ -595,13 +533,9 @@
             }
         }
 
-        // inisialisasi pertama
-        function init() {
-            bindEvents();
-            renderUI();  // tampilkan data default (50/30,50/30,50/20)
-        }
-
-        init();
+        // initialize
+        bindEvents();
+        render();
     })();
 </script>
 </body>
