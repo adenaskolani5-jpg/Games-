@@ -2,619 +2,592 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>🤖 GIMBOT JADUL - Mobile Edition 🤖</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Penghitung Voucher Pribadi | Setoran & Keuntungan</title>
     <style>
         * {
-            user-select: none;
-            -webkit-tap-highlight-color: transparent;
-            touch-action: manipulation;
+            box-sizing: border-box;
+            font-family: system-ui, 'Segoe UI', 'Inter', 'Poppins', sans-serif;
         }
 
         body {
-            background: #0a0f1e;
+            background: linear-gradient(145deg, #e9f0f5 0%, #d9e2ec 100%);
+            margin: 0;
             min-height: 100vh;
+            padding: 2rem 1rem;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: 'Courier New', 'VT323', monospace;
-            margin: 0;
-            padding: 16px;
-            touch-action: pan-x pan-y; /* agar tidak zoom saat menyentuh tombol */
         }
 
-        .game-container {
-            max-width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-        }
-
-        canvas {
-            display: block;
+        /* Kartu utama */
+        .container {
+            max-width: 1300px;
             width: 100%;
-            height: auto;
-            max-width: 800px;
-            border-radius: 20px;
-            box-shadow: 0 0 0 3px #f3c26b, 0 8px 20px black;
-            image-rendering: crisp-edges;
-            image-rendering: pixelated;
-            cursor: pointer;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(2px);
+            border-radius: 2.5rem;
+            box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.35), 0 2px 8px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            transition: all 0.2s ease;
         }
 
-        /* Panel info responsif */
-        .info-panel {
+        /* Header */
+        .header {
+            background: #1e2f3f;
+            background: linear-gradient(135deg, #1a2a38 0%, #0f1e2a 100%);
+            padding: 1.5rem 2rem;
+            color: white;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-weight: 600;
+            font-size: 1.9rem;
+            letter-spacing: -0.3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .header h1 span {
+            background: #ffb347;
+            background: linear-gradient(135deg, #ffb347, #ff8c1a);
+            padding: 5px 14px;
+            border-radius: 60px;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #1e2f3f;
+        }
+
+        .sub {
+            margin-top: 10px;
+            opacity: 0.85;
+            font-size: 0.9rem;
+        }
+
+        /* isi utama */
+        .main-content {
+            padding: 2rem 2rem 1.8rem;
+        }
+
+        /* grid voucher cards */
+        .voucher-grid {
             display: flex;
             flex-wrap: wrap;
+            gap: 1.8rem;
             justify-content: center;
-            gap: 12px;
-            background: #1a1f2e;
-            padding: 10px 16px;
-            border-radius: 60px;
-            border: 2px solid #ffcd7e;
-            color: #f7ecc7;
-            font-weight: bold;
-            font-size: 1.2rem;
-            text-shadow: 2px 2px 0 #2a2418;
-            width: fit-content;
-            margin: 0 auto;
+            margin-bottom: 2rem;
         }
 
-        .info-panel div {
-            display: flex;
-            gap: 8px;
-            align-items: baseline;
-            background: #00000066;
+        .card {
+            background: white;
+            border-radius: 1.8rem;
+            flex: 1;
+            min-width: 260px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-header {
+            background: #f8fafc;
+            padding: 1rem 1.2rem;
+            border-radius: 1.8rem 1.8rem 0 0;
+            border-bottom: 2px solid #eef2f6;
+            text-align: center;
+        }
+
+        .card-header h2 {
+            margin: 0;
+            font-weight: 700;
+            font-size: 1.9rem;
+            color: #1e4668;
+        }
+
+        .card-header .nominal {
+            font-size: 0.85rem;
+            background: #e9edf2;
+            display: inline-block;
             padding: 4px 12px;
             border-radius: 40px;
+            color: #2c3e4e;
+            margin-top: 8px;
+            font-weight: 500;
         }
 
-        .info-panel span:first-child {
-            font-size: 1rem;
+        .card-body {
+            padding: 1.5rem 1.2rem 1.2rem;
         }
 
-        .info-panel .value {
-            font-size: 1.6rem;
-            font-family: monospace;
-            color: #ffd98c;
-            min-width: 40px;
-            text-align: center;
+        .input-group {
+            margin-bottom: 1.3rem;
         }
 
-        /* TOUCH CONTROLS - Baris tombol untuk HP */
-        .touch-controls {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin-top: 5px;
-            margin-bottom: 8px;
-        }
-
-        .ctrl-btn {
-            background: #2c2f3e;
-            border: none;
-            font-size: 2rem;
-            font-weight: bold;
-            font-family: monospace;
-            padding: 12px 20px;
-            border-radius: 60px;
-            color: #ffdfa5;
-            box-shadow: 0 5px 0 #121520;
-            transition: 0.05s linear;
-            text-align: center;
-            min-width: 75px;
-            cursor: pointer;
-            touch-action: manipulation;
-            background: #3a3f55;
-        }
-
-        .ctrl-btn:active {
-            transform: translateY(3px);
-            box-shadow: 0 2px 0 #121520;
-        }
-
-        .reset-btn {
-            background: #c97e2a;
-            color: #1f1b10;
-            box-shadow: 0 5px 0 #6b3f00;
-            font-size: 1.4rem;
-        }
-
-        .status {
-            background: #2d2418b3;
-            backdrop-filter: blur(8px);
-            padding: 8px 14px;
-            border-radius: 40px;
+        .input-group label {
+            display: block;
+            font-weight: 600;
             font-size: 0.85rem;
-            font-weight: bold;
-            text-align: center;
-            color: #ffe2a4;
-            max-width: 90%;
+            color: #2c3e50;
+            margin-bottom: 6px;
+            letter-spacing: 0.3px;
         }
 
-        @media (max-width: 650px) {
-            .ctrl-btn { padding: 10px 16px; font-size: 1.7rem; min-width: 65px; }
-            .info-panel { gap: 8px; }
-            .info-panel .value { font-size: 1.3rem; }
-            .status { font-size: 0.75rem; }
+        .input-group input {
+            width: 100%;
+            padding: 12px 14px;
+            font-size: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 1.2rem;
+            background: #fff;
+            transition: all 0.2s;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .input-group input:focus {
+            border-color: #ff8c1a;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 140, 26, 0.2);
+        }
+
+        .profit-badge {
+            background: #fef5e8;
+            padding: 8px 12px;
+            border-radius: 1rem;
+            text-align: center;
+            margin-top: 10px;
+            font-size: 0.8rem;
+            color: #b45f06;
+            font-weight: 500;
+        }
+
+        /* Tombol kontrol global */
+        .action-bar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1rem 0 2rem;
+        }
+
+        .btn {
+            border: none;
+            padding: 12px 28px;
+            font-weight: 600;
+            border-radius: 3rem;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: 0.2s;
+            background: #ffffff;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: #1e4668;
+            color: white;
+            box-shadow: 0 8px 16px -8px rgba(30,70,104,0.4);
+        }
+
+        .btn-primary:hover {
+            background: #0f3552;
+            transform: scale(0.98);
+        }
+
+        .btn-secondary {
+            background: #eef2f6;
+            color: #2d3e50;
+            border: 1px solid #cddae9;
+        }
+
+        .btn-secondary:hover {
+            background: #e2e8f0;
+        }
+
+        /* Tabel hasil / ringkasan */
+        .result-section {
+            background: #fefcf7;
+            border-radius: 1.8rem;
+            padding: 1.2rem 1.5rem 1.8rem;
+            margin-top: 0.5rem;
+            border: 1px solid #ffe6cc;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.05);
+        }
+
+        .result-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #1e2f3f;
+            border-left: 5px solid #ff8c1a;
+            padding-left: 18px;
+            margin-bottom: 1.2rem;
+        }
+
+        .summary-cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            margin-bottom: 1.8rem;
+        }
+
+        .summary-item {
+            background: white;
+            flex: 1;
+            min-width: 160px;
+            border-radius: 1.4rem;
+            padding: 1rem 0.8rem;
+            text-align: center;
+            box-shadow: 0 5px 12px rgba(0,0,0,0.05);
+            border: 1px solid #ffefdb;
+        }
+
+        .summary-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #5e6f8d;
+        }
+
+        .summary-value {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #1e4668;
+            margin: 0.3rem 0;
+        }
+
+        .summary-value.keuntungan {
+            color: #2b7a3e;
+        }
+
+        .summary-value.setoran {
+            color: #c4450c;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 1.2rem;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        }
+
+        th, td {
+            padding: 12px 8px;
+            text-align: center;
+            border-bottom: 1px solid #edf2f7;
+            font-size: 0.85rem;
+        }
+
+        th {
+            background: #f1f5f9;
+            color: #1e2f3f;
+            font-weight: 700;
+        }
+
+        td {
+            font-weight: 500;
+        }
+
+        .voucher-nominal {
+            font-weight: 700;
+            background: #f8f2e7;
+        }
+
+        .footer-note {
+            margin-top: 1.5rem;
+            font-size: 0.7rem;
+            text-align: center;
+            color: #5c6f87;
+            border-top: 1px dashed #e2dccd;
+            padding-top: 1rem;
+        }
+
+        @media (max-width: 720px) {
+            .main-content {
+                padding: 1.2rem;
+            }
+            .summary-value {
+                font-size: 1.3rem;
+            }
+            .btn {
+                padding: 10px 20px;
+            }
         }
     </style>
 </head>
 <body>
-<div class="game-container">
-    <canvas id="gameCanvas" width="800" height="480"></canvas>
 
-    <div class="info-panel">
-        <div>🔩 <span class="value" id="scoreValue">0</span></div>
-        <div>❤️ <span class="value" id="livesValue">3</span></div>
-        <div>🚪 <span class="value" id="targetValue">5</span></div>
+<div class="container">
+    <div class="header">
+        <h1>
+            🧾 Voucher Manager
+            <span>Pribadi</span>
+        </h1>
+        <div class="sub">Hitung otomatis : Terjual | Pendapatan | Keuntungan Kamu | Setoran ke Titipan</div>
     </div>
 
-    <!-- Tombol sentuh untuk mobile -->
-    <div class="touch-controls">
-        <button class="ctrl-btn" id="btnLeft">◀ KIRI</button>
-        <button class="ctrl-btn" id="btnRight">KANAN ▶</button>
-        <button class="ctrl-btn" id="btnJump">🦿 LOMPAT</button>
-        <button class="ctrl-btn reset-btn" id="btnReset">🔄 RESET</button>
-    </div>
+    <div class="main-content">
+        <!-- FORM masukan awal & akhir tiap voucher -->
+        <div class="voucher-grid" id="voucherGrid">
+            <!-- Voucher 5.000 -->
+            <div class="card" data-nominal="5000" data-profit="1000">
+                <div class="card-header">
+                    <h2>Rp 5.000</h2>
+                    <div class="nominal">Keuntungan per voucher: Rp1.000</div>
+                </div>
+                <div class="card-body">
+                    <div class="input-group">
+                        <label>📦 Stok Awal (sebelum terjual)</label>
+                        <input type="number" id="awal_5000" class="awal-input" value="50" step="1" min="0">
+                    </div>
+                    <div class="input-group">
+                        <label>📉 Stok Akhir (setelah 2 minggu)</label>
+                        <input type="number" id="akhir_5000" class="akhir-input" value="30" step="1" min="0">
+                    </div>
+                    <div class="profit-badge">
+                        💰 Untung kamu Rp1.000 / voucher
+                    </div>
+                </div>
+            </div>
 
-    <div class="status" id="gameStatus">⬅️ ➡️  |  tekan tombol layar  |  kumpulkan baut & hindari api!</div>
+            <!-- Voucher 3.000 -->
+            <div class="card" data-nominal="3000" data-profit="500">
+                <div class="card-header">
+                    <h2>Rp 3.000</h2>
+                    <div class="nominal">Keuntungan per voucher: Rp500</div>
+                </div>
+                <div class="card-body">
+                    <div class="input-group">
+                        <label>📦 Stok Awal (sebelum terjual)</label>
+                        <input type="number" id="awal_3000" class="awal-input" value="50" step="1" min="0">
+                    </div>
+                    <div class="input-group">
+                        <label>📉 Stok Akhir (setelah 2 minggu)</label>
+                        <input type="number" id="akhir_3000" class="akhir-input" value="30" step="1" min="0">
+                    </div>
+                    <div class="profit-badge">
+                        💰 Untung kamu Rp500 / voucher
+                    </div>
+                </div>
+            </div>
+
+            <!-- Voucher 10.000 -->
+            <div class="card" data-nominal="10000" data-profit="1000">
+                <div class="card-header">
+                    <h2>Rp 10.000</h2>
+                    <div class="nominal">Keuntungan per voucher: Rp1.000</div>
+                </div>
+                <div class="card-body">
+                    <div class="input-group">
+                        <label>📦 Stok Awal (sebelum terjual)</label>
+                        <input type="number" id="awal_10000" class="awal-input" value="50" step="1" min="0">
+                    </div>
+                    <div class="input-group">
+                        <label>📉 Stok Akhir (setelah 2 minggu)</label>
+                        <input type="number" id="akhir_10000" class="akhir-input" value="20" step="1" min="0">
+                    </div>
+                    <div class="profit-badge">
+                        💰 Untung kamu Rp1.000 / voucher
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="action-bar">
+            <button class="btn btn-primary" id="hitungBtn">✨ Hitung & Ringkasan ✨</button>
+            <button class="btn btn-secondary" id="resetBtn">⟳ Reset ke Contoh Awal</button>
+        </div>
+
+        <!-- Area hasil perhitungan -->
+        <div class="result-section" id="resultArea">
+            <div class="result-title">
+                📊 Laporan Penjualan & Setoran
+            </div>
+            <div class="summary-cards" id="summaryCards">
+                <!-- dinamis via js -->
+            </div>
+            <div style="overflow-x: auto;">
+                <table id="detailTable">
+                    <thead>
+                        <tr><th>Jenis Voucher</th><th>Terjual</th><th>Total Pendapatan (Rp)</th><th>Keuntungan Kamu (Rp)</th><th>Yang Harus Disetorkan (Rp)</th></tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <tr><td colspan="5" style="text-align:center;">Tekan tombol hitung untuk melihat data</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="footer-note">
+                ⚡ Perhitungan: Terjual = Stok Awal - Stok Akhir. <br>
+                • Voucher 5.000 & 10.000 → keuntungan Rp1.000 per voucher.<br>
+                • Voucher 3.000 → keuntungan Rp500 per voucher. <br>
+                • Uang Setoran = Total Pendapatan - Keuntungan Anda.
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>
-    (function () {
-        // ---------- CANVAS ----------
-        const canvas = document.getElementById('gameCanvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = 800;
-        canvas.height = 480;
+    // Data konfigurasi voucher
+    const voucherConfig = [
+        { nominal: 5000, profit: 1000, idAwal: 'awal_5000', idAkhir: 'akhir_5000' },
+        { nominal: 3000, profit: 500,  idAwal: 'awal_3000', idAkhir: 'akhir_3000' },
+        { nominal: 10000, profit: 1000, idAwal: 'awal_10000', idAkhir: 'akhir_10000' }
+    ];
 
-        // ---------- GAME WORLD ----------
-        const GRAVITY = 0.6;
-        const JUMP_POWER = -9;
-        const GROUND_Y = 420;
+    // Fungsi untuk mendapatkan nilai integer dari input
+    function getIntValue(elementId) {
+        const el = document.getElementById(elementId);
+        if (!el) return 0;
+        let val = parseInt(el.value, 10);
+        if (isNaN(val) || val < 0) val = 0;
+        return val;
+    }
 
-        let player = {
-            x: 80,
-            y: GROUND_Y - 28,
-            width: 28,
-            height: 28,
-            vx: 0,
-            vy: 0,
-            onGround: true,
-            facingRight: true
-        };
+    // Hitung semua data dan tampilkan
+    function hitungDanTampilkan() {
+        let hasilPerVoucher = [];
+        let grandTotalPendapatan = 0;
+        let grandTotalKeuntungan = 0;
+        let grandTotalSetoran = 0;
 
-        let platforms = [
-            { x: 0, y: GROUND_Y, w: 800, h: 10 },
-            { x: 180, y: 360, w: 100, h: 18 },
-            { x: 500, y: 320, w: 100, h: 18 },
-            { x: 350, y: 270, w: 80, h: 18 },
-            { x: 640, y: 380, w: 90, h: 18 }
-        ];
+        // Loop setiap voucher
+        for (let config of voucherConfig) {
+            const awal = getIntValue(config.idAwal);
+            const akhir = getIntValue(config.idAkhir);
+            let terjual = awal - akhir;
+            if (terjual < 0) terjual = 0;   // mencegah negatif jika salah input
 
-        let bolts = [
-            { x: 220, y: 335, w: 14, h: 14, collected: false },
-            { x: 540, y: 295, w: 14, h: 14, collected: false },
-            { x: 380, y: 245, w: 14, h: 14, collected: false },
-            { x: 670, y: 355, w: 14, h: 14, collected: false },
-            { x: 110, y: 395, w: 14, h: 14, collected: false },
-            { x: 710, y: 395, w: 14, h: 14, collected: false }
-        ];
+            const nominal = config.nominal;
+            const profitPerVoucher = config.profit;
 
-        let enemies = [
-            { x: 240, y: 345, w: 18, h: 18, vx: 0.9, dir: 1, type: 'fire' },
-            { x: 550, y: 305, w: 18, h: 18, vx: 1.2, dir: -1, type: 'fire' },
-            { x: 380, y: 255, w: 18, h: 18, vx: 0.7, dir: 1, type: 'fire' },
-            { x: 680, y: 365, w: 18, h: 18, vx: 1.1, dir: -1, type: 'fire' }
-        ];
+            const totalPendapatan = terjual * nominal;
+            const totalKeuntungan = terjual * profitPerVoucher;
+            const setoran = totalPendapatan - totalKeuntungan;
 
-        let exitDoor = { x: 720, y: GROUND_Y - 38, w: 28, h: 38, active: false };
-
-        let score = 0;
-        let targetBolts = bolts.length;
-        let lives = 3;
-        let gameActive = true;
-        let winFlag = false;
-        let invincibleFrames = 0;
-        let animationId = null;
-
-        // control state (untuk keyboard & touch)
-        const keys = {
-            ArrowLeft: false,
-            ArrowRight: false,
-            jumpPressed: false,
-            canJump: true
-        };
-
-        // DOM elements
-        const scoreSpan = document.getElementById('scoreValue');
-        const livesSpan = document.getElementById('livesValue');
-        const targetSpan = document.getElementById('targetValue');
-        const resetBtn = document.getElementById('btnReset');
-        const statusDiv = document.getElementById('gameStatus');
-
-        targetSpan.innerText = targetBolts;
-
-        function updateUI() {
-            scoreSpan.innerText = score;
-            livesSpan.innerText = lives;
-            if (winFlag) {
-                statusDiv.innerHTML = "✨✨ SELAMAT! GIMBOT MENANG! ✨✨  Tekan RESET untuk main lagi.";
-            } else if (!gameActive) {
-                statusDiv.innerHTML = "💀 GAME OVER 💀  Tekan RESET untuk mencoba lagi.";
-            } else {
-                statusDiv.innerHTML = `🔧 Baut tersisa: ${targetBolts - score}  |  ❤️ nyawa: ${lives}  |  hindari api & capai pintu!`;
-            }
-            targetSpan.innerText = targetBolts;
-        }
-
-        function resetGame() {
-            player = {
-                x: 80,
-                y: GROUND_Y - 28,
-                width: 28,
-                height: 28,
-                vx: 0,
-                vy: 0,
-                onGround: true,
-                facingRight: true
-            };
-            bolts.forEach(b => b.collected = false);
-            score = 0;
-            lives = 3;
-            gameActive = true;
-            winFlag = false;
-            invincibleFrames = 0;
-            enemies = [
-                { x: 240, y: 345, w: 18, h: 18, vx: 0.9, dir: 1, type: 'fire' },
-                { x: 550, y: 305, w: 18, h: 18, vx: 1.2, dir: -1, type: 'fire' },
-                { x: 380, y: 255, w: 18, h: 18, vx: 0.7, dir: 1, type: 'fire' },
-                { x: 680, y: 365, w: 18, h: 18, vx: 1.1, dir: -1, type: 'fire' }
-            ];
-            exitDoor.active = false;
-            updateUI();
-        }
-
-        // collisions & physics (sama seperti versi sebelumnya)
-        function collide(r1, r2) {
-            return !(r2.x > r1.x + r1.w || r2.x + r2.w < r1.x || r2.y > r1.y + r1.h || r2.y + r2.h < r1.y);
-        }
-
-        function handleCollisions() {
-            player.onGround = false;
-            let newX = player.x + player.vx;
-            let playerRect = { x: newX, y: player.y, w: player.width, h: player.height };
-            for (let plat of platforms) {
-                let platRect = { x: plat.x, y: plat.y, w: plat.w, h: plat.h };
-                if (collide(playerRect, platRect)) {
-                    if (player.vx > 0) newX = platRect.x - player.width;
-                    else if (player.vx < 0) newX = platRect.x + platRect.w;
-                    playerRect.x = newX;
-                }
-            }
-            player.x = newX;
-
-            let newY = player.y + player.vy;
-            let playerRectY = { x: player.x, y: newY, w: player.width, h: player.height };
-            for (let plat of platforms) {
-                let platRect = { x: plat.x, y: plat.y, w: plat.w, h: plat.h };
-                if (collide(playerRectY, platRect)) {
-                    if (player.vy > 0) {
-                        newY = platRect.y - player.height;
-                        player.vy = 0;
-                        player.onGround = true;
-                    } else if (player.vy < 0) {
-                        newY = platRect.y + platRect.h;
-                        player.vy = 0;
-                    }
-                    playerRectY.y = newY;
-                }
-            }
-            player.y = newY;
-
-            if (player.y + player.height > GROUND_Y + 20) {
-                if (gameActive && !winFlag) loseLife();
-                resetPlayerPosition();
-            }
-            if (player.x < 10) player.x = 10;
-            if (player.x + player.width > canvas.width - 10) player.x = canvas.width - player.width - 10;
-        }
-
-        function resetPlayerPosition() {
-            player.x = 80;
-            player.y = GROUND_Y - 28;
-            player.vx = 0;
-            player.vy = 0;
-            player.onGround = true;
-            invincibleFrames = 25;
-        }
-
-        function loseLife() {
-            if (!gameActive || winFlag) return;
-            lives--;
-            updateUI();
-            if (lives <= 0) {
-                gameActive = false;
-                winFlag = false;
-                statusDiv.innerHTML = "💀 GAME OVER - Tekan RESET 💀";
-                updateUI();
-            } else {
-                resetPlayerPosition();
-                statusDiv.innerHTML = `🔥 TERKENA API! Nyawa sisa: ${lives} 🔥`;
-                setTimeout(() => updateUI(), 200);
-            }
-        }
-
-        function collectBolts() {
-            for (let i = 0; i < bolts.length; i++) {
-                const b = bolts[i];
-                if (!b.collected) {
-                    let boltRect = { x: b.x, y: b.y, w: b.w, h: b.h };
-                    let playerRect = { x: player.x, y: player.y, w: player.width, h: player.height };
-                    if (collide(boltRect, playerRect)) {
-                        b.collected = true;
-                        score++;
-                        updateUI();
-                    }
-                }
-            }
-            if (score === targetBolts) {
-                exitDoor.active = true;
-                statusDiv.innerHTML = "✨ PINTU TERBUKA! Capai pintu untuk menang! ✨";
-            }
-        }
-
-        function handleEnemyCollision() {
-            if (invincibleFrames > 0) {
-                invincibleFrames--;
-                return;
-            }
-            let playerRect = { x: player.x, y: player.y, w: player.width, h: player.height };
-            for (let e of enemies) {
-                let enemyRect = { x: e.x, y: e.y, w: e.w, h: e.h };
-                if (collide(playerRect, enemyRect)) {
-                    loseLife();
-                    invincibleFrames = 30;
-                    break;
-                }
-            }
-        }
-
-        function updateEnemies() {
-            for (let e of enemies) {
-                let newX = e.x + e.vx * e.dir;
-                if (newX < 30) { e.dir = 1; newX = 30; }
-                if (newX + e.w > canvas.width - 30) { e.dir = -1; newX = canvas.width - e.w - 30; }
-                let onSolid = false;
-                for (let plat of platforms) {
-                    if (newX + e.w > plat.x && newX < plat.x + plat.w && Math.abs(e.y + e.h - plat.y) < 10) {
-                        onSolid = true;
-                        break;
-                    }
-                }
-                if (!onSolid && e.y + e.h < GROUND_Y - 5) e.dir *= -1;
-                else e.x = newX;
-            }
-        }
-
-        function checkWin() {
-            if (!gameActive) return;
-            if (exitDoor.active && score === targetBolts) {
-                let doorRect = { x: exitDoor.x, y: exitDoor.y, w: exitDoor.w, h: exitDoor.h };
-                let playerRect = { x: player.x, y: player.y, w: player.width, h: player.height };
-                if (collide(doorRect, playerRect)) {
-                    winFlag = true;
-                    gameActive = false;
-                    statusDiv.innerHTML = "🎉🎉 KEMENANGAN! GIMBOT BERHASIL! 🎉🎉";
-                    updateUI();
-                }
-            }
-        }
-
-        function updatePlayerMovement() {
-            if (!gameActive || winFlag) return;
-            const MOVE_ACC = 0.7;
-            const MAX_SPEED = 4.2;
-            if (keys.ArrowLeft) {
-                player.vx = Math.max(-MAX_SPEED, player.vx - MOVE_ACC);
-                player.facingRight = false;
-            } else if (keys.ArrowRight) {
-                player.vx = Math.min(MAX_SPEED, player.vx + MOVE_ACC);
-                player.facingRight = true;
-            } else {
-                player.vx *= 0.92;
-            }
-            if (keys.jumpPressed && keys.canJump && player.onGround) {
-                player.vy = JUMP_POWER;
-                player.onGround = false;
-                keys.canJump = false;
-            }
-            if (!keys.jumpPressed) keys.canJump = true;
-            player.vy += GRAVITY;
-            if (player.vy > 12) player.vy = 12;
-        }
-
-        // ------------------ GAMBAR ------------------
-        function drawPixelGimbot(x, y, w, h, faceRight) {
-            ctx.fillStyle = "#6c8c9e";
-            ctx.fillRect(x+4, y+4, w-8, h-8);
-            ctx.fillStyle = "#3a5e6b";
-            ctx.fillRect(x+6, y+2, w-12, 6);
-            ctx.fillStyle = "#cab577";
-            ctx.fillRect(x+8, y+12, 6, 6);
-            ctx.fillRect(x+w-14, y+12, 6, 6);
-            ctx.fillStyle = "#fff6cf";
-            ctx.fillRect(x+10, y+18, 5, 5);
-            ctx.fillRect(x+w-15, y+18, 5, 5);
-            ctx.fillStyle = "#000";
-            ctx.fillRect(faceRight ? x+13 : x+8, y+20, 2, 2);
-            ctx.fillRect(faceRight ? x+w-12 : x+w-17, y+20, 2, 2);
-            ctx.fillStyle = "#c97e2a";
-            ctx.fillRect(x+12, y-6, 4, 10);
-            ctx.fillStyle = "#f0b34b";
-            ctx.beginPath();
-            ctx.arc(x+14, y-6, 5, 0, Math.PI*2);
-            ctx.fill();
-        }
-
-        function draw() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = "#111d2b";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = "#3e5d3e";
-            for(let i=0; i<canvas.width; i+=30) ctx.fillRect(i, GROUND_Y+5, 15, 5);
-            for(let plat of platforms) {
-                ctx.fillStyle = "#8b6946";
-                ctx.fillRect(plat.x, plat.y, plat.w, plat.h);
-                ctx.fillStyle = "#c29a5b";
-                ctx.fillRect(plat.x+2, plat.y-3, plat.w-4, 4);
-            }
-            for(let b of bolts) {
-                if(!b.collected){
-                    ctx.fillStyle = "#f7d44a";
-                    ctx.beginPath();
-                    ctx.ellipse(b.x+7, b.y+7, 6, 6, 0, 0, Math.PI*2);
-                    ctx.fill();
-                    ctx.fillStyle = "#b47c2e";
-                    ctx.fillRect(b.x+5, b.y+3, 4, 8);
-                }
-            }
-            for(let e of enemies) {
-                ctx.fillStyle = "#ff6622";
-                ctx.shadowBlur = 8;
-                ctx.beginPath();
-                ctx.ellipse(e.x+e.w/2, e.y+e.h/2, e.w/2, e.h/2, 0, 0, Math.PI*2);
-                ctx.fill();
-                ctx.fillStyle = "#ffaa33";
-                ctx.beginPath();
-                ctx.ellipse(e.x+e.w/2-2, e.y+e.h/2-2, 4, 4, 0, 0, Math.PI*2);
-                ctx.fill();
-                ctx.shadowBlur = 0;
-            }
-            if(exitDoor.active || score === targetBolts){
-                ctx.fillStyle = "#9f7e3c";
-                ctx.fillRect(exitDoor.x, exitDoor.y, exitDoor.w, exitDoor.h);
-                ctx.fillStyle = "#6b4c1c";
-                ctx.fillRect(exitDoor.x+10, exitDoor.y+10, 8, 18);
-                ctx.fillStyle = "#efcd7b";
-                ctx.beginPath();
-                ctx.arc(exitDoor.x+exitDoor.w/2, exitDoor.y+8, 6, 0, Math.PI*2);
-                ctx.fill();
-            }
-            if(invincibleFrames > 0 && (Math.floor(Date.now()/50)%2 === 0)) ctx.globalAlpha = 0.6;
-            drawPixelGimbot(player.x, player.y, player.width, player.height, player.facingRight);
-            ctx.globalAlpha = 1;
-            if(winFlag){
-                ctx.font = "bold 34px monospace";
-                ctx.fillStyle = "#ffdd77";
-                ctx.fillText("WINNER!", canvas.width/2-70, 70);
-            } else if(!gameActive && !winFlag){
-                ctx.font = "28px monospace";
-                ctx.fillStyle = "#ff8866";
-                ctx.fillText("GAME OVER", canvas.width/2-85, 70);
-            }
-        }
-
-        function updateGame() {
-            if (!gameActive && !winFlag) { draw(); return; }
-            if (winFlag) { draw(); return; }
-            updatePlayerMovement();
-            handleCollisions();
-            collectBolts();
-            updateEnemies();
-            handleEnemyCollision();
-            checkWin();
-            draw();
-        }
-
-        function gameLoop() {
-            updateGame();
-            animationId = requestAnimationFrame(gameLoop);
-        }
-
-        // ---------- KONTROL UNTUK MOBILE (TOUCH BUTTONS) ----------
-        function attachTouchControls() {
-            const leftBtn = document.getElementById('btnLeft');
-            const rightBtn = document.getElementById('btnRight');
-            const jumpBtn = document.getElementById('btnJump');
-            const resetTouchBtn = document.getElementById('btnReset');
-
-            // Event untuk tombol kiri (sentuh mulai & berakhir)
-            leftBtn.addEventListener('touchstart', (e) => { e.preventDefault(); keys.ArrowLeft = true; });
-            leftBtn.addEventListener('touchend', (e) => { e.preventDefault(); keys.ArrowLeft = false; });
-            leftBtn.addEventListener('mousedown', () => { keys.ArrowLeft = true; });
-            leftBtn.addEventListener('mouseup', () => { keys.ArrowLeft = false; });
-            // biar lepas saat mouse leave
-            leftBtn.addEventListener('mouseleave', () => { keys.ArrowLeft = false; });
-
-            rightBtn.addEventListener('touchstart', (e) => { e.preventDefault(); keys.ArrowRight = true; });
-            rightBtn.addEventListener('touchend', (e) => { e.preventDefault(); keys.ArrowRight = false; });
-            rightBtn.addEventListener('mousedown', () => { keys.ArrowRight = true; });
-            rightBtn.addEventListener('mouseup', () => { keys.ArrowRight = false; });
-            rightBtn.addEventListener('mouseleave', () => { keys.ArrowRight = false; });
-
-            // Lompat: saat disentuh, aktifkan jumpPressed, lalu lepas setelah touchend/mouseup
-            function startJump(e) { e.preventDefault(); keys.jumpPressed = true; }
-            function endJump(e) { e.preventDefault(); keys.jumpPressed = false; }
-            jumpBtn.addEventListener('touchstart', startJump);
-            jumpBtn.addEventListener('touchend', endJump);
-            jumpBtn.addEventListener('mousedown', startJump);
-            jumpBtn.addEventListener('mouseup', endJump);
-            jumpBtn.addEventListener('mouseleave', endJump);
-
-            // reset button langsung panggil reset
-            resetTouchBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                resetGame();
-                gameActive = true;
-                winFlag = false;
-                invincibleFrames = 0;
-                updateUI();
+            hasilPerVoucher.push({
+                nominal: nominal,
+                terjual: terjual,
+                totalPendapatan: totalPendapatan,
+                keuntungan: totalKeuntungan,
+                setoran: setoran,
             });
-            // juga support touch
-            resetTouchBtn.addEventListener('touchstart', (e) => {
-                e.preventDefault();
-                resetGame();
-                gameActive = true;
-                winFlag = false;
-                invincibleFrames = 0;
-                updateUI();
+
+            grandTotalPendapatan += totalPendapatan;
+            grandTotalKeuntungan += totalKeuntungan;
+            grandTotalSetoran += setoran;
+        }
+
+        // Render ringkasan card (3 kartu besar)
+        const summaryContainer = document.getElementById('summaryCards');
+        summaryContainer.innerHTML = `
+            <div class="summary-item">
+                <div class="summary-label">💵 TOTAL PENDAPATAN</div>
+                <div class="summary-value">Rp ${formatRupiah(grandTotalPendapatan)}</div>
+                <div style="font-size:0.7rem;">dari semua voucher terjual</div>
+            </div>
+            <div class="summary-item">
+                <div class="summary-label">✅ KEUNTUNGAN ANDA</div>
+                <div class="summary-value keuntungan">Rp ${formatRupiah(grandTotalKeuntungan)}</div>
+                <div style="font-size:0.7rem;">yang anda peroleh / komisi</div>
+            </div>
+            <div class="summary-item">
+                <div class="summary-label">🏦 YANG HARUS DISETORKAN</div>
+                <div class="summary-value setoran">Rp ${formatRupiah(grandTotalSetoran)}</div>
+                <div style="font-size:0.7rem;">uang untuk pemilik voucher</div>
+            </div>
+        `;
+
+        // Render tabel detail per voucher
+        const tbody = document.getElementById('tableBody');
+        if (!tbody) return;
+
+        tbody.innerHTML = '';
+        for (let item of hasilPerVoucher) {
+            const row = tbody.insertRow();
+            // nominal
+            const cellNominal = row.insertCell(0);
+            cellNominal.textContent = `Rp ${item.nominal.toLocaleString('id-ID')}`;
+            cellNominal.className = 'voucher-nominal';
+            // terjual
+            const cellTerjual = row.insertCell(1);
+            cellTerjual.textContent = item.terjual;
+            // total pendapatan
+            const cellPendapatan = row.insertCell(2);
+            cellPendapatan.textContent = `Rp ${formatRupiah(item.totalPendapatan)}`;
+            // keuntungan
+            const cellKeuntungan = row.insertCell(3);
+            cellKeuntungan.textContent = `Rp ${formatRupiah(item.keuntungan)}`;
+            // setoran
+            const cellSetoran = row.insertCell(4);
+            cellSetoran.textContent = `Rp ${formatRupiah(item.setoran)}`;
+        }
+
+        // Jika tidak ada data sama sekali (tidak mungkin karena ada data default) tapi tetap
+        if (hasilPerVoucher.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">Masukkan data awal & akhir</td></tr>';
+        }
+    }
+
+    // Helper format Rupiah tanpa desimal
+    function formatRupiah(angka) {
+        if (angka === undefined || angka === null) angka = 0;
+        return angka.toLocaleString('id-ID');
+    }
+
+    // Reset ke contoh awal: voucher 5.000 (awal 50, akhir 30); 3.000 (awal 50, akhir 30); 10.000 (awal 50, akhir 20)
+    function resetToExample() {
+        document.getElementById('awal_5000').value = 50;
+        document.getElementById('akhir_5000').value = 30;
+        document.getElementById('awal_3000').value = 50;
+        document.getElementById('akhir_3000').value = 30;
+        document.getElementById('awal_10000').value = 50;
+        document.getElementById('akhir_10000').value = 20;
+        // setelah reset, langsung hitung ulang
+        hitungDanTampilkan();
+    }
+
+    // Inisialisasi event listeners & hitung pertama kali (supaya langsung tampil)
+    function init() {
+        const hitungBtn = document.getElementById('hitungBtn');
+        const resetBtn = document.getElementById('resetBtn');
+
+        if (hitungBtn) hitungBtn.addEventListener('click', hitungDanTampilkan);
+        if (resetBtn) resetBtn.addEventListener('click', resetToExample);
+
+        // Panggil hitung pertama agar langsung menampilkan data contoh (50/30, 50/30, 50/20)
+        hitungDanTampilkan();
+
+        // Opsional: realtime jika ingin? biar lebih responsif bisa juga tambahkan event input tapi biar user klik tombol saja lebih jelas.
+        // namun agar lebih nyaman, kita tambahkan event pada input jika ingin otomatis update? 
+        // sesuai kebutuhan user "saya nanti tinggal memasukan jumlah awal dan akhir lalu muncul", kita bisa buat update otomatis tanpa perlu tekan tombol? 
+        // tapi lebih baik tetap ada tombol untuk kontrol. Namun akan lebih memudahkan jika selesai input langsung update. 
+        // Berikut agar lebih seamless: setiap terjadi perubahan input, bisa langsung hitung (opsional). Tapi agar tidak membingungkan, tombol sudah kuat.
+        // Tapi saya tambahkan fitur opsi biar lebih seamless: auto-hitung ketika input berubah? Bagus untuk pengalaman "langsung muncul".
+        // Tambahkan event listener 'input' pada semua field.
+        const semuaInput = document.querySelectorAll('.awal-input, .akhir-input');
+        for (let input of semuaInput) {
+            input.addEventListener('input', function() {
+                hitungDanTampilkan();
             });
         }
+        // juga saat reset sudah memanggil hitung, dan saat awal load sudah panggil.
+    }
 
-        // Keyboard tetap support untuk debugging
-        function initKeyboard() {
-            window.addEventListener('keydown', (e) => {
-                if (e.key === 'ArrowLeft') keys.ArrowLeft = true;
-                if (e.key === 'ArrowRight') keys.ArrowRight = true;
-                if (e.key === 'ArrowUp' || e.key === ' ') {
-                    keys.jumpPressed = true;
-                    e.preventDefault();
-                }
-            });
-            window.addEventListener('keyup', (e) => {
-                if (e.key === 'ArrowLeft') keys.ArrowLeft = false;
-                if (e.key === 'ArrowRight') keys.ArrowRight = false;
-                if (e.key === 'ArrowUp' || e.key === ' ') {
-                    keys.jumpPressed = false;
-                    e.preventDefault();
-                }
-            });
-        }
-
-        // inisialisasi game
-        function init() {
-            resetGame();
-            initKeyboard();
-            attachTouchControls();
-            gameLoop();
-        }
-
-        init();
-    })();
+    // Jalankan init setelah DOM siap
+    document.addEventListener('DOMContentLoaded', init);
 </script>
 </body>
 </html>
