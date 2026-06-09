@@ -30,7 +30,6 @@
             border: 1px solid rgba(60, 200, 100, 0.4);
             box-shadow: 0 0 20px rgba(60, 200, 80, 0.15), 0 8px 32px rgba(0, 0, 0, 0.4);
             overflow: hidden;
-            transition: transform 0.2s ease;
         }
 
         /* header */
@@ -218,7 +217,7 @@
             transition: 0s;
         }
 
-        /* hasil */
+        /* hasil - stat cards dengan animasi kedip (pulse glow) */
         .result-area {
             padding: 0 1.8rem 1.5rem;
         }
@@ -230,6 +229,22 @@
             margin-bottom: 1.5rem;
         }
 
+        /* animasi pulse hijau pada border dan shadow */
+        @keyframes greenPulse {
+            0% {
+                border-color: #39ff7933;
+                box-shadow: 0 0 0px rgba(80, 255, 120, 0);
+            }
+            50% {
+                border-color: #6eff9a;
+                box-shadow: 0 0 12px rgba(80, 255, 120, 0.5);
+            }
+            100% {
+                border-color: #39ff7933;
+                box-shadow: 0 0 0px rgba(80, 255, 120, 0);
+            }
+        }
+
         .stat-card {
             flex: 1;
             background: rgba(0, 20, 5, 0.7);
@@ -238,16 +253,11 @@
             padding: 0.7rem 0.5rem;
             text-align: center;
             border: 1px solid #39ff7933;
-            transition: all 0.2s ease;
-            cursor: default;
+            animation: greenPulse 2.5s infinite ease-in-out;
+            transition: none; /* tidak ada hover effect */
         }
 
-        .stat-card:hover {
-            transform: translateY(-3px);
-            border-color: #6eff9a;
-            box-shadow: 0 5px 15px rgba(0, 255, 100, 0.15);
-        }
-
+        /* tidak ada hover transform atau efek interaksi */
         .stat-label {
             font-size: 0.65rem;
             text-transform: uppercase;
@@ -261,7 +271,6 @@
             color: #e0ffe4;
             text-shadow: 0 0 4px #0eff5e;
             margin: 0.2rem 0;
-            transition: all 0.1s ease;
         }
 
         .stat-value.profit {
@@ -431,7 +440,7 @@
         </div>
         <div class="footer">
             <div class="note">🧾 Keuntungan: Voucher 5.000 & 10.000 → Rp1.000/pcs | Voucher 3.000 → Rp500/pcs<br>Setoran = Total Pendapatan - Keuntungan Anda</div>
-            <div class="developer">✨ Developed by <strong>Aden Askolani Fahri</strong> • Fullstack Designer</div>
+            <div class="developer">Developed by Aden Askolani Fahri • Fullstack Designer</div>
         </div>
     </div>
 </div>
@@ -489,22 +498,22 @@
         function render() {
             const { details, totalIncome, totalProfit, totalSetoran } = compute();
 
-            // Update statistik card
+            // Update statistik card dengan label baru: Pendapatan, Keuntungan, Setor
             const statsContainer = document.getElementById('statsContainer');
             if (statsContainer) {
                 statsContainer.innerHTML = `
                     <div class="stat-card">
-                        <div class="stat-label">💵 TOTAL PENDAPATAN</div>
+                        <div class="stat-label">PENDAPATAN</div>
                         <div class="stat-value">${formatRupiah(totalIncome)}</div>
-                        <div style="font-size:0.6rem;">dari semua voucher</div>
+                        <div style="font-size:0.6rem;">total dari semua voucher</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-label">✅ KEUNTUNGAN ANDA</div>
+                        <div class="stat-label">KEUNTUNGAN</div>
                         <div class="stat-value profit">${formatRupiah(totalProfit)}</div>
                         <div style="font-size:0.6rem;">komisi penjualan</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-label">🏦 SETORAN KE PEMILIK</div>
+                        <div class="stat-label">SETOR</div>
                         <div class="stat-value setoran">${formatRupiah(totalSetoran)}</div>
                         <div style="font-size:0.6rem;">yang harus disetorkan</div>
                     </div>
@@ -542,7 +551,7 @@
             document.getElementById('awal_10000').value = '';
             document.getElementById('akhir_10000').value = '';
             render();
-            // animasi tambahan: efek flash pada tombol reset (optional)
+            // efek animasi kilat pada tombol reset (opsional)
             const resetBtn = document.getElementById('resetBtn');
             if (resetBtn) {
                 resetBtn.style.transform = 'scale(0.98)';
