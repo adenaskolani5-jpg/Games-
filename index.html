@@ -183,6 +183,22 @@ body{ font-family:Poppins,sans-serif; background:var(--bg); color:var(--text); }
 .voucher-compact .btn-reset-voucher { background:rgba(0,0,0,0.6); border:1px solid #22c55e; border-radius:2rem; padding:0.2rem 1rem; font-size:0.7rem; cursor:pointer; margin:0 auto; display:block; }
 .whatsapp-btn { background:#25D366; color:white; border:none; border-radius:2rem; padding:0.3rem 0.8rem; font-size:0.7rem; font-weight:bold; display:inline-flex; align-items:center; gap:0.3rem; cursor:pointer; margin-left:0.5rem; transition:all 0.2s; }
 .whatsapp-btn:hover { background:#128C7E; transform:scale(1.05); box-shadow:0 0 10px #25D366; }
+/* Stabilkan ukuran modal kalkulator */
+.calc-mode {
+  min-height: 420px;
+  transition: all 0.2s ease;
+}
+#calcVoucherMode {
+  max-height: 420px;
+  overflow-y: auto;
+}
+/* Perbaiki tampilan voucher agar rapi */
+.voucher-compact .input-mini {
+  width: 75px;
+}
+.voucher-compact .stats-grid {
+  margin: 0.5rem 0;
+}
 </style>        
 </head>        
 <body class="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white">        
@@ -572,7 +588,7 @@ function openCalculator() {
     const box = modal.querySelector('div');
     if (box) box.classList.remove('scale-95');
   }
-  // pastikan mode awal kembali ke kalkulator jika modal ditutup lalu dibuka lagi
+  // Pastikan mode kalkulator saat dibuka (kecuali sedang dalam mode voucher, biarkan? lebih baik reset)
   if (currentMode !== 'calc') {
     const normalDiv = document.getElementById('calcNormalMode');
     const voucherDiv = document.getElementById('calcVoucherMode');
