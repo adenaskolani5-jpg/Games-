@@ -7,46 +7,20 @@
 <script src="https://cdn.tailwindcss.com"></script>          
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">        
 <style>
-/* Tombol WhatsApp */
-.whatsapp-btn {
-  background: #25D366;
-  color: white;
-  border: none;
-  border-radius: 2rem;
-  padding: 0.3rem 0.8rem;
-  font-size: 0.7rem;
-  font-weight: bold;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  margin-left: 0.5rem;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-}
-.whatsapp-btn:hover {
-  background: #128C7E;
-  transform: scale(1.05);
-  box-shadow: 0 0 10px #25D366;
-}
 /* ===== EFEK FUTURISTIK UNTUK TOMBOL MENU ===== */
 .futuristic-btn {
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
 }
-
 .futuristic-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 0 12px rgba(34, 197, 94, 0.8), 0 0 25px rgba(34, 197, 94, 0.4);
   border-color: #22c55e !important;
 }
-
 .futuristic-btn:active {
   transform: translateY(1px);
 }
-
-/* Efek khusus untuk tombol Info (ⓘ) */
 .futuristic-btn-info:hover {
   box-shadow: 0 0 12px rgba(250, 204, 21, 0.8), 0 0 25px rgba(250, 204, 21, 0.4);
   border-color: #facc15 !important;
@@ -119,573 +93,96 @@
   color: black;
   border-color: #ffaa33;
 }       
-#popularList{          
-  transition:.3s;          
-}          
-.fade-out{
-opacity:0;
-transform: translateY(10px) scale(.95);
-filter: blur(5px);
-}
-.fade-in{
-opacity:1;
-transform: translateY(0) scale(1);
-filter: blur(0);
-}
+#popularList{ transition:.3s; }          
+.fade-out{ opacity:0; transform: translateY(10px) scale(.95); filter: blur(5px); }
+.fade-in{ opacity:1; transform: translateY(0) scale(1); filter: blur(0); }
 :root{
---bg:#050505;
---card:#0b0b0b;
---text:#e5e7eb;
---muted:#9ca3af;
---accent:#22c55e;
---blue:#3b82f6;
---yellow:#facc15;
+  --bg:#050505; --card:#0b0b0b; --text:#e5e7eb; --muted:#9ca3af; --accent:#22c55e; --blue:#3b82f6; --yellow:#facc15;
 }
 .light{
---bg:#f5f7fb;
---card:#ffffff;
---text:#0f172a;
---muted:#64748b;
---accent:#22c55e;
---blue:#2563eb;
---yellow:#f59e0b;
+  --bg:#f5f7fb; --card:#ffffff; --text:#0f172a; --muted:#64748b; --accent:#22c55e; --blue:#2563eb; --yellow:#f59e0b;
 }
-.light body{
-background:linear-gradient(135deg,#eef2ff,#f8fafc);
-}
-.light .card{
-background:white;
-color:#0f172a;
-border:1px solid rgba(34,197,94,.4);
-box-shadow:0 6px 20px rgba(0,0,0,.08),0 0 20px rgba(34,197,94,.15);
-}
-.light .card::before{
-filter:blur(20px);
-opacity:.35;
-}
-.light .price{
-color:#16a34a;
-text-shadow:none;
-}
-.light header{
-background:white;
-border-color:#e5e7eb;
-}
-.light header p{
-color:#64748b;
-}
-.light footer{
-background:#f8fafc;
-color:#334155;
-}
-.light .marquee{
-background:#e5e7eb;
-border-color:#22c55e;
-}
-.light .marquee span{
-color:#0f172a;
-text-shadow:none;
-}
-body{
-font-family:Poppins,sans-serif;
-background:var(--bg);
-color:var(--text);
-}
-.page {
-  animation: slideUp 0.25s ease;
-}
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+.light body{ background:linear-gradient(135deg,#eef2ff,#f8fafc); }
+.light .card{ background:white; color:#0f172a; border:1px solid rgba(34,197,94,.4); box-shadow:0 6px 20px rgba(0,0,0,.08),0 0 20px rgba(34,197,94,.15); }
+.light .card::before{ filter:blur(20px); opacity:.35; }
+.light .price{ color:#16a34a; text-shadow:none; }
+.light header{ background:white; border-color:#e5e7eb; }
+.light header p{ color:#64748b; }
+.light footer{ background:#f8fafc; color:#334155; }
+.light .marquee{ background:#e5e7eb; border-color:#22c55e; }
+.light .marquee span{ color:#0f172a; text-shadow:none; }
+body{ font-family:Poppins,sans-serif; background:var(--bg); color:var(--text); }
+.page{ animation:fadeIn 0.2s ease; }
+@keyframes fadeIn{ from{ opacity:0; } to{ opacity:1; } }
 .card{
-position:relative;
-background:var(--card);
-color:var(--text);
-padding:1.3rem;
-border-radius:1rem;
-font-weight:600;
-display:flex;
-justify-content:space-between;
-align-items:center;
-cursor:pointer;
-transition:.35s;
-border:1px solid rgba(34,197,94,.35);
-box-shadow:0 0 12px rgba(34,197,94,.25),0 0 40px rgba(34,197,94,.15);
+  position:relative; background:var(--card); color:var(--text); padding:1.3rem; border-radius:1rem; font-weight:600;
+  display:flex; justify-content:space-between; align-items:center; cursor:pointer; transition:.35s;
+  border:1px solid rgba(34,197,94,.35); box-shadow:0 0 12px rgba(34,197,94,.25),0 0 40px rgba(34,197,94,.15);
 }
 .card::before{
-content:"";
-position:absolute;
-inset:-2px;
-border-radius:1rem;
-background:linear-gradient(120deg,var(--accent),var(--blue),var(--accent));
-filter:blur(18px);
-opacity:.55;
-z-index:-1;
-animation:glow 3s infinite alternate;
+  content:""; position:absolute; inset:-2px; border-radius:1rem; background:linear-gradient(120deg,var(--accent),var(--blue),var(--accent));
+  filter:blur(18px); opacity:.55; z-index:-1; animation:glow 3s infinite alternate;
 }
-@keyframes glow{from{opacity:.3}to{opacity:.7}}
-.card:hover{
-transform:scale(1.05);
-box-shadow:0 0 20px rgba(34,197,94,.8),0 0 60px rgba(59,130,246,.7);
-}
-.menu-active{
-border-color:var(--accent)!important;
-box-shadow:0 0 30px var(--accent),0 0 80px rgba(59,130,246,.9)!important;
-}
-.back-btn{
-padding:.6rem 1.3rem;
-border-radius:999px;
-background:black;
-color:white;
-font-weight:600;
-border:1px solid #22c55e;
-box-shadow:0 0 15px rgba(34,197,94,.6);
-transition:.3s;
-}
-.back-btn:hover{transform:scale(1.05)}
-.price{
-color:var(--accent);
-font-weight:700;
-text-shadow:0 0 6px rgba(34,197,94,.7),0 0 14px rgba(34,197,94,.4);
-}
-.ket-btn{
-background:var(--yellow);
-color:#000;
-padding:.25rem .6rem;
-border-radius:.5rem;
-font-size:.75rem;
-font-weight:700;
-box-shadow:0 0 8px rgba(250,204,21,.6);
-}
-.ket-box{
-display:none;
-color:var(--yellow);
-font-size:.85rem;
-padding-left:.6rem;
-margin-top:.4rem;
-line-height:1.5;
-}
-.marquee {
-  width: 100%;
-  overflow: hidden;
-  background: #000;
-  border-top: 1px solid #22c55e;
-  border-bottom: 1px solid #22c55e;
-  position: relative;
-}
-.marquee-track {
-  display: flex;
-  width: max-content;
-  gap: 0;
-  will-change: transform;
-  transform: translateZ(0);
-  animation: scroll 50s linear infinite;
-}
-.marquee span {
-  flex-shrink: 0;
-  padding: 12px 40px;
-  white-space: nowrap;
-  font-weight: 600;
-  color: #ffffff;
-  text-shadow: 0 0 10px rgba(34,197,94,.8);
-  font-size: .95rem;
-}
-@keyframes scroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-@keyframes fadeSlide{
-from{
-opacity:0;
-transform: translateY(12px) scale(.98);
-filter: blur(4px);
-}
-to{
-opacity:1;
-transform: translateY(0) scale(1);
-filter: blur(0);
-}
-}
-.tab-btn{
-transition:.25s;
-}
-.tab-btn.active{
-background:#22c55e;
-color:black;
-box-shadow:0 0 15px rgba(34,197,94,.8);
-}
-
-/* ===== STYLE UNTUK POPULER LIST ===== */
+@keyframes glow{ from{opacity:.3} to{opacity:.7} }
+.card:hover{ transform:scale(1.05); box-shadow:0 0 20px rgba(34,197,94,.8),0 0 60px rgba(59,130,246,.7); }
+.menu-active{ border-color:var(--accent)!important; box-shadow:0 0 30px var(--accent),0 0 80px rgba(59,130,246,.9)!important; }
+.back-btn{ padding:.6rem 1.3rem; border-radius:999px; background:black; color:white; font-weight:600; border:1px solid #22c55e; box-shadow:0 0 15px rgba(34,197,94,.6); transition:.3s; }
+.back-btn:hover{ transform:scale(1.05); }
+.price{ color:var(--accent); font-weight:700; text-shadow:0 0 6px rgba(34,197,94,.7),0 0 14px rgba(34,197,94,.4); }
+.ket-btn{ background:var(--yellow); color:#000; padding:.25rem .6rem; border-radius:.5rem; font-size:.75rem; font-weight:700; box-shadow:0 0 8px rgba(250,204,21,.6); }
+.ket-box{ display:none; color:var(--yellow); font-size:.85rem; padding-left:.6rem; margin-top:.4rem; line-height:1.5; }
+.marquee { width:100%; overflow:hidden; background:#000; border-top:1px solid #22c55e; border-bottom:1px solid #22c55e; position:relative; }
+.marquee-track { display:flex; width:max-content; gap:0; will-change:transform; transform:translateZ(0); animation:scroll 50s linear infinite; }
+.marquee span { flex-shrink:0; padding:12px 40px; white-space:nowrap; font-weight:600; color:#ffffff; text-shadow:0 0 10px rgba(34,197,94,.8); font-size:.95rem; }
+@keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.tab-btn{ transition:.25s; }
+.tab-btn.active{ background:#22c55e; color:black; box-shadow:0 0 15px rgba(34,197,94,.8); }
+/* ===== STYLE POPULER ===== */
 .popular-item {
-  background: rgba(20, 20, 30, 0.7);
-  backdrop-filter: blur(4px);
-  border: 1px solid rgba(34, 197, 94, 0.3);
-  border-radius: 1rem;
-  padding: 0.75rem 1rem;
-  margin-bottom: 0.75rem;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  transition: all 0.25s ease;
-  cursor: default;
-  font-weight: 500;
-  color: #e5e7eb;
+  background: rgba(20,20,30,0.7); backdrop-filter: blur(4px); border:1px solid rgba(34,197,94,0.3); border-radius:1rem;
+  padding:0.75rem 1rem; margin-bottom:0.75rem; display:flex; align-items:center; gap:0.75rem; transition:all 0.25s ease;
+  cursor:default; font-weight:500; color:#e5e7eb;
 }
-
-.popular-item:hover {
-  transform: translateX(5px);
-  border-color: #22c55e;
-  box-shadow: 0 0 12px rgba(34, 197, 94, 0.4);
-  background: rgba(34, 197, 94, 0.1);
-}
-
-.popular-icon {
-  font-size: 1.25rem;
-  width: 2rem;
-  text-align: center;
-}
-
-.popular-text {
-  flex: 1;
-  font-size: 0.9rem;
-  line-height: 1.3;
-}
-
-/* ===== STYLE UNTUK HASIL PENCARIAN HARGA (MODERN) ===== */
+.popular-item:hover { transform:translateX(5px); border-color:#22c55e; box-shadow:0 0 12px rgba(34,197,94,0.4); background:rgba(34,197,94,0.1); }
+.popular-icon { font-size:1.25rem; width:2rem; text-align:center; }
+.popular-text { flex:1; font-size:0.9rem; line-height:1.3; }
+/* ===== STYLE HASIL PENCARIAN ===== */
 .harga-item {
-  background: rgba(10, 10, 15, 0.75);
-  backdrop-filter: blur(2px);
-  border-left: 4px solid #22c55e;
-  border-radius: 0.75rem;
-  margin-bottom: 0.85rem;
-  padding: 0.85rem 1rem;
-  transition: all 0.25s ease;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.3), -2px 0 8px rgba(34,197,94,0.2);
+  background: rgba(10,10,15,0.75); backdrop-filter:blur(2px); border-left:4px solid #22c55e; border-radius:0.75rem;
+  margin-bottom:0.85rem; padding:0.85rem 1rem; transition:all 0.25s ease; box-shadow:0 2px 8px rgba(0,0,0,0.3), -2px 0 8px rgba(34,197,94,0.2);
 }
-
-.harga-item:hover {
-  transform: translateX(5px);
-  box-shadow: 0 4px 14px rgba(0,0,0,0.4), -4px 0 14px rgba(34,197,94,0.6);
-  background: rgba(34, 197, 94, 0.08);
-  border-left-color: #4ade80;
-}
-
-.harga-nama {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.harga-nama-text {
-  font-weight: 700;
-  color: #e5e7eb;
-  font-size: 0.95rem;
-  letter-spacing: -0.2px;
-}
-
-.harga-harga {
-  font-weight: 800;
-  color: #facc15;
-  background: rgba(250,204,21,0.15);
-  padding: 0.2rem 0.6rem;
-  border-radius: 999px;
-  font-size: 0.8rem;
-  font-family: monospace;
-  box-shadow: 0 0 4px rgba(250,204,21,0.4);
-}
-
-.harga-ket {
-  font-size: 0.7rem;
-  color: #9ca3af;
-  border-top: 1px dashed rgba(34,197,94,0.3);
-  padding-top: 0.5rem;
-  margin-top: 0.2rem;
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-}
-
-.harga-ket::before {
-  content: "ℹ️";
-  font-size: 0.65rem;
-  opacity: 0.7;
-}
-
-/* Scrollbar keren untuk daftar hasil */
-#hasilHarga {
-  scrollbar-width: thin;
-  scrollbar-color: #22c55e #1f1f1f;
-}
-#hasilHarga::-webkit-scrollbar {
-  width: 5px;
-}
-#hasilHarga::-webkit-scrollbar-track {
-  background: #1f1f1f;
-  border-radius: 10px;
-}
-#hasilHarga::-webkit-scrollbar-thumb {
-  background: #22c55e;
-  border-radius: 10px;
-}
-
-/* ===== STYLE MODAL CEK HARGA (CARI) ===== */
-#hargaModal > div {
-  border: 1px solid rgba(34, 197, 94, 0.5);
-  box-shadow: 0 0 20px rgba(34, 197, 94, 0.3), 0 0 40px rgba(34, 197, 94, 0.1);
-  backdrop-filter: blur(10px);
-  background: rgba(17, 24, 39, 0.9);
-}
-
-#hargaModal h2 {
-  text-shadow: 0 0 5px #22c55e;
-  letter-spacing: 1px;
-}
-
-#searchHarga {
-  border: 1px solid #22c55e;
-  background: rgba(0, 0, 0, 0.6);
-  transition: all 0.3s ease;
-  color: white;
-}
-
-#searchHarga:focus {
-  outline: none;
-  border-color: #4ade80;
-  box-shadow: 0 0 12px #22c55e;
-  background: rgba(0, 0, 0, 0.8);
-}
-
-#searchHarga::placeholder {
-  color: #9ca3af;
-  font-style: italic;
-}
-
-/* Tombol close (×) */
-#hargaModal button.absolute {
-  transition: all 0.2s;
-}
-#hargaModal button.absolute:hover {
-  text-shadow: 0 0 8px #22c55e;
-  transform: scale(1.1);
-}
-#hargaModal > div {
-  border-left: 4px solid #22c55e;
-  border-radius: 1rem;
-  animation: glowPulse 2s infinite;
-}
-
-@keyframes glowPulse {
-  0% { border-left-color: #22c55e; box-shadow: -2px 0 8px rgba(34,197,94,0.2); }
-  50% { border-left-color: #4ade80; box-shadow: -4px 0 20px rgba(34,197,94,0.6); }
-  100% { border-left-color: #22c55e; box-shadow: -2px 0 8px rgba(34,197,94,0.2); }
-}
+.harga-item:hover { transform:translateX(5px); box-shadow:0 4px 14px rgba(0,0,0,0.4), -4px 0 14px rgba(34,197,94,0.6); background:rgba(34,197,94,0.08); border-left-color:#4ade80; }
+.harga-nama { display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.5rem; }
+.harga-nama-text { font-weight:700; color:#e5e7eb; font-size:0.95rem; }
+.harga-harga { font-weight:800; color:#facc15; background:rgba(250,204,21,0.15); padding:0.2rem 0.6rem; border-radius:999px; font-size:0.8rem; font-family:monospace; }
+.harga-ket { font-size:0.7rem; color:#9ca3af; border-top:1px dashed rgba(34,197,94,0.3); padding-top:0.5rem; margin-top:0.2rem; display:flex; align-items:center; gap:0.4rem; }
+.harga-ket::before { content:"ℹ️"; font-size:0.65rem; opacity:0.7; }
+#hasilHarga { scrollbar-width:thin; scrollbar-color:#22c55e #1f1f1f; }
+#hasilHarga::-webkit-scrollbar { width:5px; }
+#hasilHarga::-webkit-scrollbar-track { background:#1f1f1f; border-radius:10px; }
+#hasilHarga::-webkit-scrollbar-thumb { background:#22c55e; border-radius:10px; }
+/* ===== STYLE MODAL CEK HARGA ===== */
+#hargaModal > div { border:1px solid rgba(34,197,94,0.5); box-shadow:0 0 20px rgba(34,197,94,0.3); backdrop-filter:blur(10px); background:rgba(17,24,39,0.9); border-left:4px solid #22c55e; animation:glowPulse 2s infinite; }
+@keyframes glowPulse { 0% { border-left-color:#22c55e; box-shadow:-2px 0 8px rgba(34,197,94,0.2); } 50% { border-left-color:#4ade80; box-shadow:-4px 0 20px rgba(34,197,94,0.6); } 100% { border-left-color:#22c55e; box-shadow:-2px 0 8px rgba(34,197,94,0.2); } }
+#hargaModal h2 { text-shadow:0 0 5px #22c55e; letter-spacing:1px; }
+#searchHarga { border:1px solid #22c55e; background:rgba(0,0,0,0.6); transition:all 0.3s ease; color:white; }
+#searchHarga:focus { outline:none; border-color:#4ade80; box-shadow:0 0 12px #22c55e; background:rgba(0,0,0,0.8); }
 /* ===== STYLE MODAL POPULER ===== */
-#popularModal > div {
-  border-left: 4px solid #22c55e;
-  border-radius: 1rem;
-  background: rgba(17, 24, 39, 0.9);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 0 20px rgba(34, 197, 94, 0.3), 0 0 40px rgba(34, 197, 94, 0.1);
-  transition: all 0.3s ease;
-  animation: glowPulsePopuler 3s infinite;
-}
-
-@keyframes glowPulsePopuler {
-  0% { border-left-color: #22c55e; box-shadow: -2px 0 10px rgba(34,197,94,0.2); }
-  50% { border-left-color: #4ade80; box-shadow: -4px 0 25px rgba(34,197,94,0.6); }
-  100% { border-left-color: #22c55e; box-shadow: -2px 0 10px rgba(34,197,94,0.2); }
-}
-
-#popularModal h2 {
-  text-shadow: 0 0 5px #22c55e;
-  letter-spacing: 1px;
-}
-
-/* Efek hover pada tab tombol */
-.tab-btn {
-  transition: all 0.25s ease;
-}
-.tab-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 0 12px rgba(34,197,94,0.5);
-  border-color: #22c55e !important;
-}
-
-/* Mempercantik scrollbar dalam modal populer */
-#popularModal .overflow-auto::-webkit-scrollbar {
-  width: 5px;
-}
-#popularModal .overflow-auto::-webkit-scrollbar-track {
-  background: #1f1f1f;
-  border-radius: 10px;
-}
-#popularModal .overflow-auto::-webkit-scrollbar-thumb {
-  background: #22c55e;
-  border-radius: 10px;
-}
-/* Voucher calculator styles */
-.voucher-container {
-    background: rgba(10, 20, 16, 0.85);
-    backdrop-filter: blur(14px);
-    border-radius: 2rem;
-    border: 1px solid rgba(70, 230, 110, 0.5);
-    box-shadow: 0 0 25px rgba(60, 220, 90, 0.2);
-    overflow: hidden;
-}
-.light .voucher-container {
-    background: rgba(255, 255, 255, 0.85);
-    border-color: rgba(0, 150, 200, 0.5);
-    box-shadow: 0 0 20px rgba(0, 160, 210, 0.25);
-}
-.voucher-header {
-    background: rgba(0, 0, 0, 0.3);
-    padding: 1rem 1.5rem;
-    border-bottom: 1px solid var(--accent);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-}
-.voucher-title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    background: linear-gradient(135deg, #e5e7eb, #22c55e);
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-}
-.voucher-badge {
-    background: rgba(0,0,0,0.3);
-    padding: 0.2rem 0.9rem;
-    border-radius: 40px;
-    font-size: 0.7rem;
-    color: #bcffd4;
-    border: 1px solid #22c55e;
-}
-.light .voucher-badge {
-    color: #0f6b4c;
-    background: rgba(0,0,0,0.05);
-}
-.voucher-panel {
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 1.5rem;
-    padding: 1rem 1.5rem;
-    margin: 1rem;
-    border: 1px solid rgba(34,197,94,0.2);
-}
-.voucher-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    align-items: flex-end;
-}
-.voucher-field {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-    min-width: 100px;
-}
-.voucher-name {
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: #9ca3af;
-    background: rgba(0,0,0,0.5);
-    padding: 0.2rem 0.8rem;
-    border-radius: 20px;
-    width: fit-content;
-    border: 1px solid #22c55e;
-}
-.input-mini {
-    background: #081f12;
-    border: 1.8px solid #22c55e;
-    border-radius: 1.2rem;
-    padding: 0.55rem 0.7rem;
-    width: 100px;
-    text-align: center;
-    color: white;
-}
-.light .input-mini {
-    background: white;
-    color: #1a4d3e;
-    border-color: #1abc9c;
-}
-.input-mini:focus {
-    outline: none;
-    box-shadow: 0 0 12px #22c55e;
-}
-.stats-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin: 1rem;
-}
-.stat-card {
-    flex: 1;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(8px);
-    border-radius: 1.4rem;
-    padding: 0.8rem;
-    text-align: center;
-    border: 1px solid #22c55e;
-}
-.stat-value {
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: #22c55e;
-}
-.table-wrapper {
-    margin: 1rem;
-    overflow-x: auto;
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 1rem;
-}
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-th, td {
-    padding: 10px;
-    text-align: center;
-    border-bottom: 1px solid #22c55e;
-    color: #e5e7eb;
-}
-.light th, .light td {
-    color: #1a4d3e;
-}
-th {
-    background: rgba(34,197,94,0.2);
-}
-.btn-reset-voucher {
-    background: rgba(0,0,0,0.6);
-    border: 1.5px solid #22c55e;
-    padding: 0.5rem 1.5rem;
-    border-radius: 3rem;
-    color: white;
-    cursor: pointer;
-    margin: 0 1rem 1rem auto;
-    display: block;
-}
-.light .btn-reset-voucher {
-    background: rgba(240,248,245,0.9);
-    color: #1a4d3e;
-}
-.footer-note {
-    padding: 0.8rem;
-    text-align: center;
-    font-size: 0.7rem;
-    color: #9ca3af;
-    border-top: 1px solid #22c55e;
-}
+#popularModal > div { border-left:4px solid #22c55e; border-radius:1rem; background:rgba(17,24,39,0.9); backdrop-filter:blur(10px); box-shadow:0 0 20px rgba(34,197,94,0.3); animation:glowPulsePopuler 3s infinite; }
+@keyframes glowPulsePopuler { 0% { border-left-color:#22c55e; box-shadow:-2px 0 10px rgba(34,197,94,0.2); } 50% { border-left-color:#4ade80; box-shadow:-4px 0 25px rgba(34,197,94,0.6); } 100% { border-left-color:#22c55e; box-shadow:-2px 0 10px rgba(34,197,94,0.2); } }
+#popularModal h2 { text-shadow:0 0 5px #22c55e; }
+.tab-btn:hover { transform:translateY(-2px); box-shadow:0 0 12px rgba(34,197,94,0.5); border-color:#22c55e !important; }
+/* ===== VOUCHER COMPACT MODE ===== */
+.voucher-compact .input-mini { width:70px; padding:0.3rem; font-size:0.75rem; background:#081f12; border:1px solid #22c55e; border-radius:1rem; color:white; text-align:center; }
+.light .voucher-compact .input-mini { background:white; color:#1a4d3e; }
+.voucher-compact .stats-grid { display:flex; gap:0.5rem; margin:0.5rem 0; }
+.voucher-compact .stat-card { background:rgba(0,0,0,0.5); border-radius:0.8rem; padding:0.3rem; text-align:center; flex:1; }
+.voucher-compact .stat-value { font-size:0.9rem; font-weight:bold; color:#22c55e; }
+.voucher-compact .table-wrapper { max-height:180px; overflow-y:auto; margin-top:0.5rem; }
+.voucher-compact th, .voucher-compact td { font-size:0.65rem; padding:4px; }
+.voucher-compact .btn-reset-voucher { background:rgba(0,0,0,0.6); border:1px solid #22c55e; border-radius:2rem; padding:0.2rem 1rem; font-size:0.7rem; cursor:pointer; margin:0 auto; display:block; }
+.whatsapp-btn { background:#25D366; color:white; border:none; border-radius:2rem; padding:0.3rem 0.8rem; font-size:0.7rem; font-weight:bold; display:inline-flex; align-items:center; gap:0.3rem; cursor:pointer; margin-left:0.5rem; transition:all 0.2s; }
+.whatsapp-btn:hover { background:#128C7E; transform:scale(1.05); box-shadow:0 0 10px #25D366; }
 </style>        
 </head>        
 <body class="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white">        
@@ -701,18 +198,10 @@ th {
 </header>        
 <!-- Tombol -->        
 <div class="flex justify-center items-center gap-3 my-4">          
-  <div class="flex flex-col items-center">          
-    <button onclick="openHarga()" class="w-24 border border-green-400 text-green-400 text-xs py-2 rounded-md hover:bg-green-400 hover:text-black transition futuristic-btn">🔍 Cari</button>          
-  </div>          
-  <div class="flex flex-col items-center">          
-    <button onclick="openCalculator()" class="w-24 border border-green-400 text-green-400 text-xs py-2 rounded-md hover:bg-green-400 hover:text-black transition futuristic-btn">Kalkulator 📟</button>          
-  </div>          
-  <div class="flex flex-col items-center">          
-    <button onclick="openPopular()" class="w-24 border border-green-400 text-green-400 text-xs py-2 rounded-md hover:bg-green-400 hover:text-black transition futuristic-btn">Populer 📊</button>          
-  </div>        
-  <div class="flex flex-col items-center justify-center">        
-    <button onclick="openPromo()" class="w-8 h-8 rounded-full border border-yellow-400 text-yellow-400 text-sm font-bold hover:bg-yellow-400 hover:text-black transition futuristic-btn futuristic-btn-info">ⓘ</button>        
-  </div>      
+  <div class="flex flex-col items-center"><button onclick="openHarga()" class="w-24 border border-green-400 text-green-400 text-xs py-2 rounded-md hover:bg-green-400 hover:text-black transition futuristic-btn">🔍 Cari</button></div>          
+  <div class="flex flex-col items-center"><button onclick="openCalculator()" class="w-24 border border-green-400 text-green-400 text-xs py-2 rounded-md hover:bg-green-400 hover:text-black transition futuristic-btn">Kalkulator 📟</button></div>          
+  <div class="flex flex-col items-center"><button onclick="openPopular()" class="w-24 border border-green-400 text-green-400 text-xs py-2 rounded-md hover:bg-green-400 hover:text-black transition futuristic-btn">Populer 📊</button></div>          
+  <div class="flex flex-col items-center justify-center"><button onclick="openPromo()" class="w-8 h-8 rounded-full border border-yellow-400 text-yellow-400 text-sm font-bold hover:bg-yellow-400 hover:text-black transition futuristic-btn futuristic-btn-info">ⓘ</button></div>      
 </div>
 
 <!-- Modal Harga -->          
@@ -765,13 +254,8 @@ th {
     <button onclick="closePromo()" class="absolute top-3 right-3 text-gray-400 hover:text-white text-lg font-bold">×</button>
   </div>
 </div>
-<!-- Voucher Calculator Section (hidden by default) -->
-<section id="voucherSection" class="hidden page p-4 max-w-5xl mx-auto my-6">
-  <button onclick="back()" class="back-btn mb-4">← Kembali</button>
-  <div id="voucherAppContainer"></div>
-</section>
 
-<!-- SCRIPT PERTAMA (DIPERBAIKI - HANYA JAVASCRIPT) -->
+<!-- SCRIPT PERTAMA (INTEGRASI VOUCHER DI KALKULATOR) -->
 <script>          
 const popularItems = {          
   paket: [ "Freedom Mini 7GB 7 Hari Rp 26.000", "Freedom Mini 5 GB 2 Hari Rp 13.000", "Freedom Internet 10GB 28 Hari Rp 40.000", "Freedom Mini 6GB 5 Hari Rp 20.000" ],          
@@ -787,7 +271,6 @@ function openPopular() {
   const firstBtn = document.querySelector(".tab-btn:last-child");
   showPopular('all', firstBtn);
 }
-
 function closePopular() {
   const modal = document.getElementById('popularModal');
   if (!modal) return;
@@ -795,7 +278,6 @@ function closePopular() {
   const box = modal.querySelector('div');
   if (box) box.classList.add('scale-95');
 }
-
 function openPromo() {
   const modal = document.getElementById('promoModal');
   if (!modal) return;
@@ -803,7 +285,6 @@ function openPromo() {
   const box = modal.querySelector('div');
   if (box) box.classList.remove('scale-95');
 }
-
 function closePromo() {
   const modal = document.getElementById('promoModal');
   if (!modal) return;
@@ -822,24 +303,17 @@ function showPopular(type, btn) {
     if (type === "paket") items = popularItems.paket;
     else if (type === "game") items = popularItems.game;
     else items = [...popularItems.paket, ...popularItems.game];
-    
     items.forEach(item => {
       let hargaMatch = item.match(/Rp\s?[\d\.]+/);
       let harga = hargaMatch ? hargaMatch[0] : "";
       let nama = item.replace(harga, "").trim();
       let itemType = (type === "paket" || (type === "all" && popularItems.paket.includes(item))) ? "paket" : "game";
       let icon = itemType === "paket" ? "📶" : "🎮";
-      
       const div = document.createElement("div");
       div.className = `popular-item ${itemType}`;
-      div.innerHTML = `
-        <div class="popular-icon">${icon}</div>
-        <div class="popular-text">${escapeHtml(item)}</div>
-        <button class="whatsapp-btn" onclick="sendToWhatsApp('${escapeHtml(nama)}', '${harga}')">💬</button>
-      `;
+      div.innerHTML = `<div class="popular-icon">${icon}</div><div class="popular-text">${escapeHtml(item)}</div><button class="whatsapp-btn" onclick="sendToWhatsApp('${escapeHtml(nama)}', '${harga}')">💬</button>`;
       list.appendChild(div);
     });
-    
     list.classList.remove("fade-out");
     list.classList.add("fade-in");
     document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
@@ -848,7 +322,6 @@ function showPopular(type, btn) {
 }
 
 let hargaData = [];
-
 function buildHargaData() {
   hargaData = [];
   if (typeof operators !== 'undefined') {
@@ -871,7 +344,6 @@ function buildHargaData() {
     });
   }
 }
-
 function openHarga() {
   const m = document.getElementById("hargaModal");
   if (!m) return;
@@ -880,7 +352,6 @@ function openHarga() {
   if (box) box.classList.remove("scale-95");
   buildHargaData();
 }
-
 function closeHarga() {
   const m = document.getElementById("hargaModal");
   if (!m) return;
@@ -888,7 +359,6 @@ function closeHarga() {
   const box = m.querySelector("div");
   if (box) box.classList.add("scale-95");
 }
-
 function escapeHtml(str) {
   if (!str) return '';
   return str.replace(/[&<>]/g, function(m) {
@@ -898,34 +368,15 @@ function escapeHtml(str) {
     return m;
   });
 }
-
 function sendToWhatsApp(nama, harga) {
   const nomorToko = "6283844843020";
-  
-  // Deteksi apakah ini produk game (berdasarkan kata kunci)
   const isGame = /(Top Up|Diamond|UC|CP|Tokens|Crystals|Robux|Mobile Legends|Free Fire|PUBG|Call Of Duty|Honor Of Kings|Genshin Impact|Roblox)/i.test(nama);
-  
   let pesan = "";
   if (isGame) {
-    pesan = `Assalamualaikum, saya ingin memesan:
-${nama}
-Harga: ${harga}
-
-ID Game: 
-Pembayaran: (transfer/QRIS)
-
-Terima kasih.`;
+    pesan = `Assalamualaikum, saya ingin memesan:\n${nama}\nHarga: ${harga}\n\nID Game: \nPembayaran: (transfer/QRIS)\n\nTerima kasih.`;
   } else {
-    pesan = `Assalamualaikum, saya ingin memesan:
-${nama}
-Harga: ${harga}
-
-No. HP: 
-Pembayaran: (transfer/QRIS)
-
-Terima kasih.`;
+    pesan = `Assalamualaikum, saya ingin memesan:\n${nama}\nHarga: ${harga}\n\nNo. HP: \nPembayaran: (transfer/QRIS)\n\nTerima kasih.`;
   }
-  
   const url = `https://wa.me/${nomorToko}?text=${encodeURIComponent(pesan)}`;
   window.open(url, '_blank');
 }
@@ -946,10 +397,7 @@ document.addEventListener("DOMContentLoaded", function() {
       res.slice(0, 20).forEach(x => {
         box.innerHTML += `
           <div class="harga-item">
-            <div class="harga-nama">
-              <span class="harga-nama-text">${escapeHtml(x.nama)}</span>
-              <span class="harga-harga">${escapeHtml(x.harga)}</span>
-            </div>
+            <div class="harga-nama"><span class="harga-nama-text">${escapeHtml(x.nama)}</span><span class="harga-harga">${escapeHtml(x.harga)}</span></div>
             <div class="harga-ket">${escapeHtml(x.ket)}</div>
             <div style="margin-top: 0.5rem; text-align: right;">
               <button class="whatsapp-btn" onclick="sendToWhatsApp('${escapeHtml(x.nama)}', '${escapeHtml(x.harga)}')">💬 Beli via WA</button>
@@ -960,163 +408,159 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   }
 });
-// Voucher Calculator
-let voucherInitialized = false;
-function initVoucherCalculator() {
-    if (voucherInitialized) return;
-    voucherInitialized = true;
-    const container = document.getElementById('voucherAppContainer');
-    if (!container) return;
-    container.innerHTML = `
-        <div class="voucher-container">
-            <div class="voucher-header">
-                <div class="voucher-title">📊 Hitung Penjualan Voucher</div>
-                <div class="voucher-badge">realtime | setoran & komisi</div>
-            </div>
-            <div class="voucher-panel">
-                <div style="margin-bottom:0.5rem; display:flex; gap:1rem; align-items:center;"><span class="voucher-badge">📦 STOK AWAL</span><span style="font-size:0.7rem;">sebelum terjual</span></div>
-                <div class="voucher-row">
-                    <div class="voucher-field"><div class="voucher-name">Rp 5.000 <small>+1.000</small></div><input type="number" id="v_awal_5000" class="input-mini" placeholder="0" step="1" min="0" value=""></div>
-                    <div class="voucher-field"><div class="voucher-name">Rp 3.000 <small>+500</small></div><input type="number" id="v_awal_3000" class="input-mini" placeholder="0" step="1" min="0" value=""></div>
-                    <div class="voucher-field"><div class="voucher-name">Rp 10.000 <small>+1.000</small></div><input type="number" id="v_awal_10000" class="input-mini" placeholder="0" step="1" min="0" value=""></div>
-                </div>
-            </div>
-            <div class="voucher-panel">
-                <div style="margin-bottom:0.5rem; display:flex; gap:1rem;"><span class="voucher-badge">📉 STOK AKHIR</span><span style="font-size:0.7rem;">setelah 2 minggu</span></div>
-                <div class="voucher-row">
-                    <div class="voucher-field"><div class="voucher-name">Rp 5.000</div><input type="number" id="v_akhir_5000" class="input-mini" placeholder="0" step="1" min="0" value=""></div>
-                    <div class="voucher-field"><div class="voucher-name">Rp 3.000</div><input type="number" id="v_akhir_3000" class="input-mini" placeholder="0" step="1" min="0" value=""></div>
-                    <div class="voucher-field"><div class="voucher-name">Rp 10.000</div><input type="number" id="v_akhir_10000" class="input-mini" placeholder="0" step="1" min="0" value=""></div>
-                </div>
-            </div>
-            <button class="btn-reset-voucher" id="v_resetBtn">⟳ Reset Semua Input</button>
-            <div id="v_statsContainer" class="stats-grid"></div>
-            <div class="table-wrapper">
-                <table id="v_resultTable">
-                    <thead><tr><th>Jenis Voucher</th><th>Terjual</th><th>Total Pendapatan</th><th>Keuntungan Anda</th><th>Yang Disetorkan</th></tr></thead>
-                    <tbody id="v_tableBody"><tr><td colspan="5" style="text-align:center;">💡 Masukkan jumlah stok awal & akhir</td></tr></tbody>
-                </table>
-            </div>
-            <div class="footer-note">🧾 Keuntungan: Voucher 5.000 & 10.000 → Rp1.000/pcs | Voucher 3.000 → Rp500/pcs<br>Setoran = Total Pendapatan - Keuntungan Anda</div>
+
+// ========== VOUCHER MODE DI KALKULATOR ==========
+let voucherModeInitialized = false;
+function initVoucherInCalculator() {
+  if (voucherModeInitialized) return;
+  voucherModeInitialized = true;
+  const container = document.getElementById('voucherAppContainer');
+  if (!container) return;
+  container.innerHTML = `
+    <div class="voucher-compact">
+      <div style="margin:0 0 0.5rem 0; padding:0.5rem; background:rgba(0,0,0,0.3); border-radius:1rem;">
+        <div style="display:flex; gap:0.5rem; flex-wrap:wrap; align-items:center;">
+          <span class="voucher-badge">Stok Awal</span>
+          <div><input type="number" id="vc_awal_5000" class="input-mini" placeholder="5k" value=""></div>
+          <div><input type="number" id="vc_awal_3000" class="input-mini" placeholder="3k" value=""></div>
+          <div><input type="number" id="vc_awal_10000" class="input-mini" placeholder="10k" value=""></div>
         </div>
-    `;
-    attachVoucherEvents();
-    voucherRender();
+        <div style="display:flex; gap:0.5rem; flex-wrap:wrap; align-items:center; margin-top:0.5rem;">
+          <span class="voucher-badge">Stok Akhir</span>
+          <div><input type="number" id="vc_akhir_5000" class="input-mini" placeholder="5k" value=""></div>
+          <div><input type="number" id="vc_akhir_3000" class="input-mini" placeholder="3k" value=""></div>
+          <div><input type="number" id="vc_akhir_10000" class="input-mini" placeholder="10k" value=""></div>
+        </div>
+      </div>
+      <button id="vc_resetBtn" class="btn-reset-voucher">⟳ Reset</button>
+      <div id="vc_statsContainer" class="stats-grid"></div>
+      <div class="table-wrapper">
+        <table id="vc_resultTable">
+          <thead><tr><th>Voucher</th><th>Terjual</th><th>Pendapatan</th><th>Untung</th><th>Setor</th></tr></thead>
+          <tbody id="vc_tableBody"><tr><td colspan="5">Masukkan stok awal & akhir</td></tr></tbody>
+        </table>
+      </div>
+      <div class="footer-note" style="font-size:0.6rem; padding:0.3rem; text-align:center;">Keuntungan: 5k & 10k = 1k/pcs, 3k = 500/pcs</div>
+    </div>
+  `;
+  attachVoucherCompactEvents();
+  voucherCompactRender();
 }
-function getVoucherNumber(id) {
-    const el = document.getElementById(id);
-    if (!el) return 0;
-    let val = parseInt(el.value, 10);
-    return isNaN(val) || val < 0 ? 0 : val;
+function getVcNumber(id) {
+  let val = parseInt(document.getElementById(id)?.value, 10);
+  return isNaN(val) || val < 0 ? 0 : val;
 }
-function voucherCompute() {
-    const vouchers = [
-        { nominal: 5000, profit: 1000, idAwal: 'v_awal_5000', idAkhir: 'v_akhir_5000', name: 'Rp 5.000' },
-        { nominal: 3000, profit: 500,  idAwal: 'v_awal_3000', idAkhir: 'v_akhir_3000', name: 'Rp 3.000' },
-        { nominal: 10000, profit: 1000, idAwal: 'v_awal_10000', idAkhir: 'v_akhir_10000', name: 'Rp 10.000' }
-    ];
-    let details = [], totalIncome = 0, totalProfit = 0, totalSetoran = 0;
-    for (let v of vouchers) {
-        let awal = getVoucherNumber(v.idAwal);
-        let akhir = getVoucherNumber(v.idAkhir);
-        let sold = Math.max(0, awal - akhir);
-        let income = sold * v.nominal;
-        let profit = sold * v.profit;
-        let setoran = income - profit;
-        details.push({ name: v.name, sold, income, profit, setoran });
-        totalIncome += income;
-        totalProfit += profit;
-        totalSetoran += setoran;
-    }
-    return { details, totalIncome, totalProfit, totalSetoran };
-}
-function voucherRender() {
-    const { details, totalIncome, totalProfit, totalSetoran } = voucherCompute();
-    const statsDiv = document.getElementById('v_statsContainer');
-    if (statsDiv) {
-        statsDiv.innerHTML = `
-            <div class="stat-card"><div class="stat-label" style="font-size:0.7rem;">PENDAPATAN</div><div class="stat-value">${formatRupiah(totalIncome)}</div><div style="font-size:0.6rem;">total semua voucher</div></div>
-            <div class="stat-card"><div class="stat-label" style="font-size:0.7rem;">KEUNTUNGAN</div><div class="stat-value" style="color:#22c55e;">${formatRupiah(totalProfit)}</div><div style="font-size:0.6rem;">komisi penjualan</div></div>
-            <div class="stat-card"><div class="stat-label" style="font-size:0.7rem;">SETOR</div><div class="stat-value" style="color:#facc15;">${formatRupiah(totalSetoran)}</div><div style="font-size:0.6rem;">yang harus disetorkan</div></div>
-        `;
-    }
-    const tbody = document.getElementById('v_tableBody');
-    if (tbody) {
-        tbody.innerHTML = '';
-        for (let item of details) {
-            let row = tbody.insertRow();
-            row.insertCell(0).innerHTML = `<span class="voucher-badge">${item.name}</span>`;
-            row.insertCell(1).textContent = item.sold;
-            row.insertCell(2).textContent = formatRupiah(item.income);
-            row.insertCell(3).textContent = formatRupiah(item.profit);
-            row.insertCell(4).textContent = formatRupiah(item.setoran);
-        }
-        if (details.length === 0) tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">🔢 Masukkan angka</td></tr>';
-    }
+function voucherCompactCompute() {
+  const items = [
+    { nominal: 5000, profit: 1000, awalId: 'vc_awal_5000', akhirId: 'vc_akhir_5000', name: '5.000' },
+    { nominal: 3000, profit: 500,  awalId: 'vc_awal_3000', akhirId: 'vc_akhir_3000', name: '3.000' },
+    { nominal: 10000, profit: 1000, awalId: 'vc_awal_10000', akhirId: 'vc_akhir_10000', name: '10.000' }
+  ];
+  let details = [], totalIncome = 0, totalProfit = 0, totalSetoran = 0;
+  for (let v of items) {
+    let awal = getVcNumber(v.awalId);
+    let akhir = getVcNumber(v.akhirId);
+    let sold = Math.max(0, awal - akhir);
+    let income = sold * v.nominal;
+    let profit = sold * v.profit;
+    let setoran = income - profit;
+    details.push({ name: v.name, sold, income, profit, setoran });
+    totalIncome += income;
+    totalProfit += profit;
+    totalSetoran += setoran;
+  }
+  return { details, totalIncome, totalProfit, totalSetoran };
 }
 function formatRupiah(angka) {
-    return 'Rp ' + angka.toLocaleString('id-ID');
+  return 'Rp ' + angka.toLocaleString('id-ID');
 }
-function attachVoucherEvents() {
-    const inputs = document.querySelectorAll('#voucherAppContainer .input-mini');
-    inputs.forEach(inp => inp.addEventListener('input', voucherRender));
-    const resetBtn = document.getElementById('v_resetBtn');
-    if (resetBtn) resetBtn.addEventListener('click', () => {
-        document.getElementById('v_awal_5000').value = '';
-        document.getElementById('v_akhir_5000').value = '';
-        document.getElementById('v_awal_3000').value = '';
-        document.getElementById('v_akhir_3000').value = '';
-        document.getElementById('v_awal_10000').value = '';
-        document.getElementById('v_akhir_10000').value = '';
-        voucherRender();
-    });
+function voucherCompactRender() {
+  const { details, totalIncome, totalProfit, totalSetoran } = voucherCompactCompute();
+  const statsDiv = document.getElementById('vc_statsContainer');
+  if (statsDiv) {
+    statsDiv.innerHTML = `
+      <div class="stat-card"><div class="stat-label">PENDAPATAN</div><div class="stat-value">${formatRupiah(totalIncome)}</div></div>
+      <div class="stat-card"><div class="stat-label">KEUNTUNGAN</div><div class="stat-value">${formatRupiah(totalProfit)}</div></div>
+      <div class="stat-card"><div class="stat-label">SETOR</div><div class="stat-value">${formatRupiah(totalSetoran)}</div></div>
+    `;
+  }
+  const tbody = document.getElementById('vc_tableBody');
+  if (tbody) {
+    tbody.innerHTML = '';
+    for (let item of details) {
+      let row = tbody.insertRow();
+      row.insertCell(0).textContent = item.name;
+      row.insertCell(1).textContent = item.sold;
+      row.insertCell(2).textContent = formatRupiah(item.income);
+      row.insertCell(3).textContent = formatRupiah(item.profit);
+      row.insertCell(4).textContent = formatRupiah(item.setoran);
+    }
+    if (details.length === 0 || details.every(d=>d.sold===0)) tbody.innerHTML = '<tr><td colspan="5">Masukkan stok awal & akhir</td></tr>';
+  }
 }
-function openVoucher() {
-    historyStack.push(() => document.getElementById('home').classList.remove('hidden'));
-    hideAll();
-    const voucherSection = document.getElementById('voucherSection');
-    voucherSection.classList.remove('hidden');
-    initVoucherCalculator();
+function attachVoucherCompactEvents() {
+  const inputs = document.querySelectorAll('#voucherAppContainer .input-mini');
+  inputs.forEach(inp => inp.addEventListener('input', voucherCompactRender));
+  const resetBtn = document.getElementById('vc_resetBtn');
+  if (resetBtn) resetBtn.addEventListener('click', () => {
+    document.getElementById('vc_awal_5000').value = '';
+    document.getElementById('vc_akhir_5000').value = '';
+    document.getElementById('vc_awal_3000').value = '';
+    document.getElementById('vc_akhir_3000').value = '';
+    document.getElementById('vc_awal_10000').value = '';
+    document.getElementById('vc_akhir_10000').value = '';
+    voucherCompactRender();
+  });
+}
+let currentMode = 'calc';
+function toggleCalcMode() {
+  const normalDiv = document.getElementById('calcNormalMode');
+  const voucherDiv = document.getElementById('calcVoucherMode');
+  const headerTitle = document.querySelector('#calculatorModal .text-2xl');
+  if (currentMode === 'calc') {
+    normalDiv.classList.add('hidden');
+    voucherDiv.classList.remove('hidden');
+    headerTitle.textContent = 'Hitung Voucher';
+    currentMode = 'voucher';
+    initVoucherInCalculator();
+    voucherCompactRender();
+  } else {
+    normalDiv.classList.remove('hidden');
+    voucherDiv.classList.add('hidden');
+    headerTitle.textContent = 'Kalkulator';
+    currentMode = 'calc';
+  }
 }
 </script>        
 
-<!-- Kalkulator Modal (MODERN) -->
+<!-- Kalkulator Modal dengan Toggle Mode -->
 <div id="calculatorModal" class="fixed inset-0 bg-black/80 flex items-center justify-center opacity-0 pointer-events-none z-50 transition-all duration-300 backdrop-blur-sm">
   <div class="bg-gray-900/90 text-white rounded-2xl p-5 w-96 max-w-[90%] relative transform scale-95 transition-all duration-300 border border-green-500/30 shadow-2xl">
-    <h2 class="text-2xl font-bold mb-3 text-center bg-gradient-to-r from-green-400 to-green-600 bg-clip-text text-transparent">Kalkulator</h2>
-    <div class="calc-display">
-      <input type="text" id="calcDisplay" readonly>
+    <div class="flex justify-between items-center mb-2">
+      <button id="toggleCalcModeBtn" class="text-green-400 hover:text-green-300 text-xl px-2 py-1 rounded-full hover:bg-green-900/50 transition" title="Ganti mode">🔄</button>
+      <h2 class="text-2xl font-bold text-center bg-gradient-to-r from-green-400 to-green-600 bg-clip-text text-transparent flex-1">Kalkulator</h2>
+      <button onclick="closeCalculator()" class="text-gray-400 hover:text-white text-xl font-bold transition">&times;</button>
     </div>
-    <div class="grid grid-cols-4 gap-3">
-      <button onclick="appendCalc('7')" class="calc-btn">7</button>
-      <button onclick="appendCalc('8')" class="calc-btn">8</button>
-      <button onclick="appendCalc('9')" class="calc-btn">9</button>
-      <button onclick="appendCalc('/')" class="calc-btn calc-btn-op">÷</button>
-      <button onclick="appendCalc('4')" class="calc-btn">4</button>
-      <button onclick="appendCalc('5')" class="calc-btn">5</button>
-      <button onclick="appendCalc('6')" class="calc-btn">6</button>
-      <button onclick="appendCalc('*')" class="calc-btn calc-btn-op">×</button>
-      <button onclick="appendCalc('1')" class="calc-btn">1</button>
-      <button onclick="appendCalc('2')" class="calc-btn">2</button>
-      <button onclick="appendCalc('3')" class="calc-btn">3</button>
-      <button onclick="appendCalc('-')" class="calc-btn calc-btn-op">−</button>
-      <button onclick="appendCalc('0')" class="calc-btn col-span-2">0</button>
-      <button onclick="appendCalc('.')" class="calc-btn">.</button>
-      <button onclick="appendCalc('+')" class="calc-btn calc-btn-op">+</button>
-      <button onclick="backspace()" class="calc-btn calc-btn-back">⌫</button>
-      <button onclick="clearCalc()" class="calc-btn calc-btn-clear">C</button>
-      <button onclick="calculate()" class="calc-btn calc-btn-equal col-span-2">=</button>
+    <div id="calcNormalMode" class="calc-mode">
+      <div class="calc-display">
+        <input type="text" id="calcDisplay" readonly>
+      </div>
+      <div class="grid grid-cols-4 gap-3">
+        <button onclick="appendCalc('7')" class="calc-btn">7</button><button onclick="appendCalc('8')" class="calc-btn">8</button><button onclick="appendCalc('9')" class="calc-btn">9</button><button onclick="appendCalc('/')" class="calc-btn calc-btn-op">÷</button>
+        <button onclick="appendCalc('4')" class="calc-btn">4</button><button onclick="appendCalc('5')" class="calc-btn">5</button><button onclick="appendCalc('6')" class="calc-btn">6</button><button onclick="appendCalc('*')" class="calc-btn calc-btn-op">×</button>
+        <button onclick="appendCalc('1')" class="calc-btn">1</button><button onclick="appendCalc('2')" class="calc-btn">2</button><button onclick="appendCalc('3')" class="calc-btn">3</button><button onclick="appendCalc('-')" class="calc-btn calc-btn-op">−</button>
+        <button onclick="appendCalc('0')" class="calc-btn col-span-2">0</button><button onclick="appendCalc('.')" class="calc-btn">.</button><button onclick="appendCalc('+')" class="calc-btn calc-btn-op">+</button>
+        <button onclick="backspace()" class="calc-btn calc-btn-back">⌫</button><button onclick="clearCalc()" class="calc-btn calc-btn-clear">C</button><button onclick="calculate()" class="calc-btn calc-btn-equal col-span-2">=</button>
+      </div>
     </div>
-    <button onclick="closeCalculator()" class="absolute top-3 right-3 text-gray-400 hover:text-white text-xl font-bold transition">&times;</button>
+    <div id="calcVoucherMode" class="calc-mode hidden">
+      <div id="voucherAppContainer"></div>
+    </div>
   </div>
-</div>      
+</div>
 
 <style>          
-@keyframes greenGlow {          
-  0% { box-shadow: 0 0 5px #22c55e, 0 0 10px #22c55e; }          
-  50% { box-shadow: 0 0 15px #22c55e, 0 0 30px #22c55e; }          
-  100% { box-shadow: 0 0 5px #22c55e, 0 0 10px #22c55e; }          
-}          
+@keyframes greenGlow { 0% { box-shadow: 0 0 5px #22c55e; } 50% { box-shadow: 0 0 15px #22c55e; } 100% { box-shadow: 0 0 5px #22c55e; } }          
 .calc-btn:hover { background: #1f2937; }
 </style>        
 
@@ -1128,6 +572,18 @@ function openCalculator() {
     const box = modal.querySelector('div');
     if (box) box.classList.remove('scale-95');
   }
+  // pastikan mode awal kembali ke kalkulator jika modal ditutup lalu dibuka lagi
+  if (currentMode !== 'calc') {
+    const normalDiv = document.getElementById('calcNormalMode');
+    const voucherDiv = document.getElementById('calcVoucherMode');
+    const headerTitle = document.querySelector('#calculatorModal .text-2xl');
+    if (normalDiv && voucherDiv) {
+      normalDiv.classList.remove('hidden');
+      voucherDiv.classList.add('hidden');
+      if(headerTitle) headerTitle.textContent = 'Kalkulator';
+      currentMode = 'calc';
+    }
+  }
 }
 function closeCalculator() {    
   const modal = document.getElementById('calculatorModal');    
@@ -1137,24 +593,11 @@ function closeCalculator() {
     if (box) box.classList.add('scale-95');
   }
 }    
-function appendCalc(value) {    
-  document.getElementById('calcDisplay').value += value;    
-}    
-function clearCalc() {    
-  document.getElementById('calcDisplay').value = '';    
-}    
-function backspace() {    
-  let display = document.getElementById('calcDisplay');    
-  display.value = display.value.slice(0, -1);    
-}    
-function calculate() {    
-  let display = document.getElementById('calcDisplay');    
-  try {    
-    display.value = eval(display.value);    
-  } catch (e) {    
-    display.value = 'Error';    
-  }    
-}    
+function appendCalc(value) { document.getElementById('calcDisplay').value += value; }    
+function clearCalc() { document.getElementById('calcDisplay').value = ''; }    
+function backspace() { let d=document.getElementById('calcDisplay'); d.value = d.value.slice(0,-1); }    
+function calculate() { let d=document.getElementById('calcDisplay'); try { d.value = eval(d.value); } catch(e) { d.value = 'Error'; } }    
+document.getElementById('toggleCalcModeBtn')?.addEventListener('click', toggleCalcMode);
 </script>    
 
 <!-- HOME -->    
@@ -1163,39 +606,17 @@ function calculate() {
     <button onclick="openInternet(this)" class="card">📶 Paket Internet</button>
     <button onclick="openGame(this)" class="card">🎮 Top Up Game</button>
   </div>
-  <div class="flex justify-center mt-8">
-    <button onclick="openVoucher()" class="px-6 py-3 border border-green-400 text-green-400 rounded-md hover:bg-green-400 hover:text-black transition futuristic-btn w-64">📊 Hitung Voucher</button>
-  </div>
+  <!-- Tidak ada tombol voucher tambahan di sini -->
 </section>    
 
 <!-- INTERNET -->    
-<section id="internet" class="hidden page p-6 max-w-6xl mx-auto">    
-  <button onclick="back()" class="back-btn mb-6">← Kembali</button>    
-  <h2 class="text-2xl font-bold mb-4">Pilih Operator</h2>    
-  <div id="operatorList" class="grid md:grid-cols-3 gap-4"></div>    
-</section>    
-<section id="paketTypes" class="hidden page p-6 max-w-6xl mx-auto">    
-  <button onclick="back()" class="back-btn mb-6">← Kembali</button>    
-  <h2 id="paketTitle" class="text-2xl font-bold mb-4"></h2>    
-  <div id="paketTypeList" class="grid md:grid-cols-3 gap-4"></div>    
-</section>    
-<section id="operatorDetail" class="hidden page p-6 max-w-6xl mx-auto">    
-  <button onclick="back()" class="back-btn mb-6">← Kembali</button>    
-  <h2 id="operatorTitle" class="text-2xl font-bold mb-4"></h2>    
-  <div id="paketList" class="space-y-3"></div>    
-</section>    
+<section id="internet" class="hidden page p-6 max-w-6xl mx-auto"><button onclick="back()" class="back-btn mb-6">← Kembali</button><h2 class="text-2xl font-bold mb-4">Pilih Operator</h2><div id="operatorList" class="grid md:grid-cols-3 gap-4"></div></section>    
+<section id="paketTypes" class="hidden page p-6 max-w-6xl mx-auto"><button onclick="back()" class="back-btn mb-6">← Kembali</button><h2 id="paketTitle" class="text-2xl font-bold mb-4"></h2><div id="paketTypeList" class="grid md:grid-cols-3 gap-4"></div></section>    
+<section id="operatorDetail" class="hidden page p-6 max-w-6xl mx-auto"><button onclick="back()" class="back-btn mb-6">← Kembali</button><h2 id="operatorTitle" class="text-2xl font-bold mb-4"></h2><div id="paketList" class="space-y-3"></div></section>    
 
 <!-- GAME -->    
-<section id="game" class="hidden page p-6 max-w-6xl mx-auto">    
-  <button onclick="back()" class="back-btn mb-6">← Kembali</button>    
-  <h2 class="text-2xl font-bold mb-4">Pilih Game</h2>    
-  <div id="gameList" class="grid md:grid-cols-3 gap-4"></div>    
-</section>    
-<section id="gameDetail" class="hidden page p-6 max-w-6xl mx-auto">    
-  <button onclick="back()" class="back-btn mb-6">← Kembali</button>    
-  <h2 id="gameTitle" class="text-2xl font-bold mb-4"></h2>    
-  <div id="topupList" class="space-y-3"></div>    
-</section>    
+<section id="game" class="hidden page p-6 max-w-6xl mx-auto"><button onclick="back()" class="back-btn mb-6">← Kembali</button><h2 class="text-2xl font-bold mb-4">Pilih Game</h2><div id="gameList" class="grid md:grid-cols-3 gap-4"></div></section>    
+<section id="gameDetail" class="hidden page p-6 max-w-6xl mx-auto"><button onclick="back()" class="back-btn mb-6">← Kembali</button><h2 id="gameTitle" class="text-2xl font-bold mb-4"></h2><div id="topupList" class="space-y-3"></div></section>    
 
 <!-- FOOTER -->    
 <footer class="mt-20 p-6 text-center text-sm bg-black/60 space-y-3">    
@@ -1204,7 +625,7 @@ function calculate() {
   <a href="https://wa.me/6283844843020" class="text-green-400 inline-block">📞 (+62) 838-4484-3020</a>    
   <hr class="border-gray-600 my-3">    
   <p class="text-gray-400 text-xs">© 2026 PasirPogorCell<br>Developed by <span class="font-semibold text-white">Aden Askolani Fahri</span></p>    
-</footer>     
+</footer>         
     
 <script>    
 /* ================= DATA ================= */    
