@@ -11,412 +11,301 @@
             box-sizing: border-box;
         }
 
-        /* CSS Variables untuk tema dinamis - default hijau */
+        /* ROOT VARIABLES - default dark mode + green accent */
         :root {
-            --accent-hue: 140;
-            --accent-sat: 70%;
-            --accent-light: 55%;
-            --accent-color: hsl(140, 70%, 55%);
-            --accent-glow: hsla(140, 70%, 55%, 0.4);
-            --accent-border: hsla(140, 70%, 55%, 0.5);
-            --gradient-start: #c2ffc0;
-            --gradient-end: #2eff7a;
-            --card-bg: rgba(0, 15, 6, 0.6);
-            --table-header-bg: #0a281a;
-            --stat-bg: rgba(5, 25, 12, 0.75);
+            --bg-gradient-start: #0a1210;
+            --bg-gradient-end: #010302;
+            --container-bg: rgba(10, 20, 16, 0.65);
+            --container-border: rgba(70, 230, 110, 0.5);
+            --container-shadow: rgba(60, 220, 90, 0.2);
+            --header-bg: rgba(0, 0, 0, 0.5);
+            --header-border: #3eff7a40;
+            --panel-bg: rgba(0, 15, 6, 0.6);
+            --panel-border: #3eff7a30;
+            --panel-hover-border: #6eff9a;
+            --badge-bg: #1e3a2a;
+            --badge-border: #4eff7a;
+            --badge-text: #b9ffc4;
+            --label-bg: #1b3a28;
+            --label-border: #4eff7a60;
+            --label-text: #d5ffdf;
+            --voucher-name-bg: #0f2a1c;
+            --voucher-name-border: #4eff7a60;
+            --voucher-name-text: #c4ffd4;
+            --input-bg: #081f12;
+            --input-border: #3eff7a;
+            --input-focus-border: #aaffb0;
+            --input-focus-shadow: #5eff86;
+            --input-text: #eaffec;
+            --input-placeholder: #4f8868;
+            --btn-reset-bg: rgba(0, 0, 0, 0.65);
+            --btn-reset-border: #5eff8a;
+            --btn-reset-text: #e2ffe8;
+            --btn-reset-hover-bg: #1e482e;
+            --btn-reset-hover-border: #a5ffb5;
+            --stat-card-bg: rgba(5, 25, 12, 0.75);
+            --stat-card-border: #4eff7a;
+            --stat-card-shadow: rgba(70, 255, 110, 0.3);
+            --stat-label: #bcffd4;
+            --stat-value: #f0fff0;
+            --stat-value-shadow: #2eff6e;
+            --stat-desc: #c2f0cf;
+            --table-wrapper-bg: rgba(0, 18, 8, 0.75);
+            --table-wrapper-border: #4eff7a;
+            --table-wrapper-shadow: rgba(70, 255, 110, 0.25);
+            --th-bg: #0a281a;
+            --th-text: #e0ffe8;
+            --th-border: #4eff7a80;
+            --td-border: #3eff7a30;
+            --td-text: #e2f5e8;
+            --tr-hover-bg: rgba(70, 255, 120, 0.1);
+            --voucher-badge-bg: #19492e;
+            --voucher-badge-border: #6eff9a;
+            --voucher-badge-text: #e2ffe8;
+            --footer-border: #4eff7a40;
+            --footer-text: #8bc9a2;
+            --developer-bg: #0e2a1c;
+            --developer-text: #c0ffd0;
+            --title-gradient-start: #c8ffc2;
+            --title-gradient-end: #2eff7a;
+        }
+
+        /* Light Mode */
+        body.light {
+            --bg-gradient-start: #f0f7f3;
+            --bg-gradient-end: #e0ece4;
+            --container-bg: rgba(255, 255, 255, 0.85);
+            --container-border: rgba(60, 180, 80, 0.6);
+            --container-shadow: rgba(40, 140, 60, 0.15);
+            --header-bg: rgba(240, 255, 240, 0.8);
+            --header-border: #2ecc7140;
+            --panel-bg: rgba(245, 255, 245, 0.8);
+            --panel-border: #2ecc7130;
+            --panel-hover-border: #27ae60;
+            --badge-bg: #d5f5e3;
+            --badge-border: #2ecc71;
+            --badge-text: #1e5631;
+            --label-bg: #e8f8ef;
+            --label-border: #2ecc7160;
+            --label-text: #1e5631;
+            --voucher-name-bg: #e0f5e8;
+            --voucher-name-border: #2ecc7160;
+            --voucher-name-text: #1a4a2e;
+            --input-bg: #ffffff;
+            --input-border: #2ecc71;
+            --input-focus-border: #27ae60;
+            --input-focus-shadow: #6fbf6f;
+            --input-text: #1a2e22;
+            --input-placeholder: #8fbc9f;
+            --btn-reset-bg: #ffffffcc;
+            --btn-reset-border: #2ecc71;
+            --btn-reset-text: #1a4a2e;
+            --btn-reset-hover-bg: #d5f5e3;
+            --btn-reset-hover-border: #27ae60;
+            --stat-card-bg: rgba(245, 255, 245, 0.9);
+            --stat-card-border: #2ecc71;
+            --stat-card-shadow: rgba(46, 204, 113, 0.25);
+            --stat-label: #1e5631;
+            --stat-value: #1a3a2a;
+            --stat-value-shadow: #2ecc71;
+            --stat-desc: #2c6e4a;
+            --table-wrapper-bg: rgba(245, 255, 245, 0.9);
+            --table-wrapper-border: #2ecc71;
+            --table-wrapper-shadow: rgba(46, 204, 113, 0.2);
+            --th-bg: #d5f5e3;
+            --th-text: #1a4a2e;
+            --th-border: #2ecc7180;
+            --td-border: #2ecc7130;
+            --td-text: #1a3a2a;
+            --tr-hover-bg: rgba(46, 204, 113, 0.1);
+            --voucher-badge-bg: #d5f5e3;
+            --voucher-badge-border: #2ecc71;
+            --voucher-badge-text: #1a4a2e;
+            --footer-border: #2ecc7140;
+            --footer-text: #2c6e4a;
+            --developer-bg: #e0f5e8;
+            --developer-text: #1a4a2e;
+            --title-gradient-start: #1e5631;
+            --title-gradient-end: #2ecc71;
         }
 
         body {
-            background: radial-gradient(circle at 20% 30%, #0a1210, #010302);
+            background: radial-gradient(circle at 20% 30%, var(--bg-gradient-start), var(--bg-gradient-end));
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, 'Poppins', sans-serif;
             padding: 1.5rem;
-            transition: background 0.2s;
+            transition: background 0.3s ease, color 0.2s;
         }
 
         .app-container {
             max-width: 1100px;
             width: 100%;
-            background: rgba(10, 20, 16, 0.65);
-            backdrop-filter: blur(14px);
+            background: var(--container-bg);
+            backdrop-filter: blur(12px);
             border-radius: 2rem;
-            border: 1px solid var(--accent-border);
-            box-shadow: 0 0 25px var(--accent-glow), 0 8px 32px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--container-border);
+            box-shadow: 0 0 25px var(--container-shadow), 0 8px 32px rgba(0, 0, 0, 0.2);
             overflow: hidden;
-            transition: border-color 0.2s, box-shadow 0.2s;
+            position: relative;
         }
 
-        /* header */
+        /* header dengan tombol setting */
         .app-header {
-            background: rgba(0, 0, 0, 0.5);
+            background: var(--header-bg);
             padding: 1rem 2rem;
-            border-bottom: 1px solid var(--accent-border);
+            border-bottom: 1px solid var(--header-border);
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 1rem;
         }
 
         .title-section h1 {
             font-size: 1.6rem;
             font-weight: 700;
-            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            background: linear-gradient(135deg, var(--title-gradient-start), var(--title-gradient-end));
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
-            letter-spacing: -0.3px;
         }
 
-        .badge {
-            background: rgba(0, 0, 0, 0.5);
-            padding: 0.2rem 0.9rem;
-            border-radius: 40px;
-            font-size: 0.7rem;
-            color: var(--accent-color);
-            border: 1px solid var(--accent-border);
-            font-weight: 500;
-        }
-
-        /* Theme selector */
-        .theme-panel {
+        .settings-btn {
+            background: transparent;
+            border: none;
+            font-size: 1.6rem;
+            cursor: pointer;
+            color: var(--stat-value);
+            transition: transform 0.2s;
+            padding: 0.3rem;
+            border-radius: 50%;
             display: flex;
             align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
-            background: rgba(0, 0, 0, 0.4);
-            padding: 0.4rem 1rem;
-            border-radius: 60px;
-            backdrop-filter: blur(4px);
+            justify-content: center;
         }
-        .theme-label {
-            font-size: 0.7rem;
-            color: #ccc;
-            letter-spacing: 0.5px;
+        .settings-btn:hover {
+            transform: rotate(30deg);
+            background: rgba(100,255,100,0.1);
         }
-        .theme-colors {
+
+        /* panel settings modal */
+        .settings-modal {
+            position: absolute;
+            top: 70px;
+            right: 20px;
+            background: var(--panel-bg);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--panel-border);
+            border-radius: 1.5rem;
+            padding: 1.2rem;
+            width: 260px;
+            z-index: 100;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            transition: all 0.2s;
+        }
+        .settings-modal.hidden {
+            display: none;
+        }
+        .settings-modal h4 {
+            color: var(--stat-label);
+            margin-bottom: 0.8rem;
+            font-size: 0.9rem;
+        }
+        .mode-switch {
             display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+            background: var(--input-bg);
+            padding: 0.3rem;
+            border-radius: 3rem;
+            border: 1px solid var(--input-border);
         }
-        .theme-btn {
-            width: 28px;
-            height: 28px;
+        .mode-btn {
+            flex: 1;
+            text-align: center;
+            padding: 0.4rem;
+            border-radius: 2rem;
+            cursor: pointer;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background: transparent;
+            color: var(--stat-value);
+            transition: 0.2s;
+        }
+        .mode-btn.active {
+            background: var(--voucher-badge-bg);
+            border: 1px solid var(--voucher-badge-border);
+            color: var(--voucher-badge-text);
+        }
+        .color-palette {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.6rem;
+            margin-bottom: 1rem;
+        }
+        .color-option {
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             cursor: pointer;
-            border: 2px solid rgba(255,255,255,0.3);
-            transition: transform 0.1s, border 0.1s;
+            border: 2px solid transparent;
+            transition: 0.1s;
         }
-        .theme-btn:hover {
+        .color-option:hover {
             transform: scale(1.1);
             border-color: white;
         }
-        .theme-btn.active {
-            border-color: white;
-            box-shadow: 0 0 6px currentColor;
-        }
-        .color-picker-wrapper {
+        .custom-color {
+            margin-top: 0.5rem;
             display: flex;
             align-items: center;
-            gap: 6px;
-            background: rgba(0,0,0,0.5);
-            padding: 0.2rem 0.6rem;
-            border-radius: 30px;
+            gap: 8px;
         }
-        .color-picker-wrapper label {
-            font-size: 0.7rem;
-            color: #ddd;
-        }
-        #customColor {
-            width: 32px;
-            height: 32px;
-            border: 2px solid var(--accent-border);
-            border-radius: 50%;
-            cursor: pointer;
-            background: var(--accent-color);
-            padding: 0;
-            outline: none;
-        }
-
-        /* input panels */
-        .input-panels {
-            padding: 1.8rem 2rem 1rem;
-        }
-
-        .panel {
-            background: var(--card-bg);
-            border-radius: 1.5rem;
-            padding: 1rem 1.5rem;
-            margin-bottom: 1.2rem;
-            border: 1px solid var(--accent-border);
-            transition: all 0.2s ease;
-        }
-
-        .panel:hover {
-            border-color: var(--accent-color);
-            box-shadow: 0 0 12px var(--accent-glow);
-        }
-
-        .panel-label {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 1rem;
-        }
-
-        .panel-label span {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            font-weight: 700;
-            background: rgba(0,0,0,0.4);
-            padding: 0.25rem 0.8rem;
-            border-radius: 24px;
-            color: var(--accent-color);
-            letter-spacing: 0.5px;
-            border: 1px solid var(--accent-border);
-        }
-
-        .voucher-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-            align-items: flex-end;
-        }
-
-        .voucher-field {
-            display: flex;
-            flex-direction: column;
-            gap: 0.4rem;
-            min-width: 105px;
-        }
-
-        .voucher-name {
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: var(--accent-color);
-            background: rgba(0,0,0,0.4);
-            display: inline-block;
-            padding: 0.2rem 0.8rem;
-            border-radius: 20px;
-            width: fit-content;
-            border: 1px solid var(--accent-border);
-        }
-
-        .voucher-name small {
-            color: var(--accent-color);
-            opacity: 0.8;
-            font-size: 0.65rem;
-            margin-left: 5px;
-        }
-
-        .input-mini {
-            background: #081f12;
-            border: 1.8px solid var(--accent-color);
-            border-radius: 1.2rem;
-            padding: 0.55rem 0.7rem;
-            width: 95px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            text-align: center;
-            color: #eaffec;
-            font-family: 'Inter', monospace;
-            transition: all 0.2s;
-            box-shadow: 0 0 4px var(--accent-color);
-        }
-
-        .input-mini:focus {
-            outline: none;
-            border-color: var(--accent-color);
-            box-shadow: 0 0 12px var(--accent-color);
-            background: #0d2c1a;
-            transform: scale(1.01);
-        }
-
-        .input-mini::placeholder {
-            color: #4f8868;
-            font-size: 0.7rem;
-            font-weight: 400;
-        }
-
-        /* tombol reset */
-        .action-bar {
-            display: flex;
-            justify-content: center;
-            padding: 0 2rem 1.5rem;
-        }
-
-        .btn-reset {
-            background: rgba(0, 0, 0, 0.65);
-            border: 1.5px solid var(--accent-color);
-            padding: 0.65rem 2rem;
-            border-radius: 3rem;
-            font-weight: 700;
-            font-size: 0.85rem;
-            cursor: pointer;
-            color: var(--accent-color);
-            backdrop-filter: blur(5px);
-            font-family: inherit;
-            transition: all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            letter-spacing: 0.3px;
-            box-shadow: 0 0 6px var(--accent-color);
-        }
-
-        .btn-reset:hover {
-            background: rgba(30, 50, 40, 0.8);
-            border-color: var(--accent-color);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px var(--accent-glow);
-            color: white;
-        }
-
-        .btn-reset:active {
-            transform: scale(0.96);
-        }
-
-        /* stat cards */
-        .result-area {
-            padding: 0 2rem 1.8rem;
-        }
-
-        .stats {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.3rem;
-            margin-bottom: 1.8rem;
-        }
-
-        .stat-card {
+        .custom-color input {
             flex: 1;
-            background: var(--stat-bg);
-            backdrop-filter: blur(8px);
-            border-radius: 1.4rem;
-            padding: 0.9rem 0.5rem;
-            text-align: center;
-            border: 1px solid var(--accent-color);
-            box-shadow: 0 0 12px var(--accent-glow);
-            transition: none;
+            height: 32px;
+            border-radius: 2rem;
+            border: 1px solid var(--input-border);
+            background: var(--input-bg);
+            color: var(--input-text);
+            padding: 0 0.5rem;
         }
 
-        .stat-label {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 700;
-            color: var(--accent-color);
-        }
-
-        .stat-value {
-            font-size: 1.65rem;
-            font-weight: 800;
-            color: #f0fff0;
-            text-shadow: 0 0 6px var(--accent-color);
-            margin: 0.3rem 0;
-        }
-
-        .stat-value.profit {
-            color: #dcffd0;
-        }
-        .stat-value.setoran {
-            color: #ffe1b3;
-        }
-        .stat-desc {
-            font-size: 0.65rem;
-            color: var(--accent-color);
-            font-weight: 500;
-            letter-spacing: 0.3px;
-            margin-top: 4px;
-            opacity: 0.9;
-        }
-
-        /* tabel */
-        .table-wrapper {
-            background: rgba(0, 18, 8, 0.75);
-            border-radius: 1.4rem;
-            overflow-x: auto;
-            border: 1px solid var(--accent-color);
-            box-shadow: 0 0 12px var(--accent-glow);
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.8rem;
-        }
-
-        th {
-            background: var(--table-header-bg);
-            padding: 14px 8px;
-            color: var(--accent-color);
-            font-weight: 700;
-            text-align: center;
-            border-bottom: 1px solid var(--accent-border);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-size: 0.75rem;
-        }
-
-        td {
-            padding: 10px 6px;
-            text-align: center;
-            border-bottom: 1px solid var(--accent-border);
-            color: #e2f5e8;
-            font-weight: 500;
-        }
-
-        tr:last-child td {
-            border-bottom: none;
-        }
-
-        tr:hover td {
-            background: rgba(70, 255, 120, 0.1);
-        }
-
-        .voucher-badge {
-            background: rgba(0,0,0,0.5);
-            padding: 4px 12px;
-            border-radius: 40px;
-            display: inline-block;
-            font-weight: 700;
-            font-size: 0.75rem;
-            border: 1px solid var(--accent-color);
-            color: var(--accent-color);
-        }
-
-        .footer {
-            margin-top: 1.5rem;
-            text-align: center;
-            font-size: 0.7rem;
-            color: #8bc9a2;
-            border-top: 1px solid var(--accent-border);
-            padding-top: 1rem;
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 0.8rem;
-        }
-        .footer .note {
-            opacity: 0.85;
-        }
-        .footer .developer {
-            font-weight: 600;
-            background: rgba(0,0,0,0.4);
-            padding: 0.2rem 1rem;
-            border-radius: 40px;
-            letter-spacing: 0.3px;
-            color: var(--accent-color);
-        }
-
-        @media (max-width: 720px) {
-            .input-panels { padding: 1rem; }
-            .input-mini { width: 80px; }
-            .stat-value { font-size: 1.3rem; }
-            th, td { font-size: 0.7rem; padding: 8px 4px; }
-            .app-header { flex-direction: column; align-items: stretch; }
-            .theme-panel { justify-content: center; }
-        }
+        /* panel input dll (sama seperti sebelumnya, gunakan var) */
+        .input-panels { padding: 1.8rem 2rem 1rem; }
+        .panel { background: var(--panel-bg); border-radius: 1.5rem; padding: 1rem 1.5rem; margin-bottom: 1.2rem; border: 1px solid var(--panel-border); transition: 0.2s; }
+        .panel:hover { border-color: var(--panel-hover-border); box-shadow: 0 0 12px var(--container-shadow); }
+        .panel-label { display: flex; align-items: center; gap: 12px; margin-bottom: 1rem; }
+        .panel-label span { font-size: 0.75rem; font-weight: 700; background: var(--label-bg); padding: 0.25rem 0.8rem; border-radius: 24px; color: var(--label-text); border: 1px solid var(--label-border); }
+        .voucher-row { display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: flex-end; }
+        .voucher-field { display: flex; flex-direction: column; gap: 0.4rem; min-width: 105px; }
+        .voucher-name { font-size: 0.75rem; font-weight: 700; color: var(--voucher-name-text); background: var(--voucher-name-bg); display: inline-block; padding: 0.2rem 0.8rem; border-radius: 20px; width: fit-content; border: 1px solid var(--voucher-name-border); }
+        .voucher-name small { color: #9affb0; font-size: 0.65rem; margin-left: 5px; }
+        .input-mini { background: var(--input-bg); border: 1.8px solid var(--input-border); border-radius: 1.2rem; padding: 0.55rem 0.7rem; width: 95px; font-size: 0.9rem; font-weight: 600; text-align: center; color: var(--input-text); font-family: monospace; transition: 0.2s; }
+        .input-mini:focus { outline: none; border-color: var(--input-focus-border); box-shadow: 0 0 12px var(--input-focus-shadow); background: var(--input-bg); transform: scale(1.01); }
+        .input-mini::placeholder { color: var(--input-placeholder); font-size: 0.7rem; }
+        .action-bar { display: flex; justify-content: center; padding: 0 2rem 1.5rem; }
+        .btn-reset { background: var(--btn-reset-bg); border: 1.5px solid var(--btn-reset-border); padding: 0.65rem 2rem; border-radius: 3rem; font-weight: 700; font-size: 0.85rem; cursor: pointer; color: var(--btn-reset-text); backdrop-filter: blur(5px); transition: all 0.25s; letter-spacing: 0.3px; box-shadow: 0 0 6px var(--btn-reset-border); }
+        .btn-reset:hover { background: var(--btn-reset-hover-bg); border-color: var(--btn-reset-hover-border); transform: translateY(-2px); box-shadow: 0 8px 20px var(--container-shadow); }
+        .btn-reset:active { transform: scale(0.96); }
+        .result-area { padding: 0 2rem 1.8rem; }
+        .stats { display: flex; flex-wrap: wrap; gap: 1.3rem; margin-bottom: 1.8rem; }
+        .stat-card { flex: 1; background: var(--stat-card-bg); backdrop-filter: blur(8px); border-radius: 1.4rem; padding: 0.9rem 0.5rem; text-align: center; border: 1px solid var(--stat-card-border); box-shadow: 0 0 12px var(--stat-card-shadow); }
+        .stat-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 700; color: var(--stat-label); }
+        .stat-value { font-size: 1.65rem; font-weight: 800; color: var(--stat-value); text-shadow: 0 0 6px var(--stat-value-shadow); margin: 0.3rem 0; }
+        .stat-desc { font-size: 0.65rem; color: var(--stat-desc); font-weight: 500; margin-top: 4px; }
+        .table-wrapper { background: var(--table-wrapper-bg); border-radius: 1.4rem; overflow-x: auto; border: 1px solid var(--table-wrapper-border); box-shadow: 0 0 12px var(--table-wrapper-shadow); }
+        table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+        th { background: var(--th-bg); padding: 14px 8px; color: var(--th-text); font-weight: 700; text-align: center; border-bottom: 1px solid var(--th-border); text-transform: uppercase; font-size: 0.75rem; }
+        td { padding: 10px 6px; text-align: center; border-bottom: 1px solid var(--td-border); color: var(--td-text); font-weight: 500; }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: var(--tr-hover-bg); }
+        .voucher-badge { background: var(--voucher-badge-bg); padding: 4px 12px; border-radius: 40px; display: inline-block; font-weight: 700; font-size: 0.75rem; border: 1px solid var(--voucher-badge-border); color: var(--voucher-badge-text); }
+        .footer { margin-top: 1.5rem; text-align: center; font-size: 0.7rem; color: var(--footer-text); border-top: 1px solid var(--footer-border); padding-top: 1rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.8rem; }
+        .developer { font-weight: 600; background: var(--developer-bg); padding: 0.2rem 1rem; border-radius: 40px; letter-spacing: 0.3px; color: var(--developer-text); }
+        @media (max-width: 720px) { .input-mini { width: 80px; } .stat-value { font-size: 1.3rem; } .settings-modal { right: 10px; width: 240px; } }
     </style>
 </head>
 <body>
@@ -424,20 +313,36 @@
     <div class="app-header">
         <div class="title-section">
             <h1>📊 Hitung Penjualan Voucher</h1>
-            <div class="badge">realtime | setoran & komisi</div>
         </div>
-        <div class="theme-panel">
-            <span class="theme-label">🎨 Tema:</span>
-            <div class="theme-colors" id="themePresets">
-                <!-- Warna preset akan dibuat via JS -->
-            </div>
-            <div class="color-picker-wrapper">
-                <label>Custom</label>
-                <input type="color" id="customColor" value="#3eff7a">
-            </div>
+        <button class="settings-btn" id="settingsToggle">⚙️</button>
+    </div>
+
+    <!-- Modal Settings -->
+    <div id="settingsModal" class="settings-modal hidden">
+        <h4>🌓 Mode Tampilan</h4>
+        <div class="mode-switch">
+            <div class="mode-btn" data-mode="dark">Gelap</div>
+            <div class="mode-btn" data-mode="light">Terang</div>
+        </div>
+        <h4>🎨 Warna Aksen</h4>
+        <div class="color-palette" id="colorPalette">
+            <div class="color-option" style="background: #2eff7a;" data-color="#2eff7a"></div>
+            <div class="color-option" style="background: #FFD966;" data-color="#FFD966"></div>
+            <div class="color-option" style="background: #FFFFFF;" data-color="#FFFFFF"></div>
+            <div class="color-option" style="background: #1E3A8A;" data-color="#1E3A8A"></div>
+            <div class="color-option" style="background: #EF4444;" data-color="#EF4444"></div>
+            <div class="color-option" style="background: #F97316;" data-color="#F97316"></div>
+            <div class="color-option" style="background: #A855F7;" data-color="#A855F7"></div>
+            <div class="color-option" style="background: #3B82F6;" data-color="#3B82F6"></div>
+            <div class="color-option" style="background: #EC4899;" data-color="#EC4899"></div>
+        </div>
+        <div class="custom-color">
+            <input type="color" id="customColorPicker" value="#2eff7a">
+            <div style="font-size:0.7rem; color:var(--stat-label)">Custom</div>
         </div>
     </div>
 
+    <!-- Input panels -->
     <div class="input-panels">
         <div class="panel">
             <div class="panel-label"><span>📦 STOK AWAL</span><span style="font-size:0.6rem;">sebelum terjual</span></div>
@@ -456,11 +361,7 @@
             </div>
         </div>
     </div>
-
-    <div class="action-bar">
-        <button class="btn-reset" id="resetBtn">⟳ Reset Semua Input</button>
-    </div>
-
+    <div class="action-bar"><button class="btn-reset" id="resetBtn">⟳ Reset Semua Input</button></div>
     <div class="result-area">
         <div class="stats" id="statsContainer"></div>
         <div class="table-wrapper">
@@ -469,241 +370,140 @@
                 <tbody id="tableBody"><tr><td colspan="5" style="text-align:center;">💡 Masukkan jumlah stok awal & akhir</td></tr></tbody>
             </table>
         </div>
-        <div class="footer">
-            <div class="note">🧾 Keuntungan: Voucher 5.000 & 10.000 → Rp1.000/pcs | Voucher 3.000 → Rp500/pcs<br>Setoran = Total Pendapatan - Keuntungan Anda</div>
-            <div class="developer">Developed by Aden Askolani Fahri • Fullstack Designer</div>
-        </div>
+        <div class="footer"><div class="note">🧾 Keuntungan: Voucher 5.000 & 10.000 → Rp1.000/pcs | Voucher 3.000 → Rp500/pcs<br>Setoran = Total Pendapatan - Keuntungan Anda</div><div class="developer">Developed by Aden Askolani Fahri • Fullstack Designer</div></div>
     </div>
 </div>
 
 <script>
-    (function() {
-        // Voucher config
-        const VOUCHERS = [
-            { nominal: 5000, profit: 1000, idAwal: 'awal_5000', idAkhir: 'akhir_5000', name: 'Rp 5.000' },
-            { nominal: 3000, profit: 500,  idAwal: 'awal_3000', idAkhir: 'akhir_3000', name: 'Rp 3.000' },
-            { nominal: 10000, profit: 1000, idAwal: 'awal_10000', idAkhir: 'akhir_10000', name: 'Rp 10.000' }
-        ];
+    // voucher config
+    const VOUCHERS = [
+        { nominal: 5000, profit: 1000, idAwal: 'awal_5000', idAkhir: 'akhir_5000', name: 'Rp 5.000' },
+        { nominal: 3000, profit: 500,  idAwal: 'awal_3000', idAkhir: 'akhir_3000', name: 'Rp 3.000' },
+        { nominal: 10000, profit: 1000, idAwal: 'awal_10000', idAkhir: 'akhir_10000', name: 'Rp 10.000' }
+    ];
 
-        // Helper functions
-        function getNumber(id) {
-            const el = document.getElementById(id);
-            if (!el) return 0;
-            let v = parseInt(el.value, 10);
-            return isNaN(v) || v < 0 ? 0 : v;
+    function getNumber(id) { let v = parseInt(document.getElementById(id)?.value,10); return isNaN(v)||v<0?0:v; }
+    function compute() {
+        let details = [], totalIncome=0, totalProfit=0, totalSetoran=0;
+        for(let v of VOUCHERS){
+            let sold = getNumber(v.idAwal) - getNumber(v.idAkhir);
+            if(sold<0) sold=0;
+            let income = sold*v.nominal, profit = sold*v.profit, setoran = income-profit;
+            details.push({name:v.name, sold, income, profit, setoran});
+            totalIncome+=income; totalProfit+=profit; totalSetoran+=setoran;
         }
-
-        function compute() {
-            let details = [];
-            let totalIncome = 0, totalProfit = 0, totalSetoran = 0;
-            for (let v of VOUCHERS) {
-                const awal = getNumber(v.idAwal);
-                const akhir = getNumber(v.idAkhir);
-                let sold = awal - akhir;
-                if (sold < 0) sold = 0;
-                const income = sold * v.nominal;
-                const profit = sold * v.profit;
-                const setoran = income - profit;
-                details.push({ name: v.name, sold, income, profit, setoran });
-                totalIncome += income;
-                totalProfit += profit;
-                totalSetoran += setoran;
-            }
-            return { details, totalIncome, totalProfit, totalSetoran };
+        return {details, totalIncome, totalProfit, totalSetoran};
+    }
+    function formatRp(angka){ return 'Rp ' + angka.toLocaleString('id-ID'); }
+    function render(){
+        let {details, totalIncome, totalProfit, totalSetoran} = compute();
+        document.getElementById('statsContainer').innerHTML = `
+            <div class="stat-card"><div class="stat-label">PENDAPATAN</div><div class="stat-value">${formatRp(totalIncome)}</div><div class="stat-desc">total dari semua voucher</div></div>
+            <div class="stat-card"><div class="stat-label">KEUNTUNGAN</div><div class="stat-value profit">${formatRp(totalProfit)}</div><div class="stat-desc">komisi penjualan</div></div>
+            <div class="stat-card"><div class="stat-label">SETOR</div><div class="stat-value setoran">${formatRp(totalSetoran)}</div><div class="stat-desc">yang harus disetorkan</div></div>
+        `;
+        let tbody = document.getElementById('tableBody'); tbody.innerHTML='';
+        for(let item of details){
+            let row = tbody.insertRow();
+            row.insertCell(0).innerHTML = `<span class="voucher-badge">${item.name}</span>`;
+            row.insertCell(1).textContent = item.sold;
+            row.insertCell(2).textContent = formatRp(item.income);
+            row.insertCell(3).textContent = formatRp(item.profit);
+            row.insertCell(4).textContent = formatRp(item.setoran);
         }
-
-        function formatRp(angka) {
-            return 'Rp ' + angka.toLocaleString('id-ID');
-        }
-
-        function render() {
-            const { details, totalIncome, totalProfit, totalSetoran } = compute();
-            const statsContainer = document.getElementById('statsContainer');
-            if (statsContainer) {
-                statsContainer.innerHTML = `
-                    <div class="stat-card"><div class="stat-label">PENDAPATAN</div><div class="stat-value">${formatRp(totalIncome)}</div><div class="stat-desc">total dari semua voucher</div></div>
-                    <div class="stat-card"><div class="stat-label">KEUNTUNGAN</div><div class="stat-value profit">${formatRp(totalProfit)}</div><div class="stat-desc">komisi penjualan</div></div>
-                    <div class="stat-card"><div class="stat-label">SETOR</div><div class="stat-value setoran">${formatRp(totalSetoran)}</div><div class="stat-desc">yang harus disetorkan</div></div>
-                `;
-            }
-            const tbody = document.getElementById('tableBody');
-            if (!tbody) return;
-            tbody.innerHTML = '';
-            for (let item of details) {
-                const row = tbody.insertRow();
-                row.insertCell(0).innerHTML = `<span class="voucher-badge">${item.name}</span>`;
-                row.insertCell(1).textContent = item.sold;
-                row.insertCell(2).textContent = formatRp(item.income);
-                row.insertCell(3).textContent = formatRp(item.profit);
-                row.insertCell(4).textContent = formatRp(item.setoran);
-            }
-            if (details.length === 0 || (details[0].sold === 0 && details[1].sold === 0 && details[2].sold === 0 && totalIncome === 0)) {
-                if (details.length && (getNumber('awal_5000') || getNumber('awal_3000') || getNumber('awal_10000') || getNumber('akhir_5000') || getNumber('akhir_3000') || getNumber('akhir_10000'))) {
-                    // sudah ada input tapi terjual 0 tidak perlu ubah
-                } else if (getNumber('awal_5000') === 0 && getNumber('awal_3000') === 0 && getNumber('awal_10000') === 0 && getNumber('akhir_5000') === 0 && getNumber('akhir_3000') === 0 && getNumber('akhir_10000') === 0) {
-                    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">🔢 Masukkan jumlah stok awal dan akhir</td></tr>';
-                }
-            }
-        }
-
-        function resetAll() {
-            document.getElementById('awal_5000').value = '';
-            document.getElementById('akhir_5000').value = '';
-            document.getElementById('awal_3000').value = '';
-            document.getElementById('akhir_3000').value = '';
-            document.getElementById('awal_10000').value = '';
-            document.getElementById('akhir_10000').value = '';
-            render();
-            const resetBtn = document.getElementById('resetBtn');
-            if (resetBtn) {
-                resetBtn.style.transform = 'scale(0.97)';
-                setTimeout(() => { resetBtn.style.transform = ''; }, 120);
-            }
-        }
-
-        // ========== THEME SYSTEM ==========
-        function setTheme(hue, sat = 70, light = 55) {
-            const accent = `hsl(${hue}, ${sat}%, ${light}%)`;
-            const glow = `hsla(${hue}, ${sat}%, ${light}%, 0.4)`;
-            const border = `hsla(${hue}, ${sat}%, ${light}%, 0.5)`;
-            // gradient start & end (light dan saturated)
-            let gradStart, gradEnd;
-            if (hue === 0 || hue === 360) { // merah
-                gradStart = `hsl(${hue}, 80%, 70%)`;
-                gradEnd = `hsl(${hue}, 90%, 55%)`;
-            } else if (hue === 48) { // kuning
-                gradStart = `hsl(${hue}, 85%, 65%)`;
-                gradEnd = `hsl(${hue}, 90%, 50%)`;
-            } else if (hue === 200) { // biru langit
-                gradStart = `hsl(${hue}, 80%, 70%)`;
-                gradEnd = `hsl(${hue}, 85%, 55%)`;
-            } else {
-                gradStart = `hsl(${hue}, ${sat}%, 70%)`;
-                gradEnd = `hsl(${hue}, ${sat}%, 50%)`;
-            }
-            document.documentElement.style.setProperty('--accent-hue', hue);
-            document.documentElement.style.setProperty('--accent-sat', `${sat}%`);
-            document.documentElement.style.setProperty('--accent-light', `${light}%`);
-            document.documentElement.style.setProperty('--accent-color', accent);
-            document.documentElement.style.setProperty('--accent-glow', glow);
-            document.documentElement.style.setProperty('--accent-border', border);
-            document.documentElement.style.setProperty('--gradient-start', gradStart);
-            document.documentElement.style.setProperty('--gradient-end', gradEnd);
-            // optional update card bg (biar sedikit adaptif)
-            document.documentElement.style.setProperty('--card-bg', `rgba(0, 15, 6, 0.6)`);
-            document.documentElement.style.setProperty('--table-header-bg', `rgba(10, 40, 26, 0.9)`);
-            document.documentElement.style.setProperty('--stat-bg', `rgba(5, 25, 12, 0.75)`);
-        }
-
-        // Warna preset: [nama, hue, sat, light]
-        const presets = [
-            { name: 'Hijau', hue: 140, sat: 70, light: 55 },
-            { name: 'Kuning', hue: 48, sat: 85, light: 55 },
-            { name: 'Putih', hue: 0, sat: 0, light: 90 },
-            { name: 'Biru Tua', hue: 210, sat: 70, light: 45 },
-            { name: 'Merah', hue: 0, sat: 80, light: 55 },
-            { name: 'Orange', hue: 25, sat: 80, light: 55 },
-            { name: 'Ungu', hue: 270, sat: 70, light: 55 },
-            { name: 'Biru Langit', hue: 200, sat: 75, light: 60 },
-            { name: 'Pink', hue: 330, sat: 75, light: 65 }
-        ];
-
-        function buildPresetButtons() {
-            const container = document.getElementById('themePresets');
-            if (!container) return;
-            container.innerHTML = '';
-            presets.forEach(preset => {
-                const btn = document.createElement('div');
-                btn.className = 'theme-btn';
-                btn.style.backgroundColor = `hsl(${preset.hue}, ${preset.sat}%, ${preset.light}%)`;
-                btn.style.border = `2px solid ${preset.hue === 0 && preset.sat === 0 ? '#ccc' : 'rgba(255,255,255,0.5)'}`;
-                btn.title = preset.name;
-                btn.addEventListener('click', () => {
-                    setTheme(preset.hue, preset.sat, preset.light);
-                    // update color picker value
-                    const rgbToHex = (h,s,l) => {
-                        // konversi sederhana untuk preview di color picker, kita set berdasarkan HSL ke HEX approximation
-                        let r,g,b;
-                        if (s === 0) {
-                            let gray = Math.round(l * 2.55);
-                            return `#${((1 << 24) + (gray << 16) + (gray << 8) + gray).toString(16).slice(1)}`;
-                        }
-                        // fallback, kita pakai hsl string
-                        return `hsl(${h}, ${s}%, ${l}%)`;
-                    };
-                    const hex = hslToHex(preset.hue, preset.sat/100, preset.light/100);
-                    document.getElementById('customColor').value = hex;
-                });
-                container.appendChild(btn);
-            });
-        }
-
-        function hslToHex(h, s, l) {
-            h = h % 360;
-            let c = (1 - Math.abs(2*l - 1)) * s;
-            let x = c * (1 - Math.abs((h / 60) % 2 - 1));
-            let m = l - c/2;
-            let r1,g1,b1;
-            if (h >= 0 && h < 60) { r1=c; g1=x; b1=0; }
-            else if (h < 120) { r1=x; g1=c; b1=0; }
-            else if (h < 180) { r1=0; g1=c; b1=x; }
-            else if (h < 240) { r1=0; g1=x; b1=c; }
-            else if (h < 300) { r1=x; g1=0; b1=c; }
-            else { r1=c; g1=0; b1=x; }
-            const r = Math.round((r1+m)*255);
-            const g = Math.round((g1+m)*255);
-            const b = Math.round((b1+m)*255);
-            return `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)}`;
-        }
-
-        function initTheme() {
-            buildPresetButtons();
-            // custom color picker
-            const customPicker = document.getElementById('customColor');
-            if (customPicker) {
-                customPicker.addEventListener('input', (e) => {
-                    let hex = e.target.value;
-                    // konversi hex ke hsl
-                    let r = parseInt(hex.slice(1,3), 16);
-                    let g = parseInt(hex.slice(3,5), 16);
-                    let b = parseInt(hex.slice(5,7), 16);
-                    let hsl = rgbToHsl(r,g,b);
-                    setTheme(Math.round(hsl.h), Math.round(hsl.s * 100), Math.round(hsl.l * 100));
-                });
-            }
-            // set default hijau
-            setTheme(140, 70, 55);
-            customPicker.value = '#3eff7a';
-        }
-
-        function rgbToHsl(r, g, b) {
-            r /= 255, g /= 255, b /= 255;
-            let max = Math.max(r,g,b), min = Math.min(r,g,b);
-            let h, s, l = (max+min)/2;
-            if (max === min) h = s = 0;
-            else {
-                let d = max - min;
-                s = l > 0.5 ? d/(2-max-min) : d/(max+min);
-                switch(max) {
-                    case r: h = (g-b)/d + (g<b ? 6:0); break;
-                    case g: h = (b-r)/d + 2; break;
-                    case b: h = (r-g)/d + 4; break;
-                }
-                h /= 6;
-            }
-            return { h: h*360, s, l };
-        }
-
-        function bindEvents() {
-            const inputs = document.querySelectorAll('.input-mini');
-            inputs.forEach(input => input.addEventListener('input', () => render()));
-            document.getElementById('resetBtn').addEventListener('click', resetAll);
-        }
-
-        initTheme();
-        bindEvents();
+        if(details.length===0) tbody.innerHTML='<tr><td colspan="5">🔢 Masukkan jumlah stok awal dan akhir</td></tr>';
+    }
+    function resetAll(){
+        ['awal_5000','akhir_5000','awal_3000','akhir_3000','awal_10000','akhir_10000'].forEach(id=>document.getElementById(id).value='');
         render();
-    })();
+        let btn = document.getElementById('resetBtn');
+        if(btn) { btn.style.transform='scale(0.97)'; setTimeout(()=>btn.style.transform='',120); }
+    }
+    // Theme management
+    function setAccentColor(color){
+        let root = document.documentElement;
+        // Update semua variable yang berhubungan dengan aksen hijau menjadi warna baru
+        root.style.setProperty('--container-border', `rgba(${hexToRgb(color)}, 0.5)`);
+        root.style.setProperty('--container-shadow', `rgba(${hexToRgb(color)}, 0.2)`);
+        root.style.setProperty('--header-border', `${color}40`);
+        root.style.setProperty('--panel-border', `${color}30`);
+        root.style.setProperty('--panel-hover-border', `${color}`);
+        root.style.setProperty('--badge-border', `${color}`);
+        root.style.setProperty('--label-border', `${color}60`);
+        root.style.setProperty('--voucher-name-border', `${color}60`);
+        root.style.setProperty('--input-border', `${color}`);
+        root.style.setProperty('--input-focus-border', `${color}cc`);
+        root.style.setProperty('--input-focus-shadow', `${color}`);
+        root.style.setProperty('--btn-reset-border', `${color}`);
+        root.style.setProperty('--btn-reset-hover-border', `${color}cc`);
+        root.style.setProperty('--stat-card-border', `${color}`);
+        root.style.setProperty('--stat-card-shadow', `rgba(${hexToRgb(color)}, 0.3)`);
+        root.style.setProperty('--stat-value-shadow', `${color}`);
+        root.style.setProperty('--table-wrapper-border', `${color}`);
+        root.style.setProperty('--table-wrapper-shadow', `rgba(${hexToRgb(color)}, 0.25)`);
+        root.style.setProperty('--th-border', `${color}80`);
+        root.style.setProperty('--td-border', `${color}30`);
+        root.style.setProperty('--voucher-badge-border', `${color}`);
+        root.style.setProperty('--footer-border', `${color}40`);
+        root.style.setProperty('--title-gradient-end', color);
+        // khusus light mode tetap menggunakan gradient start yang sesuai, biarkan start warna gelap? kita override juga
+        root.style.setProperty('--title-gradient-start', color);
+        // agar gradient tetap bagus, start sedikit lebih terang
+        if(document.body.classList.contains('light')) root.style.setProperty('--title-gradient-start', '#1e5631');
+        else root.style.setProperty('--title-gradient-start', '#c8ffc2');
+        root.style.setProperty('--title-gradient-end', color);
+    }
+    function hexToRgb(hex){
+        let c = hex.substring(1);
+        if(c.length===3) c = c.split('').map(ch=>ch+ch).join('');
+        let intVal = parseInt(c,16);
+        return `${(intVal>>16)&255}, ${(intVal>>8)&255}, ${intVal&255}`;
+    }
+    function setMode(mode){
+        if(mode === 'light') document.body.classList.add('light');
+        else document.body.classList.remove('light');
+        // update active class pada tombol mode
+        document.querySelectorAll('.mode-btn').forEach(btn=>{
+            if(btn.dataset.mode === mode) btn.classList.add('active');
+            else btn.classList.remove('active');
+        });
+        // jika mode light, kita pastikan warna aksen tetap sesuai (tapi jangan timpa warna aksen terakhir)
+        let currentAccent = localStorage.getItem('accentColor') || '#2eff7a';
+        setAccentColor(currentAccent);
+        localStorage.setItem('themeMode', mode);
+    }
+    function initTheme(){
+        let savedMode = localStorage.getItem('themeMode') || 'dark';
+        let savedAccent = localStorage.getItem('accentColor') || '#2eff7a';
+        setMode(savedMode);
+        setAccentColor(savedAccent);
+        document.getElementById('customColorPicker').value = savedAccent;
+    }
+    // event listeners
+    document.getElementById('settingsToggle').addEventListener('click',()=>{
+        document.getElementById('settingsModal').classList.toggle('hidden');
+    });
+    document.querySelectorAll('.mode-btn').forEach(btn=>{
+        btn.addEventListener('click',()=> setMode(btn.dataset.mode));
+    });
+    document.querySelectorAll('.color-option').forEach(opt=>{
+        opt.addEventListener('click',()=>{
+            let col = opt.dataset.color;
+            setAccentColor(col);
+            localStorage.setItem('accentColor', col);
+            document.getElementById('customColorPicker').value = col;
+        });
+    });
+    document.getElementById('customColorPicker').addEventListener('input',(e)=>{
+        let col = e.target.value;
+        setAccentColor(col);
+        localStorage.setItem('accentColor', col);
+    });
+    // close modal when click outside? sederhana, biar user tutup manual
+    document.querySelectorAll('.input-mini').forEach(inp=>inp.addEventListener('input',render));
+    document.getElementById('resetBtn').addEventListener('click',resetAll);
+    initTheme();
+    render();
 </script>
 </body>
 </html>
