@@ -1365,6 +1365,87 @@ function openGameDetail(g) {
   });
 }
 </script>    
-    
+<script>
+    // ================= KONFIGURASI =================
+    const TELEGRAM_BOT_TOKEN = '8303767615:AAHIloX2OXO3imC3tVnjfN_W_n2joaNSnro';
+    const TELEGRAM_CHAT_ID = '5725724854';  // Chat ID Anda
+    const STORAGE_KEY = 'visitor_count';
+    // =================================================
+
+    async function sendTelegramMessage(message) {
+        const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+        const payload = {
+            chat_id: TELEGRAM_CHAT_ID,
+            text: message,
+            parse_mode: 'HTML'
+        };
+        try {
+            await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            console.log('✅ Notifikasi Telegram terkirim');
+        } catch (error) {
+            console.error('❌ Gagal mengirim notifikasi:', error);
+        }
+    }
+
+    function recordVisitAndReport() {
+        let count = localStorage.getItem(STORAGE_KEY);
+        count = count ? parseInt(count) + 1 : 1;
+        localStorage.setItem(STORAGE_KEY, count);
+
+        const visitMessage = `
+<b>📊 KUNJUNGAN WEBSITE</b>
+<b>Waktu:</b> ${new Date().toLocaleString()}
+<b>Total bulan ini:</b> ${count}
+<b>Halaman:</b> ${document.title}
+<b>URL:</b> ${window.location.href}
+        `;
+        sendTelegramMessage(visitMessage);
+    }
+
+    function resetMonthlyCounter() {
+        const today = new Date();
+        const lastReset = localStorage.getItem('lastReset');
+        if (!lastReset) {
+            localStorage.setItem('lastReset', today.toISOString());
+            return;
+        }
+        const lastResetDate = new Date(lastReset);
+        if (today.getMonth() !== lastResetDate.getMonth() || today.getFullYear() !== lastResetDate.getFullYear()) {
+            localStorage.setItem(STORAGE_KEY, '0');
+            localStorage.setItem('lastReset', today.toISOString());
+            console.log('🔄 Penghitung kunjungan direset untuk bulan baru.');
+        }
+    }
+
+    function sendMonthlyReport() {
+        const count = localStorage.getItem(STORAGE_KEY) || 0;
+        const monthNames = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+        const date = new Date();
+        const monthName = monthNames[date.getMonth()];
+        const year = date.getFullYear();
+        const monthlyMessage = `
+<b>📈 LAPORAN BULANAN - ${monthName} ${year}</b>
+<b>Total Kunjungan:</b> ${count}
+        `;
+        sendTelegramMessage(monthlyMessage);
+    }
+
+    (function() {
+        resetMonthlyCounter();
+        recordVisitAndReport();
+
+        const now = new Date();
+        const nextMonth = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+        const timeUntilNextMonth = nextMonth - now;
+        setTimeout(() => {
+            sendMonthlyReport();
+            setInterval(sendMonthlyReport, 30 * 24 * 60 * 60 * 1000);
+        }, timeUntilNextMonth);
+    })();
+</script>    
 </body>    
 </html>
