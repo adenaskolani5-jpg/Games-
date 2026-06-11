@@ -1399,11 +1399,12 @@ function openGameDetail(g) {
         }
     }
 
-    function recordVisitAndReport() {
-        let count = localStorage.getItem(STORAGE_KEY);
-        count = count ? parseInt(count) + 1 : 1;
-        localStorage.setItem(STORAGE_KEY, count);
+    function recordVisitAndReport(sendNotif = true) {
+    let count = localStorage.getItem(STORAGE_KEY);
+    count = count ? parseInt(count) + 1 : 1;
+    localStorage.setItem(STORAGE_KEY, count);
 
+    if (sendNotif) {
         const visitMessage = `
 <b>📊 KUNJUNGAN WEBSITE</b>
 <b>Waktu:</b> ${new Date().toLocaleString()}
@@ -1413,6 +1414,7 @@ function openGameDetail(g) {
         `;
         sendTelegramMessage(visitMessage);
     }
+}
 
     function resetMonthlyCounter() {
         const today = new Date();
@@ -1443,17 +1445,32 @@ function openGameDetail(g) {
     }
 
     (function() {
-        resetMonthlyCounter();
-        recordVisitAndReport();
+    resetMonthlyCounter();
 
-        const now = new Date();
-        const nextMonth = new Date(now.getFullYear(), now.getMonth() + 1, 1);
-        const timeUntilNextMonth = nextMonth - now;
-        setTimeout(() => {
-            sendMonthlyReport();
-            setInterval(sendMonthlyReport, 30 * 24 * 60 * 60 * 1000);
-        }, timeUntilNextMonth);
-    })();
+    // Deteksi apakah ini kunjungan baru di tab ini (bukan refresh)
+    const visitedBefore = sessionStorage.getItem('visited_this_tab');
+    if (!visitedBefore) {
+        // Ini kunjungan pertama di tab ini (klik link, buka baru, atau ketik URL)
+        sessionStorage.setItem('visited_this_tab', 'true');
+        recordVisitAndReport(true);  // Kirim notifikasi
+    } else {
+        // Ini refresh atau navigasi internal dalam tab yang sama
+        console.log('🔄 Refresh / navigasi internal, notifikasi tidak dikirim');
+        // Tetap update counter local storage (opsional: jika ingin tetap menghitung refresh)
+        let count = localStorage.getItem(STORAGE_KEY);
+        count = count ? parseInt(count) + 1 : 1;
+        localStorage.setItem(STORAGE_KEY, count);
+    }
+
+    // Laporan bulanan (tetap seperti semula)
+    const now = new Date();
+    const nextMonth = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+    const timeUntilNextMonth = nextMonth - now;
+    setTimeout(() => {
+        sendMonthlyReport();
+        setInterval(sendMonthlyReport, 30 * 24 * 60 * 60 * 1000);
+    }, timeUntilNextMonth);
+})();
 </script>    
 </body>    
 </html>
