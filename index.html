@@ -376,6 +376,198 @@ body{ font-family:Poppins,sans-serif; background:var(--bg); color:var(--text); }
 .table-wrapper {
   max-height: 160px;
 }
+/* Ubah tombol utama (Paket Internet & Top Up Game) menjadi border kiri bercahaya */
+#home .card {
+  border-left: 4px solid #22c55e;          /* garis hijau di kiri */
+  transition: all 0.3s ease;
+}
+#home .card::before {
+  display: none;                           /* hilangkan efek glow melingkar */
+}
+#home .card:hover {
+  transform: scale(1.02);                  /* sedikit membesar saat hover (opsional) */
+  border-left-color: #4ade80;              /* garis kiri lebih terang saat hover */
+  box-shadow: 0 0 20px rgba(34,197,94,0.6), -4px 0 20px rgba(34,197,94,0.5);
+}
+/* Tambahkan border hijau bercahaya pada seluruh card di menu Paket Internet & Top Up Game */
+#internet .card,
+#paketTypes .card,
+#operatorDetail .card,
+#game .card,
+#gameDetail .card {
+  border: 1.5px solid rgba(34, 197, 94, 0.7);
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.4);
+  transition: all 0.2s ease;
+}
+
+/* Efek hover: garis lebih terang dan cahaya bertambah */
+#internet .card:hover,
+#paketTypes .card:hover,
+#operatorDetail .card:hover,
+#game .card:hover,
+#gameDetail .card:hover {
+  border-color: #4ade80;
+  box-shadow: 0 0 18px rgba(34, 197, 94, 0.7);
+}
+/* Border di seluruh sisi untuk card di menu paket & game */
+#internet .card,
+#paketTypes .card,
+#operatorDetail .card,
+#game .card,
+#gameDetail .card {
+  border: 1.5px solid rgba(34, 197, 94, 0.7) !important;
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.3);
+  transition: all 0.2s ease;
+  flex-direction: column;
+  align-items: stretch;
+}
+#internet .card:hover,
+#paketTypes .card:hover,
+#operatorDetail .card:hover,
+#game .card:hover,
+#gameDetail .card:hover {
+  border-color: #4ade80 !important;
+  box-shadow: 0 0 15px rgba(34, 197, 94, 0.6);
+}
+/* Gaya untuk konten card */
+.card-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.card-detail {
+  margin-top: 0.6rem;
+  font-size: 0.7rem;
+  color: #9ca3af;
+  border-top: 1px dashed rgba(34,197,94,0.3);
+  padding-top: 0.5rem;
+}
+/* Tombol floating kembali */
+.floating-back {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    background: #22c55e;
+    color: #000;
+    border: none;
+    border-radius: 50px;
+    padding: 12px 24px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(34,197,94,0.8);
+    transition: all 0.3s ease;
+    display: none; /* awal tersembunyi */
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    font-family: inherit;
+}
+.floating-back:hover {
+    transform: scale(1.05);
+    background: #4ade80;
+    box-shadow: 0 0 25px rgba(34,197,94,1);
+}
+/* Tombol Kalkulator dan Rekomend (di dalam section home) menjadi hitam dengan garis hijau */
+#home .futuristic-btn.border-green-400 {
+  background-color: #000000 !important;
+  border: 1px solid #22c55e !important;
+  color: #22c55e !important;
+}
+
+#home .futuristic-btn.border-green-400:hover {
+  background-color: #22c55e !important;
+  color: #000000 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 0 12px rgba(34, 197, 94, 0.8);
+}
+/* Tombol Kalkulator dan Rekomend dibuat mirip dengan card, tanpa mengubah ukuran */
+#home .futuristic-btn.border-green-400 {
+  background: var(--card);  /* sama seperti background card */
+  border: 1px solid rgba(34,197,94,.35);
+  box-shadow: 0 0 12px rgba(34,197,94,.25), 0 0 40px rgba(34,197,94,.15);
+  color: var(--text);
+  transition: all 0.35s;
+  position: relative;
+  overflow: hidden;
+}
+#home .futuristic-btn.border-green-400::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 1rem;
+  background: linear-gradient(120deg, var(--accent), var(--blue), var(--accent));
+  filter: blur(18px);
+  opacity: 0.55;
+  z-index: -1;
+  animation: glow 3s infinite alternate;
+}
+#home .futuristic-btn.border-green-400:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(34,197,94,.8), 0 0 60px rgba(59,130,246,.7);
+}
+/* Tombol Kalkulator dan Rekomend di dalam home: tampilan seperti card tapi ukuran tetap kecil */
+#home .btn-card-style {
+  background: var(--card);
+  border: 1px solid rgba(34,197,94,.35);
+  box-shadow: 0 0 12px rgba(34,197,94,.25), 0 0 40px rgba(34,197,94,.15);
+  color: var(--text);
+  transition: all 0.35s;
+  position: relative;
+  overflow: hidden;
+}
+#home .btn-card-style::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 1rem;
+  background: linear-gradient(120deg, var(--accent), var(--blue), var(--accent));
+  filter: blur(18px);
+  opacity: 0.55;
+  z-index: -1;
+  animation: glow 3s infinite alternate;
+}
+#home .btn-card-style:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(34,197,94,.8), 0 0 60px rgba(59,130,246,.7);
+}
+/* Animasi border glow untuk card info */
+.glow-card {
+  background: #0a0a0a;
+  border: 1px solid #22c55e;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+  animation: borderGlow 2s infinite alternate;
+}
+.glow-card:hover {
+  transform: translateX(5px);
+  background: #0f0f0f;
+  box-shadow: 0 0 15px rgba(34,197,94,0.5);
+}
+@keyframes borderGlow {
+  0% {
+    border-color: #22c55e;
+    box-shadow: 0 0 0px rgba(34,197,94,0.2);
+  }
+  100% {
+    border-color: #4ade80;
+    box-shadow: 0 0 12px rgba(34,197,94,0.8);
+  }
+}
+.glow-card h3 {
+  color: #22c55e;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+.glow-card p {
+  color: #d1d5db; /* abu-abu terang, lebih lembut dari putih murni */
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
 </style>        
 </head>        
 <body class="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white">        
@@ -389,60 +581,54 @@ body{ font-family:Poppins,sans-serif; background:var(--bg); color:var(--text); }
   <h1 class="text-4xl font-bold">PasirPogorCell</h1>          
   <p class="text-gray-300">Paket Internet & Top Up Game</p>          
 </header>        
-<!-- Tombol -->        
-<div class="flex justify-center items-center gap-3 my-4">          
-  <div class="flex flex-col items-center"><button onclick="openHarga()" class="w-24 border border-green-400 text-green-400 text-xs py-2 rounded-md hover:bg-green-400 hover:text-black transition futuristic-btn">🔍 Cari</button></div>          
-  <div class="flex flex-col items-center"><button onclick="openCalculator()" class="w-24 border border-green-400 text-green-400 text-xs py-2 rounded-md hover:bg-green-400 hover:text-black transition futuristic-btn">Kalkulator 📟</button></div>          
-  <div class="flex flex-col items-center"><button onclick="openPopular()" class="w-24 border border-green-400 text-green-400 text-xs py-2 rounded-md hover:bg-green-400 hover:text-black transition futuristic-btn">Populer 📊</button></div>          
-  <div class="flex flex-col items-center justify-center"><button onclick="openPromo()" class="w-8 h-8 rounded-full border border-yellow-400 text-yellow-400 text-sm font-bold hover:bg-yellow-400 hover:text-black transition futuristic-btn futuristic-btn-info">ⓘ</button></div>      
-</div>
+<!-- Tombol Baris Atas: Cari (lebar) dan Info (kanan) -->
+<div class="my-4 px-4">
+  <input type="text" id="searchHarga" placeholder="Cari paket internet atau game..." class="w-full border border-green-400 bg-gray-900 text-white text-sm py-2 px-3 rounded-md focus:outline-none focus:border-green-300 focus:ring-1 focus:ring-green-500 transition futuristic-btn">
+  <div id="hasilHarga" class="mt-3 space-y-2 max-h-80 overflow-y-auto"></div>
+</div>   
 
-<!-- Modal Harga -->          
-<div id="hargaModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center opacity-0 pointer-events-none z-50 transition-opacity duration-300">
-  <div class="bg-gray-900 text-white rounded-xl p-6 w-80 relative transform scale-95 transition-transform duration-300">
-    <h2 class="text-xl font-bold mb-3">Cek Harga</h2>
-    <input id="searchHarga" type="text" placeholder="Ketik nama paket / game..." class="w-full p-2 rounded bg-gray-800 mb-3 text-sm">
-    <div id="hasilHarga" class="space-y-2 max-h-60 overflow-y-auto text-sm"></div>
-    <button onclick="closeHarga()" class="absolute top-3 right-3 text-gray-400 hover:text-white text-lg font-bold">×</button>
-  </div>
-</div>     
-
-<!-- Modal Populer -->        
-<div id="popularModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center opacity-0 pointer-events-none z-50 transition-opacity duration-300">
-  <div class="relative bg-gray-900 text-white rounded-xl p-6 w-80 max-h-[80vh] overflow-auto transform scale-95 transition-transform duration-300">
-    <h2 class="text-xl font-bold mb-4">Paket & Game Populer</h2>
-    <div class="flex justify-center gap-2 mb-4">
-      <button onclick="showPopular('paket', this)" class="tab-btn px-3 py-1 rounded text-sm font-semibold border border-green-400">Paket</button>
-      <button onclick="showPopular('game', this)" class="tab-btn px-3 py-1 rounded text-sm font-semibold border border-yellow-400">Game</button>
-      <button onclick="showPopular('all', this)" class="tab-btn px-3 py-1 rounded text-sm font-semibold border border-blue-400">Semua</button>
+<!-- Modal Rekomendasi -->
+<div id="rekomendasiModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center opacity-0 pointer-events-none z-50 transition-opacity duration-300">
+  <div class="relative bg-gray-900 text-white rounded-xl p-6 w-80 max-h-[80vh] overflow-auto transform scale-95 transition-transform duration-300 border-l-4 border-green-500 shadow-2xl">
+    <h2 class="text-xl font-bold mb-4 text-green-400">⭐ Rekomendasi Paket</h2>
+    <div id="rekomendasiMenu" class="space-y-2">
+      <!-- Daftar operator akan dimuat di sini -->
     </div>
-    <ul id="popularList" class="list-disc pl-5 space-y-2"></ul>
-    <button onclick="closePopular()" class="absolute top-3 right-3 text-gray-400 hover:text-white text-lg font-bold">×</button>
+    <button onclick="closeRekomendasi()" class="absolute top-3 right-3 text-gray-400 hover:text-white text-lg font-bold">×</button>
   </div>
 </div>
 
-<!-- Modal Promo (Info Toko) -->      
+<!-- Modal Promo (Info Toko) dengan gaya hitam pekat + border glow -->
 <div id="promoModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center opacity-0 pointer-events-none z-50 transition-opacity duration-300">
-  <div class="bg-gray-900 text-white rounded-xl p-6 w-80 max-h-[80vh] overflow-auto relative transform scale-95 transition-transform duration-300">
-    <h2 class="text-xl font-bold text-yellow-400 mb-4">Informasi Toko</h2>
-    <div class="space-y-3 text-sm">
-      <div class="border border-green-500 rounded-lg p-3 bg-green-900/30">
-        <h3 class="font-semibold text-green-300">📱 Registrasi Kartu Indosat</h3>
-        <p class="text-xs text-gray-300 mb-2">Khusus pelanggan Indosat untuk registrasi kartu prabayar.</p>
-        <a href="https://registrasi.ioh.co.id" target="_blank" rel="noopener noreferrer" class="text-green-400 underline break-all font-mono text-sm">registrasi.ioh.co.id</a>
+  <div class="bg-gray-900 text-white rounded-xl p-6 w-80 max-h-[80vh] overflow-auto relative transform scale-95 transition-transform duration-300 border-l-4 border-green-500 shadow-2xl">
+    <h2 class="text-xl font-bold text-green-400 mb-4">Informasi Toko</h2>
+    <div>
+
+      <!-- Card Registrasi Indosat -->
+      <div class="glow-card">
+        <h3>Registrasi Kartu Indosat</h3>
+        <p>Khusus pelanggan Indosat untuk registrasi kartu prabayar.</p>
+        <a href="https://registrasi.ioh.co.id" target="_blank" rel="noopener noreferrer">registrasi.ioh.co.id</a>
       </div>
-      <div class="border border-yellow-500 rounded-lg p-3">
-        <h3 class="font-semibold text-yellow-300">Paket internet lebih besar?</h3>
+
+      <!-- Card Paket internet lebih besar -->
+      <div class="glow-card">
+        <h3>Paket internet lebih besar?</h3>
         <p>Terkadang jumlah kuota yang terkirim lebih besar dari yang tertera! terutama untuk paket 20.000 dan 26.000</p>
       </div>
-      <div class="border border-yellow-500 rounded-lg p-3">
-        <h3 class="font-semibold text-yellow-300">bisa TopUp semua Game</h3>
+
+      <!-- Card bisa TopUp semua Game -->
+      <div class="glow-card">
+        <h3>bisa TopUp semua Game</h3>
         <p>Kami menyediakan TopUp untuk berbagai jenis game, tetapi pilihan menu harga TopUp Game hanya tersedia untuk beberapa Game saja</p>
       </div>
-      <div class="border border-yellow-500 rounded-lg p-3">
-        <h3 class="font-semibold text-yellow-300">Promo harga Kuota dan topUp Game</h3>
+
+      <!-- Card Promo harga Kuota dan topUp Game -->
+      <div class="glow-card">
+        <h3>Promo harga Kuota dan topUp Game</h3>
         <p>Harga paket internet dan topUp game bisa lebih murah dari biasanya, pantau terus web PasirPogorCell untuk bisa mendapatkan update terkait harga!</p>
       </div>
+
     </div>
     <button onclick="closePromo()" class="absolute top-3 right-3 text-gray-400 hover:text-white text-lg font-bold">×</button>
   </div>
@@ -455,21 +641,83 @@ const popularItems = {
   game: [ "Top Up Free Fire 100 Diamond", "Top Up Mobile Legends 50 Diamond", "Top Up PUBG Mobile 300 UC" ]          
 };          
 
-function openPopular() {
-  const modal = document.getElementById('popularModal');
+// Data rekomendasi paket per operator
+const rekomendasiData = {
+  "Indosat": [
+    { nama: "Freedom Mini 9GB 7 Hari", harga: "Rp 26.000", ket: "Kuota Utama 9GB 7 Hari. Zona Plus: 13GB. Zona Super Plus: 13GB" },
+    { nama: "Indosat Yellow 5GB 1 Hari", harga: "Rp 10.000", ket: "Pastikan tidak ada paket internet yang aktif" },
+    {nama: "Freedom Internet 40GB 28 Hari", harga: "Rp 77.000", ket: "Freedom Internet Mobo" },
+  ],
+  "Axis": [
+    { nama: "Bronet 6GB + Bonus Aigo 30 Hari", harga: "Rp 32.000", ket: "Kuota 6GB + bonus AIGO" },
+    { nama: "Mini Axis 9GB 3 Hari", harga: "Rp 17.000", ket: "Kuota besar untuk 3 hari" }
+  ],
+  "XL": [
+    { nama: "XL Xtra On 2GB 30 Hari", harga: "Rp 26.000", ket: "Cocok untuk sosial media dan game" },
+    { nama: "XL Reguler 6GB 30 Hari", harga: "Rp 61.000", ket: "Kuota menengah" }
+  ],
+  "Tri": [
+    { nama: "Tri All Jaringan 10GB 30 Hari", harga: "Rp 38.000", ket: "Hemat per GB" },
+    { nama: "Tri Data Mini 12GB 7 Hari", harga: "Rp 33.000", ket: "Kuota besar mingguan" }
+  ],
+  "Telkomsel": [
+    { nama: "Mini Data 2GB 7 Hari", harga: "Rp 19.000", ket: "Jaringan luas" },
+    { nama: "Mini Data 10GB 3 Hari", harga: "Rp 78.000", ket: "Untuk penggunaan padat" }
+  ],
+  "byU": [
+    { nama: "Kuota 5GB Semua 7 Hari", harga: "Rp 21.000", ket: "Murah meriah" }
+  ]
+};
+
+function openRekomendasi() {
+  const modal = document.getElementById('rekomendasiModal');
   if (!modal) return;
   modal.classList.remove('pointer-events-none', 'opacity-0');
   const box = modal.querySelector('div');
   if (box) box.classList.remove('scale-95');
-  const firstBtn = document.querySelector(".tab-btn:last-child");
-  showPopular('all', firstBtn);
+  
+  const menuDiv = document.getElementById('rekomendasiMenu');
+  if (!menuDiv) return;
+  menuDiv.innerHTML = '';
+  for (let op in rekomendasiData) {
+    const btn = document.createElement('button');
+    btn.className = 'card w-full mb-2';
+    btn.innerHTML = op;
+    btn.onclick = (function(operator) {
+      return function() { showRekomendasiPaket(operator); };
+    })(op);
+    menuDiv.appendChild(btn);
+  }
 }
-function closePopular() {
-  const modal = document.getElementById('popularModal');
+
+function closeRekomendasi() {
+  const modal = document.getElementById('rekomendasiModal');
   if (!modal) return;
   modal.classList.add('opacity-0', 'pointer-events-none');
   const box = modal.querySelector('div');
   if (box) box.classList.add('scale-95');
+}
+
+function showRekomendasiPaket(operator) {
+  const menuDiv = document.getElementById('rekomendasiMenu');
+  const pakets = rekomendasiData[operator];
+  if (!pakets) return;
+  menuDiv.innerHTML = '';
+  pakets.forEach(p => {
+    const div = document.createElement('div');
+    div.className = 'card flex justify-between items-center';
+    div.innerHTML = `
+      <div style="flex:1">${p.nama} <span class="price">${p.harga}</span><div class="text-xs text-gray-400">${p.ket}</div></div>
+      <button class="whatsapp-btn" onclick="sendToWhatsApp('${p.nama}', '${p.harga}')">💬 Beli</button>
+    `;
+    menuDiv.appendChild(div);
+  });
+  // tombol kembali
+  const backBtn = document.createElement('button');
+  backBtn.className = 'back-btn mt-4 w-full';
+  backBtn.innerHTML = '← Kembali ke daftar operator';
+  backBtn.onclick = () => openRekomendasi();
+  menuDiv.appendChild(backBtn);
 }
 function openPromo() {
   const modal = document.getElementById('promoModal');
@@ -478,6 +726,7 @@ function openPromo() {
   const box = modal.querySelector('div');
   if (box) box.classList.remove('scale-95');
 }
+
 function closePromo() {
   const modal = document.getElementById('promoModal');
   if (!modal) return;
@@ -485,35 +734,6 @@ function closePromo() {
   const box = modal.querySelector('div');
   if (box) box.classList.add('scale-95');
 }
-
-function showPopular(type, btn) {
-  const list = document.getElementById('popularList');
-  if (!list) return;
-  list.classList.add("fade-out");
-  setTimeout(() => {
-    list.innerHTML = "";
-    let items = [];
-    if (type === "paket") items = popularItems.paket;
-    else if (type === "game") items = popularItems.game;
-    else items = [...popularItems.paket, ...popularItems.game];
-    items.forEach(item => {
-      let hargaMatch = item.match(/Rp\s?[\d\.]+/);
-      let harga = hargaMatch ? hargaMatch[0] : "";
-      let nama = item.replace(harga, "").trim();
-      let itemType = (type === "paket" || (type === "all" && popularItems.paket.includes(item))) ? "paket" : "game";
-      let icon = itemType === "paket" ? "📶" : "🎮";
-      const div = document.createElement("div");
-      div.className = `popular-item ${itemType}`;
-      div.innerHTML = `<div class="popular-icon">${icon}</div><div class="popular-text">${escapeHtml(item)}</div><button class="whatsapp-btn" onclick="sendToWhatsApp('${escapeHtml(nama)}', '${harga}')">💬</button>`;
-      list.appendChild(div);
-    });
-    list.classList.remove("fade-out");
-    list.classList.add("fade-in");
-    document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
-    if (btn) btn.classList.add("active");
-  }, 200);
-}
-
 let hargaData = [];
 function buildHargaData() {
   hargaData = [];
@@ -537,21 +757,6 @@ function buildHargaData() {
     });
   }
 }
-function openHarga() {
-  const m = document.getElementById("hargaModal");
-  if (!m) return;
-  m.classList.remove("opacity-0", "pointer-events-none");
-  const box = m.querySelector("div");
-  if (box) box.classList.remove("scale-95");
-  buildHargaData();
-}
-function closeHarga() {
-  const m = document.getElementById("hargaModal");
-  if (!m) return;
-  m.classList.add("opacity-0", "pointer-events-none");
-  const box = m.querySelector("div");
-  if (box) box.classList.add("scale-95");
-}
 function escapeHtml(str) {
   if (!str) return '';
   return str.replace(/[&<>]/g, function(m) {
@@ -561,27 +766,220 @@ function escapeHtml(str) {
     return m;
   });
 }
-function sendToWhatsApp(nama, harga) {
+// Variabel untuk menyimpan state modal
+let modalResolve = null;
+let modalPromise = null;
+
+function showInputModal(title, placeholder, validator, infoText = '') {
+  return new Promise((resolve) => {
+    const modal = document.getElementById('inputModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalInput = document.getElementById('modalInput');
+    const confirmBtn = document.getElementById('modalConfirmBtn');
+    const cancelBtn = document.getElementById('modalCancelBtn');
+    const modalBody = modal.querySelector('div');
+    
+    // Hapus info lama jika ada
+    const oldInfo = modalBody.querySelector('.info-text');
+    if (oldInfo) oldInfo.remove();
+    
+    // Buat elemen info
+    if (infoText) {
+      const infoDiv = document.createElement('p');
+      infoDiv.className = 'info-text text-xs text-gray-400 mt-2 mb-0';
+      infoDiv.innerHTML = infoText;
+      modalBody.insertBefore(infoDiv, modalBody.querySelector('#modalInput')?.nextSibling);
+    }
+    
+    const errorMsg = document.createElement('p');
+    errorMsg.className = 'text-red-400 text-xs mt-2 hidden';
+    modalBody.appendChild(errorMsg);
+    
+    modalTitle.textContent = title;
+    modalInput.placeholder = placeholder;
+    modalInput.value = '';
+    
+    modal.classList.remove('opacity-0', 'pointer-events-none');
+    modal.querySelector('div').classList.remove('scale-95');
+    modalInput.focus();
+    
+    function cleanup() {
+      modal.classList.add('opacity-0', 'pointer-events-none');
+      modal.querySelector('div').classList.add('scale-95');
+      confirmBtn.removeEventListener('click', onConfirm);
+      cancelBtn.removeEventListener('click', onCancel);
+      modalInput.removeEventListener('keypress', onKeyPress);
+      if (errorMsg) errorMsg.remove();
+    }
+    
+    function onConfirm() {
+      const value = modalInput.value.trim();
+      if (validator && !validator(value)) {
+        errorMsg.textContent = validator.errorMessage || 'Input tidak valid!';
+        errorMsg.classList.remove('hidden');
+        modalInput.classList.add('border-red-500');
+        return;
+      }
+      errorMsg.classList.add('hidden');
+      modalInput.classList.remove('border-red-500');
+      cleanup();
+      resolve(value);
+    }
+    
+    function onCancel() {
+      cleanup();
+      resolve(null);
+    }
+    
+    function onKeyPress(e) {
+      if (e.key === 'Enter') onConfirm();
+    }
+    
+    confirmBtn.addEventListener('click', onConfirm);
+    cancelBtn.addEventListener('click', onCancel);
+    modalInput.addEventListener('keypress', onKeyPress);
+    modalInput.addEventListener('input', () => {
+      errorMsg.classList.add('hidden');
+      modalInput.classList.remove('border-red-500');
+    });
+  });
+}
+// Mapping prefix per operator
+const operatorPrefixes = {
+  telkomsel: ['0811', '0812', '0813', '0821', '0822', '0823', '0851', '0852', '0853'],
+  indosat: ['0814', '0815', '0816', '0855', '0856', '0857', '0858'],
+  tri: ['0895', '0896', '0897', '0898', '0899'],
+  xl: ['0817', '0818', '0819', '0859', '0877', '0878'],
+  axis: ['0831', '0832', '0833', '0838'],
+  smartfren: ['0881', '0882', '0883', '0884', '0885', '0886', '0887', '0888', '0889']
+};
+
+// Fungsi untuk mendeteksi operator dari nama paket
+function detectOperatorFromNama(nama) {
+  const lower = nama.toLowerCase();
+  if (lower.includes('telkomsel')) return 'telkomsel';
+  if (lower.includes('byu')) return 'telkomsel'; // byU termasuk Telkomsel
+  if (lower.includes('indosat')) return 'indosat';
+  if (lower.includes('tri')) return 'tri';
+  if (lower.includes('xl')) return 'xl';
+  if (lower.includes('axis')) return 'axis';
+  if (lower.includes('smartfren')) return 'smartfren';
+  return null; // tidak terdeteksi
+}
+
+// Fungsi validasi nomor HP berdasarkan operator
+function isValidPhoneForOperator(phone, operator) {
+  if (!operator) {
+    // Jika operator tidak dikenali, hanya cek digit 10-13
+    return /^\d{10,13}$/.test(phone);
+  }
+  const prefixes = operatorPrefixes[operator];
+  if (!prefixes) return false;
+  // Cek apakah nomor dimulai dengan salah satu prefix yang valid
+  return prefixes.some(prefix => phone.startsWith(prefix));
+}
+
+async function sendToWhatsApp(nama, harga) {
   const nomorToko = "6283844843020";
   const isGame = /(Top Up|Diamond|UC|CP|Tokens|Crystals|Robux|Mobile Legends|Free Fire|PUBG|Call Of Duty|Honor Of Kings|Genshin Impact|Roblox)/i.test(nama);
+  
+  let userInput = null;
+  
+  // Deteksi apakah game Mobile Legends (untuk format ID khusus)
+  const isMobileLegends = /Mobile Legends/i.test(nama);
+  
+  if (isGame) {
+    if (isMobileLegends) {
+      userInput = await showInputModal(
+        "Masukkan ID Game Mobile Legends",
+        "Contoh: 12345678(1011)",
+        (val) => {
+          // Format: angka (bisa dengan atau tanpa kurung)
+          const regex = /^\d{5,15}(?:\(\d{4}\)|\d{4})?$/;
+          return regex.test(val);
+        },
+        `<span class="text-yellow-300">📌 Informasi ID Game:</span><br>
+         • Masukkan ID Mobile Legends Anda dengan format lengkap.<br>
+         • Contoh ID: <strong>12345678(1011)</strong> atau <strong>123456781011</strong><br>
+         • Pastikan ID yang Anda masukkan sudah benar, karena kami tidak bertanggung jawab atas kesalahan pengetikan.<br>
+         <span class="text-green-300">💡 Tips: Cek ID di profil game Anda.</span>`
+      );
+    } else {
+      userInput = await showInputModal(
+        "Masukkan ID Game Anda",
+        "Contoh: Gamer123 (5-30 karakter, huruf/angka)",
+        (val) => /^[A-Za-z0-9]{5,30}$/.test(val),
+        `<span class="text-yellow-300">📌 Informasi:</span><br>
+         • Masukkan ID Game Anda dengan benar.<br>
+         • Pastikan tidak ada kesalahan pengetikan, karena ID yang salah tidak dapat diproses.<br>
+         <span class="text-green-300">💡 Kami tidak bertanggung jawab atas kesalahan input dari pelanggan.</span>`
+      );
+    }
+    if (userInput === null) return;
+  } else {
+    // Deteksi operator dari nama paket
+    const operator = detectOperatorFromNama(nama);
+    let validatorMessage = "Contoh: 081234567890 (10-13 digit angka)";
+    let infoHtml = `<span class="text-yellow-300">📌 Informasi Penting:</span><br>
+     • Masukkan nomor HP aktif dengan benar.<br>
+     • Pastikan nomor yang Anda masukkan adalah milik Anda sendiri.<br>
+     • Kami tidak bertanggung jawab atas kesalahan pengetikan atau nomor yang tidak aktif.<br>
+     <span class="text-green-300">💡 Periksa kembali nomor sebelum mengirim.</span>`;
+    
+    if (operator) {
+      const prefixList = operatorPrefixes[operator].join(', ');
+      validatorMessage = `Nomor harus diawali dengan prefix ${prefixList} (10-13 digit)`;
+      infoHtml = `<span class="text-yellow-300">📌 Informasi Penting:</span><br>
+       • Masukkan nomor HP Anda dengan benar.<br>
+       • Nomor harus diawali dengan prefix: <strong>${prefixList}</strong> (sesuai operator ${operator.toUpperCase()}).<br>
+       • Contoh: <strong>${operatorPrefixes[operator][0]}xxxxxxx</strong><br>
+       • Kami tidak bertanggung jawab atas kesalahan pengetikan atau nomor yang salah.<br>
+       <span class="text-green-300">💡 Periksa kembali nomor HP Anda sebelum melanjutkan.</span>`;
+    }
+    
+    userInput = await showInputModal(
+      "Masukkan Nomor HP",
+      validatorMessage,
+      (val) => {
+        if (!/^\d{10,13}$/.test(val)) return false;
+        if (operator) {
+          return isValidPhoneForOperator(val, operator);
+        }
+        return true;
+      },
+      infoHtml
+    );
+    if (userInput === null) return;
+  }
+  
   let pesan = "";
   if (isGame) {
-    pesan = `Assalamualaikum, saya ingin memesan:\n${nama}\nHarga: ${harga}\n\nID Game: \nPembayaran: (transfer/QRIS)\n\nTerima kasih.`;
+    pesan = `Assalamualaikum, saya ingin memesan:\n${nama}\nHarga: ${harga}\n\nID Game: ${userInput}\nPembayaran: (transfer/QRIS)\n\nTerima kasih.`;
   } else {
-    pesan = `Assalamualaikum, saya ingin memesan:\n${nama}\nHarga: ${harga}\n\nNo. HP: \nPembayaran: (transfer/QRIS)\n\nTerima kasih.`;
+    pesan = `Assalamualaikum, saya ingin memesan:\n${nama}\nHarga: ${harga}\n\nNo. HP: ${userInput}\nPembayaran: (transfer/QRIS)\n\nTerima kasih.`;
   }
+  
   const url = `https://wa.me/${nomorToko}?text=${encodeURIComponent(pesan)}`;
   window.open(url, '_blank');
 }
 
 document.addEventListener("DOMContentLoaded", function() {
+  // Load data pencarian
+  buildHargaData();
+
   const searchInput = document.getElementById("searchHarga");
   if (searchInput) {
     searchInput.addEventListener("input", function() {
       const q = this.value.toLowerCase().trim();
-      const res = hargaData.filter(x => x.nama.toLowerCase().includes(q));
       const box = document.getElementById("hasilHarga");
       if (!box) return;
+
+      if (q === "") {
+        box.innerHTML = "";
+        return;
+      }
+
+      const res = hargaData.filter(x => x.nama.toLowerCase().includes(q));
       box.innerHTML = "";
       if (res.length === 0) {
         box.innerHTML = "<p class='text-gray-400'>Tidak ditemukan</p>";
@@ -827,23 +1225,28 @@ function calculate() { let d=document.getElementById('calcDisplay'); try { d.val
 document.getElementById('toggleCalcModeBtn')?.addEventListener('click', toggleCalcMode);
 </script>    
 
-<!-- HOME -->    
 <section id="home" class="page p-6 max-w-4xl mx-auto mt-10">
   <div class="grid md:grid-cols-2 gap-6">
     <button onclick="openInternet(this)" class="card">📶 Paket Internet</button>
     <button onclick="openGame(this)" class="card">🎮 Top Up Game</button>
   </div>
-  <!-- Tidak ada tombol voucher tambahan di sini -->
+  <div class="flex justify-center items-center gap-3 mt-6">
+    <button onclick="openCalculator()" class="w-24 border border-green-400 text-green-400 text-xs py-2 rounded-md hover:bg-green-400 hover:text-black transition futuristic-btn">Kalkulator 📟</button>
+    <button onclick="openRekomendasi()" class="w-24 border border-green-400 text-green-400 text-xs py-2 rounded-md hover:bg-green-400 hover:text-black transition futuristic-btn">⭐ Rekomend</button>
+    <button onclick="openPromo()" class="w-24 border border-green-400 text-green-400 text-xs py-2 rounded-md hover:bg-green-400 hover:text-black transition futuristic-btn">📢 Info</button>
+  </div>
 </section>    
 
 <!-- INTERNET -->    
-<section id="internet" class="hidden page p-6 max-w-6xl mx-auto"><button onclick="back()" class="back-btn mb-6">← Kembali</button><h2 class="text-2xl font-bold mb-4">Pilih Operator</h2><div id="operatorList" class="grid md:grid-cols-3 gap-4"></div></section>    
-<section id="paketTypes" class="hidden page p-6 max-w-6xl mx-auto"><button onclick="back()" class="back-btn mb-6">← Kembali</button><h2 id="paketTitle" class="text-2xl font-bold mb-4"></h2><div id="paketTypeList" class="grid md:grid-cols-3 gap-4"></div></section>    
-<section id="operatorDetail" class="hidden page p-6 max-w-6xl mx-auto"><button onclick="back()" class="back-btn mb-6">← Kembali</button><h2 id="operatorTitle" class="text-2xl font-bold mb-4"></h2><div id="paketList" class="space-y-3"></div></section>    
+<section id="internet" class="hidden page p-6 max-w-6xl mx-auto"><h2 class="text-2xl font-bold mb-4">Pilih Operator</h2><div id="operatorList" class="grid md:grid-cols-3 gap-4"></div></section>    
+<section id="paketTypes" class="hidden page p-6 max-w-6xl mx-auto"><h2 id="paketTitle" class="text-2xl font-bold mb-4"></h2><div id="paketTypeList" class="grid md:grid-cols-3 gap-4"></div></section>    
+<section id="operatorDetail" class="hidden page p-6 max-w-6xl mx-auto"><h2 id="operatorTitle" class="text-2xl font-bold mb-4"></h2><div id="paketList" class="space-y-3"></div></section>    
 
 <!-- GAME -->    
-<section id="game" class="hidden page p-6 max-w-6xl mx-auto"><button onclick="back()" class="back-btn mb-6">← Kembali</button><h2 class="text-2xl font-bold mb-4">Pilih Game</h2><div id="gameList" class="grid md:grid-cols-3 gap-4"></div></section>    
-<section id="gameDetail" class="hidden page p-6 max-w-6xl mx-auto"><button onclick="back()" class="back-btn mb-6">← Kembali</button><h2 id="gameTitle" class="text-2xl font-bold mb-4"></h2><div id="topupList" class="space-y-3"></div></section>    
+<section id="game" class="hidden page p-6 max-w-6xl mx-auto"><h2 class="text-2xl font-bold mb-4">Pilih Game</h2><div id="gameList" class="grid md:grid-cols-3 gap-4"></div></section>    
+<section id="gameDetail" class="hidden page p-6 max-w-6xl mx-auto"><h2 id="gameTitle" class="text-2xl font-bold mb-4"></h2><div id="topupList" class="space-y-3"></div></section>    
+
+<button id="floatingBackBtn" class="floating-back" onclick="back()">← Kembali</button>
 
 <!-- FOOTER -->    
 <footer class="mt-20 p-6 text-center text-sm bg-black/60 space-y-3">    
@@ -858,7 +1261,7 @@ document.getElementById('toggleCalcModeBtn')?.addEventListener('click', toggleCa
 /* ================= DATA ================= */    
 const operators = {    
   Indosat: {    
-    "Paket Internet Harian": [    
+    "Freedom Mini Data (Kuota Harian)": [    
       {nama: "Indosat Yellow 1GB 2 Hari", harga: "Rp 9.000", ket: "Pastikan tidak ada paket internet yang masih aktif"},
       {nama: "Indosat Yellow 5GB 1 Hari", harga: "Rp 10.000", ket: "Pastikan tidak ada paket internet yang masih aktif"},        
       {nama: "Indosat Yellow 1GB 7 Hari", harga: "Rp 10.000", ket: "Pastikan tidak ada paket internet yang masih aktif"},
@@ -887,7 +1290,7 @@ const operators = {
       {nama: "Freedom Mini 75GB 7 Hari", harga: "Rp 50.000", ket: "Kuota utama semua jaringan"},
       {nama: "Freedom Mini 25GB 14 Hari", harga: "Rp 51.000", ket: "Kuota utama semua jaringan"},    
     ],    
-    "Paket Internet Bulanan": [                
+    "Freedom Internet (Kuota Bulanan)": [                
       {nama: "Freedom Internet 3GB 20 Hari", harga: "Rp 25.000", ket: "-All Jaringan 24 jam -Menambah masa aktif"},    
       {nama: "Freedom Internet 3GB 28 Hari", harga: "Rp 31.000", ket: "All Jaringan 24 jam"},    
       {nama: "Freedom Internet 6GB 28 Hari", harga: "Rp 35.000", ket: "Freedom Internet Mobo"},    
@@ -899,7 +1302,8 @@ const operators = {
       {nama: "Freedom Internet 28GB 28 Hari", harga: "Rp 67.000", ket: "Freedom Internet Mobo"},    
       {nama: "Freedom Internet 30GB 28 Hari", harga: "Rp 68.000", ket: "Freedom Internet Mobo"},
       {nama: "Freedom Internet 20GB 28 Hari", harga: "Rp 70.000", ket: "-Kuota Utama 20GB 28 Hari -Zona Plus: 26GB -Zona Super Plus: 32GB"},
-      {nama: "Freedom Internet 35GB 28 Hari", harga: "Rp 74.000", ket: "Freedom Internet Mobo"},     
+      {nama: "Freedom Internet 35GB 28 Hari", harga: "Rp 74.000", ket: "Freedom Internet Mobo"},
+      {nama: "Freedom Internet 40GB 28 Hari", harga: "Rp 77.000", ket: "Freedom Internet Mobo"},     
       {nama: "Freedom Internet 42GB 28 Hari", harga: "Rp 95.000", ket: "-All Jaringan 24 jam -Jalur Mobo Indosat tanpa delay"},    
       {nama: "Freedom Internet 45GB 28 Hari", harga: "Rp 96.000", ket: "Kuota utama semua jaringan"},    
       {nama: "Freedom Internet 50GB 28 Hari", harga: "Rp 105.000", ket: "-All Jaringan 24 jam -Jalur Mobo Indosat tanpa delay"},
@@ -914,37 +1318,46 @@ const operators = {
       {nama: "Freedom Internet 200GB 180 Hari", harga: "Rp 450.000", ket: "Note: Tidak Menambah Masa Aktif Kartu Hanya Menambah Masa Aktif Kuota"},    
       {nama: "Freedom Internet 1024GB 360 Hari", harga: "Rp 1.000.000", ket: "Note: Tidak Menambah Masa Aktif Kartu Hanya Menambah Masa Aktif Kuota"},    
     ],    
-    "Paket Unlimited": [    
-      {nama: "1GB + 2GB + Aplikasi Unlimited 6 Hari", harga: "Rp 20.000", ket: "UNREG paket terlebih dahulu"},    
-      {nama: "1GB Semua + 2GB + Aplikasi Unlimited 6 Hari", harga: "Rp 21.000", ket: "-1GB All Jaringan -2GB Kuota Aplikasi -1GB+Unli App 7 Hari"},    
-      {nama: "1GB Semua + 4,5GB + Aplikasi Unlimited 28 Hari", harga: "Rp 36.000", ket: "-1GB Utama -4,5GB Kuota Apps: Facebook, Twitter, WhatsApp, dll"},    
-      {nama: "2GB Semua + 7,5–8GB + Aplikasi Unli 28 Hari", harga: "Rp 62.000", ket: "-2GB Kuota Utama All Jaringan -7,5-8GB Kuota Aplikasi"},    
-      {nama: "3GB Semua + 15–17GB + Aplikasi Tanpa Batas 28 Hari", harga: "Rp 85.000", ket: "-3GB All Jaringan -15-17GB Kuota Aplikasi"},    
-      {nama: "7GB Semua + 28GB + Aplikasi Unlimited 28 Hari", harga: "Rp 110.000", ket: "Kuota besar + unlimited"},    
-      {nama: "10GB Semua + 35GB + Aplikasi Tanpa Batas 28 Hari", harga: "Rp 120.000", ket: "Streaming & kerja"},    
-      {nama: "Unlimited 90GB + Unli App + Telp + SMS 28 Hari", harga: "Rp 156.000", ket: "-90 GB Kuota Utama All Jaringan -Unlimited Kuota Aplikasi"}    
+    "Freedom U Unlimited (Kuota Unlimited)": [    
+      {nama: "1GB + 2GB + Aplikasi Unlimited 6 Hari", harga: "Rp 20.000", ket: "-GB All Jaringan -2GB Kuota Aplikasi"},                                      
+      {nama: "1GB Semua + 4,5GB + Aplikasi Unlimited 28 Hari", harga: "Rp 36.000", ket: "-1GB Utama. -4,5GB Kuota Apps: Facebook, Twitter, WhatsApp, Line, Gojek Grab, Google Meet & Classroom, Zoom Webex, Ms teams, Skype, Spotify dan Joox. -Kecepatan saat kuota Apps habis, 64kbps"},    
+      {nama: "2GB Semua + 7,5-8GB + Aplikasi Unli 28 Hari", harga: "Rp 62.000", ket: "-2GB Kuota Utama All Jaringan -7,5-8GB Kuota Apps: Facebook, Twitter, WhatsApp, Line, Gojek Grab, Google Meet & Classroom, Zoom Webex, Ms teams, Skype, Spotify dan Joox. -Kecepatan saat kuota Apps habis, 64kbps"},    
+      {nama: "3GB Semua + 15-17GB + Aplikasi Tanpa Batas 28 Hari", harga: "Rp 85.000", ket: "-3GB All Jaringan -15-17GB Kuota Apps: Facebook, Twitter, WhatsApp, Line, Gojek Grab, Google Meet & Classroom, Zoom Webex, Ms teams, Skype, Spotify dan Joox. -Kecepatan saat kuota Apps habis, 64kbps"},    
+      {nama: "7GB Semua + 28GB + Aplikasi Unlimited 28 Hari", harga: "Rp 110.000", ket: "Kuota Apps: Facebook, Twitter, WhatsApp, Line, Gojek Grab, Google Meet & Classroom, Zoom Webex, Ms teams, Skype, Spotify dan Joox. -Kecepatan saat kuota Apps habis, 64kbps. -Aplikasi tertentu lainnya tetap dapat diakses saat kuota Apps dan Utama habis. - Unlimited SMS kesesama Indosat"},    
+      {nama: "10GB Semua + 35GB + Aplikasi Tanpa Batas 28 Hari", harga: "Rp 120.000", ket: "-10GB Kuota Utama All Jaringan. -35GB Kuota Apps, detail: Facebook, Twitter, WhatsApp, Line, Gojek Grab, Google Meet & Classroom, Zoom Webex, Ms teams, Skype, Spotify dan Joox. -Kecepatan saat kuota Apps habis, 64kbps. -Aplikasi tertentu lainnya tetap dapat diakses saat kuota Apps dan Utama habis. - Unlimited SMS kesesama Indosat"},    
+      {nama: "Unlimited 90GB + Unli App + Telp + SMS 28 Hari", harga: "Rp 156.000", ket: "-90 GB Kuota Utama All Jaringan -Unlimited Kuota Apps, detail: Facebook, Twitter, WhatsApp, Line, Gojek Grab, Google Meet & Classroom, Zoom Webex, Ms teams, Skype, Spotify dan Joox. -Kecepatan saat kuota Apps habis, 64kbps. -Aplikasi tertentu lainnya tetap dapat diakses saat kuota Apps dan Utama habis. - Unlimited SMS kesesama Indosat"}    
     ]    
   },    
   Axis: {    
-    "Paket Per Jam": [    
-      {nama: "Mini 1,5GB + Bonus Aigo 1 Hari", harga: "Rp 8.000", ket: "Paket harian hemat"},    
-      {nama: "Mini Axis 2,5GB + Bonus Aigo 1 Hari", harga: "Rp 10.000", ket: "Internet cepat sehari"},    
-      {nama: "Mini Axis 2GB + Bonus Aigo 3 Hari", harga: "Rp 12.000", ket: "Cocok untuk aktivitas ringan"},    
-      {nama: "Mini Axis 2,5GB + Bonus Aigo 3 Hari", harga: "Rp 13.000", ket: "Pemakaian normal"},    
-      {nama: "Mini Axis 3GB + Bonus Aigo 3 Hari", harga: "Rp 13.000", ket: "Kuota lebih lega"},    
-      {nama: "Mini Axis 4,5GB + Bonus Aigo 3 Hari", harga: "Rp 15.000", ket: "Streaming & sosmed"},    
-      {nama: "Mini Axis 9GB + Bonus Aigo 3 Hari", harga: "Rp 17.000", ket: "Kuota besar harian"},    
-      {nama: "Aigo Kuota Mini 1,5GB + Bonus 1GB 1 Hari", harga: "Rp 8.000", ket: "Bonus AIGO aktif"}    
+    "Paket Data Warnet (Per Jam)": [    
+      {nama: "Axis Data Paket Warnet 1GB (1 Jam)", harga: "Rp 2.500", ket: "- Untuk Warnet Perjam Hanya Bisa di Aktivasi 16x Dalam 7 Hari, Akan di Reset Setiap Minggunya.                           - Untuk Warnet Unlimited Hanya Bisa di Aktivasi 3x Dalam 7 Hari & 7x Dalam 30 Hari."},    
+      {nama: "Axis Data Paket Warnet Unlimited 1 Jam", harga: "Rp 3.000", ket: "- Untuk Warnet Perjam Hanya Bisa di Aktivasi 16x Dalam 7 Hari, Akan di Reset Setiap Minggunya.                           - Untuk Warnet Unlimited Hanya Bisa di Aktivasi 3x Dalam 7 Hari & 7x Dalam 30 Hari."},    
+      {nama: "Axis Data Paket Warnet 1,5 GB (2 Jam)", harga: "Rp 4.000", ket: "- Untuk Warnet Perjam Hanya Bisa di Aktivasi 16x Dalam 7 Hari, Akan di Reset Setiap Minggunya.                           - Untuk Warnet Unlimited Hanya Bisa di Aktivasi 3x Dalam 7 Hari & 7x Dalam 30 Hari."},    
+      {nama: "Axis Data Paket Warnet 3 GB (3 Jam)", harga: "Rp 5.000", ket: "- Untuk Warnet Perjam Hanya Bisa di Aktivasi 16x Dalam 7 Hari, Akan di Reset Setiap Minggunya.                           - Untuk Warnet Unlimited Hanya Bisa di Aktivasi 3x Dalam 7 Hari & 7x Dalam 30 Hari."},    
+      {nama: "Axis Data Paket Warnet Unlimited 3 Jam", harga: "Rp 6.000", ket: "- Untuk Warnet Perjam Hanya Bisa di Aktivasi 16x Dalam 7 Hari, Akan di Reset Setiap Minggunya.                           - Untuk Warnet Unlimited Hanya Bisa di Aktivasi 3x Dalam 7 Hari & 7x Dalam 30 Hari."},    
+      {nama: "Axis Data Paket Warnet 3 GB (6 Jam)", harga: "Rp 7.000", ket: "- Untuk Warnet Perjam Hanya Bisa di Aktivasi 16x Dalam 7 Hari, Akan di Reset Setiap Minggunya.                           - Untuk Warnet Unlimited Hanya Bisa di Aktivasi 3x Dalam 7 Hari & 7x Dalam 30 Hari."},    
+      {nama: "Axis Data Paket Warnet Unlimited 24 Jam", harga: "Rp 10.000", ket: "- Untuk Warnet Perjam Hanya Bisa di Aktivasi 16x Dalam 7 Hari, Akan di Reset Setiap Minggunya.                           - Untuk Warnet Unlimited Hanya Bisa di Aktivasi 3x Dalam 7 Hari & 7x Dalam 30 Hari."},    
+      {nama: "Axis Data Paket Warnet Unlimited 48 Jam", harga: "Rp 23.000", ket: "- Untuk Warnet Perjam Hanya Bisa di Aktivasi 16x Dalam 7 Hari, Akan di Reset Setiap Minggunya.                           - Untuk Warnet Unlimited Hanya Bisa di Aktivasi 3x Dalam 7 Hari & 7x Dalam 30 Hari."},
+      {nama: "Axis Data Paket Warnet Unlimited 72 Jam", harga: "Rp 28.000", ket: "- Untuk Warnet Perjam Hanya Bisa di Aktivasi 16x Dalam 7 Hari, Akan di Reset Setiap Minggunya.                           - Untuk Warnet Unlimited Hanya Bisa di Aktivasi 3x Dalam 7 Hari & 7x Dalam 30 Hari."}    
     ],    
-    "Paket Internet Harian": [    
-      {nama: "Mini 1,5GB + Bonus Aigo 1 Hari", harga: "Rp 8.000", ket: "Paket harian hemat"},    
-      {nama: "Mini Axis 2,5GB + Bonus Aigo 1 Hari", harga: "Rp 10.000", ket: "Internet cepat sehari"},    
-      {nama: "Mini Axis 2GB + Bonus Aigo 3 Hari", harga: "Rp 12.000", ket: "Cocok untuk aktivitas ringan"},    
-      {nama: "Mini Axis 2,5GB + Bonus Aigo 3 Hari", harga: "Rp 13.000", ket: "Pemakaian normal"},    
-      {nama: "Mini Axis 3GB + Bonus Aigo 3 Hari", harga: "Rp 13.000", ket: "Kuota lebih lega"},    
-      {nama: "Mini Axis 4,5GB + Bonus Aigo 3 Hari", harga: "Rp 15.000", ket: "Streaming & sosmed"},    
-      {nama: "Mini Axis 9GB + Bonus Aigo 3 Hari", harga: "Rp 17.000", ket: "Kuota besar harian"},    
-      {nama: "Aigo Kuota Mini 1,5GB + Bonus 1GB 1 Hari", harga: "Rp 8.000", ket: "Bonus AIGO aktif"}    
+    "Aigo Kuota Mini (Paket Internet Harian)": [    
+      {nama: "Mini 5GB + Bonus Aigo 1 Hari", harga: "Rp 10.000", ket: "Bonus kuota sampai dengan 6GB berlaku di wilayah tertentu di Kota-mu"},    
+      {nama: "Mini Axis 15GB 1 Hari", harga: "Rp 10.000", ket: "Bonus kuota sampai dengan 6GB berlaku di wilayah tertentu di Kota-mu"},    
+      {nama: "Mini Axis 5GB + Bonus Aigo 2 Hari", harga: "Rp 12.000", ket: "- Berlaku masa aktif 48 jam (contoh transaksi tanggal 13 Feb Jam 13.00 akan berakhir 15 Feb Jam 13.00). - Bonus kuota sampai dengan 6GB berlaku di wilayah tertentu di Kota-mu"},    
+      {nama: "Mini Axis 7GB + Bonus Aigo 2 Hari", harga: "Rp 12.000", ket: "Bonus kuota sampai dengan 7,5GB berlaku di wilayah tertentu di Kota-mu."},    
+      {nama: "Paket Harian 3GB+ Lokal 3 Hari", harga: "Rp 13.000", ket: "Cek wilayah disini (cek detail)"},    
+      {nama: "Mini Axis 3GB + Bonus Aigo 3 Hari", harga: "Rp 13.000", ket: "Cek wilayah disini (cek detail)"},    
+      {nama: "Mini 5GB + Bonus Aigo 3 Hari", harga: "Rp 14.000", ket: "Bonus kuota sampai dengan 6GB berlaku di wilayah tertentu di Kota-mu (cek detail)"},    
+      {nama: "Paket Harian 5GB+ Lokal 3 Hari", harga: "Rp 14.000", ket: "Bonus kuota sampai dengan 6GB berlaku di wilayah tertentu di Kota-mu (cek detail)"},
+      {nama: "Paket Harian 7GB+ Lokal 3 Hari", harga: "Rp 16.000", ket: "Cek wilayah disini (cek detail)"},
+      {nama: "Mini Axis 13GB + Bonus Aigo 2 Hari", harga: "Rp 16.000", ket: "Bonus kuota sampai dengan 15GB berlaku di wilayah tertentu di Kota-mu (cek detail)"},
+       {nama: "Mini Axis 8,5GB + Bonus Aigo 3 Hari", harga: "Rp 16.000", ket: "Bonus kuota sampai dengan 10GB berlaku di wilayah tertentu di Kota-mu (cek detail)"},
+       {nama: "Mini Axis 2GB All 4 Hari", harga: "Rp 17.000", ket: "Kuota semua jaringan"},
+        {nama: "Mini Axis 12,5GB + Bonus Aigo 3 Hari", harga: "Rp 19.000", ket: "Bonus kuota sampai dengan 14GB berlaku di wilayah tertentu di Kota-mu (cek detail)"},
+       {nama: "Mini Axis 17GB + Bonus Aigo 3 Hari", harga: "Rp 20.000", ket: "Bonus kuota sampai dengan 19GB berlaku di wilayah tertentu di Kota-mu (cek detail)"},
+       {nama: "Paket Harian 13GB+ Lokal 3 Hari", harga: "Rp 20.000", ket: "Cek wilayah disini (cek detail)"},
+       {nama: "Mini Axis 30GB + Bonus Aigo 3 Hari", harga: "Rp 20.000", ket: "Bonus kuota sampai dengan 30GB berlaku di wilayah tertentu di Kota-mu (cek detail)"},
+       {nama: "Mini Axis Aigo Unlimited 24 jam 1 Hari", harga: "Rp 20.000", ket: "Kuota Tanpa Batas"},  
     ],    
     "Paket Internet Bulanan": [    
       {nama: "Axis Data 1GB Semua 30 Hari", harga: "Rp 10.000", ket: "Paket dasar bulanan"},    
@@ -1110,64 +1523,116 @@ const operators = {
 };    
       
 const games = {    
-  "Mobile Legends":[  "3 Diamond Rp 3.000",    
-  "19 (17+2) Diamond Rp 10.000",    
+  "Mobile Legends":[  
+  "3 Diamond Rp 2.500",
+  "5 Diamond Rp 3.000",
+  "12 (11+1) Diamond Rp 6.000",            
+  "19 (17+2) Diamond Rp 9.000",    
   "28 (25+3) Diamond Rp 11.000",    
   "36 (33+3) Diamond Rp 13.000",    
   "44 (40+4) Diamond Rp 15.000",    
-  "56 (51+5) Diamond Rp 19.000",    
-  "59 (53+6) Diamond Rp 20.000",    
-  "74 (69+5) Diamond Rp 23.000",    
-  "85 (77+8) Diamond Rp 27.000",    
-  "86 (78+8) Diamond Rp 27.000",    
-  "100 Diamond Rp 31.000",    
+  "56 (51+5) Diamond Rp 18.000",    
+  "59 (53+6) Diamond Rp 19.000",    
+  "74 (69+5) Diamond Rp 22.000",    
+  "85 (77+8) Diamond Rp 25.000",    
+  "86 (78+8) Diamond Rp 25.000",    
+  "100 Diamond Rp 28.000",    
   "Weekly Diamond Pass 220 (80+20/Day) Rp 31.000",    
-  "112 (102+10) Diamond Rp 34.000",    
-  "144 (130+14) Diamond Rp 42.000",    
+  "112 (102+10) Diamond Rp 32.000",    
+  "144 (130+14) Diamond Rp 40.000",    
   "170 (154+16) Diamond Rp 50.000",    
   "172 (156+16) Diamond Rp 50.000",    
-  "185 (167+18) Diamond Rp 54.000",    
+  "185 (167+18) Diamond Rp 52.000",        
+  "222 (200+22) Diamond Rp 60.000",
   "2x Weekly Diamond Pass 440 (80+20/Day) Rp 60.000",    
-  "222 (200+22) Diamond Rp 63.000",    
-  "229 (207+22) Diamond Rp 66.000",    
-  "240 (217+23) Diamond Rp 69.000",    
-  "257 (234+23) Diamond Rp 72.000",    
-  "Pass Coupon Rp 76.000",    
-  "278 (251+27) Diamond Rp 79.000",    
-  "284 (254+30) Diamond Rp 80.000",    
-  "296 (256+40) Diamond Rp 82.000",    
+  "229 (207+22) Diamond Rp 65.000",    
+  "240 (217+23) Diamond Rp 65.000",    
+  "257 (234+23) Diamond Rp 70.000",    
+  "Pass Coupon Rp 77.000",    
+  "278 (251+27) Diamond Rp 78.000",    
+  "284 (254+30) Diamond Rp 78.000",    
+  "296 (256+40) Diamond Rp 80.000",    
   "301 (261+40) Diamond Rp 84.000",    
-  "Starlight Membership Rp 85.000",    
-  "3x Weekly Diamond Pass 660 (80+20/Day) Rp 87.000",    
-  "344 (312+32) Diamond Rp 96.000",    
-  "345 (301+44) Diamond Rp 97.000",    
-  "355 (309+46) Diamond Rp 100.000",    
-  "374 (326+48) Diamond Rp 106.000",    
-  "381 (333+48) Diamond Rp 107.000",    
-  "384 Diamond Rp 110.000",    
-  "408 (367+41) Diamond Rp 114.000",    
-  "4x Weekly Diamond Pass 880 (80+20/Day) Rp 115.000",    
-  "429 (390+39) Diamond Rp 118.000",    
-  "425 (373+52) Diamond Rp 120.000",    
-  "448 Diamond Rp 137.000",    
-  "460 Diamond Rp 140.000",    
-  "514 (468+46) Diamond Rp 142.000",    
-  "5x Weekly Diamond Pass 1100 (80+20/Day) Rp 143.000",    
-  "522 (471+51) Diamond Rp 146.000",    
-  "500 Diamond Rp 150.000",    
-  "Twilight Pass Rp 155.000",    
-  "568 (503+65) Diamond Rp 155.000",    
-  "601 (533+68) Diamond Rp 165.000",    
-  "642 Diamond Rp 185.000",    
-  "706 (625+81) Diamond Rp 200.000",    
-  "712 (633+79) Diamond Rp 201.000",    
-  "717 (638+79) Diamond Rp 203.000",    
-  "Starlight Plus Member Rp 220.000",    
-  "875 (774+101) Diamond Rp 240.000",    
-  "965 (856+109) Diamond Rp 264.000",    
-  "963 (859+104) Diamond Rp 265.000",    
-  "977 (867+110) Diamond Rp 268.000"],    
-  "Free Fire":[  "5 (0+5) Diamond Rp 3.000",    
+  "Starlight Membership Rp 86.000",    
+  "3x Weekly Diamond Pass 660 (80+20/Day) Rp 88.000",    
+  "344 (312+32) Diamond Rp 94.000",    
+  "345 (301+44) Diamond Rp 95.000",    
+  "355 (309+46) Diamond Rp 97.000",    
+  "374 (326+48) Diamond Rp 104.000",    
+  "381 (333+48) Diamond Rp 105.000",    
+  "384 (346+38) Diamond Rp 111.000",    
+  "408 (367+41) Diamond Rp 110.000",    
+  "4x Weekly Diamond Pass 880 (80+20/Day) Rp 117.000",    
+  "429 (390+39) Diamond Rp 115.000",    
+  "425 (373+52) Diamond Rp 117.000",
+  "514 (468+46) Diamond Rp 138.000",    
+  "460 (415+45) Diamond Rp 140.000",        
+  "448 (403+45) Diamond Rp 142.000",
+  "522 (471+51) Diamond Rp 143.000",
+  "500 (452+49) Diamond Rp 144.000",          
+  "5x Weekly Diamond Pass 1100 (80+20/Day) Rp 145.000",      
+  "568 (503+65) Diamond Rp 152.000",
+  "Twilight Pass Rp 152.000",        
+  "601 (533+68) Diamond Rp 160.000",    
+  "642 (570+72) Diamond Rp 180.000",    
+  "706 (625+81) Diamond Rp 185.000",    
+  "712 (633+79) Diamond Rp 188.000",    
+  "717 (638+79) Diamond Rp 195.000",    
+  "Starlight Plus Member Rp 205.000",    
+  "875 (774+101) Diamond Rp 225.000",    
+  "965 (856+109) Diamond Rp 247.000",    
+  "963 (859+104) Diamond Rp 255.000",    
+  "977 (867+110) Diamond Rp 257.000",
+  "1050 (937+113) Diamond Rp 270.000",
+  "1136 (1006+130) Diamond Rp 298.000",
+  "1139 (1013+126) Diamond Rp 300.000",
+  "1159 (1031+128) Diamond Rp 305.000",
+  "1164 (1036+128) Diamond Rp 306.000",
+  "1163 (1041+122) Diamond Rp 311.000",
+  "1220 (1089+131) Diamond Rp 324.000",
+  "1233 (1139+94) Diamond Rp 324.000",
+  "1360 (1210+150) Diamond Rp 360.000",
+  "1412 (1250+162) Diamond Rp 372.000",
+  "1440 (1274+166) Diamond Rp 379.000",
+  "1455 (1299+156) Diamond Rp 380.000",
+  "1507 (1335+172) Diamond Rp 394.000",
+  "1672 (1484+188) Diamond Rp 438.000",
+  "1706 (1509+197) Diamond Rp 449.000",
+  "1750 (1548+202) Diamond Rp 454.000",
+  "1910 (1708+202) Diamond Rp 493.000",
+  "2183 (1945+238) Diamond Rp 556.000",
+  "2195 (1959+236) Diamond Rp 557.000",
+  "2195 (1960+235) Diamond Rp 559.000",
+  "2330 (2077+253) Diamond Rp 589.000",
+  "2365 (2115+250) Diamond Rp 589.000",
+  "2382 (2133+249) Diamond Rp 594.000",
+  "2526 (2192+334) Diamond Rp 634.000",
+  "2575 (2211+364) Diamond Rp 641.000",
+  "2885 (2482+403) Diamond Rp 716.000",
+  "2964 (2409+555) Diamond Rp 754.000",
+  "3453 (2985+468) Diamond Rp 863.000",
+  "3481 (3010+471) Diamond Rp 874.000",
+  "3673 (3202+471) Diamond Rp 911.000",
+  "4020 (3416+604) Diamond Rp 1.004.000",
+  "4404 (3755+649) Diamond Rp 1.093.000",
+  "4804 (4123+681) Diamond Rp 1.204.000",
+  "4873 (4201+672) Diamond Rp 1.222.000",
+  "4933 (4252+681) Diamond Rp 1.233.000",
+  "5272 (4626+646) Diamond Rp 1.326.000",
+  "5290 (4596+694) Diamond Rp 1.327.000",
+  "6033 (5124+909) Diamond Rp 1.520.000",
+  "6063 (5171+892) Diamond Rp 1.526.000",
+  "6201 (5333+868) Diamond Rp 1.546.000",
+  "6237 (5274+963) Diamond Rp 1.550.000",
+  "6813 (5784+1029) Diamond Rp 1.730.000",
+  "7195 (6020+1175) Diamond Rp 1.834.000",
+  "7563 (6442+1121) Diamond Rp 1.938.000",
+  "7723 (6387+1336) Diamond Rp 1.974.000",
+  "8063 (6855+1208) Diamond Rp 2.049.000",
+  "8345 (7038+1307) Diamond Rp 2.126.000"
+],    
+  "Free Fire":[  
+  "5 (0+5) Diamond Rp 3.000",    
   "12 (9+3) Diamond Rp 4.000",    
   "50 (45+5) Diamond Rp 10.000",    
   "70 (63+7) Diamond Rp 12.000",    
@@ -1282,89 +1747,155 @@ const games = {
   "Roblox USD 50 Global Rp 873.000",    
   "Gift Card IDR 950K Rp 997.000"    
 ]    
-};    
+};
+// Tambahkan link ke semua paket harian Axis (atau yang mengandung 'Aigo' / 'Mini')
+const linkUrl = 'https://orderkuota.com/blog/detail-aigo-mini-jawa-sks-dan-west-channel';
+const linkHtml = `<a href="${linkUrl}" target="_blank" class="text-green-400 underline">Info lengkap</a>`;
+
+// Pilih salah satu opsi di bawah:
+
+// OPSI A: Semua paket di "Aigo Kuota Mini (Paket Internet Harian)" Axis
+if (operators.Axis && operators.Axis['Aigo Kuota Mini (Paket Internet Harian)']) {
+    operators.Axis['Aigo Kuota Mini (Paket Internet Harian)'].forEach(p => {
+        if (!p.ket.includes(linkUrl)) p.ket += ' ' + linkHtml;
+    });
+}
+
+// OPSI B: Hanya paket yang mengandung "Aigo" atau "Mini" di namanya (case insensitive)
+// if (operators.Axis && operators.Axis['Paket Internet Harian']) {
+//     operators.Axis['Paket Internet Harian'].forEach(p => {
+//         if (p.nama.match(/Aigo|Mini/i) && !p.ket.includes(linkUrl)) {
+//             p.ket += ' ' + linkHtml;
+//         }
+//     });
+// }
+
+// OPSI C: Juga untuk "Paket Per Jam" Axis (jika ada)
+// if (operators.Axis && operators.Axis['Paket Per Jam']) {
+//     operators.Axis['Paket Per Jam'].forEach(p => {
+//         if (!p.ket.includes(linkUrl)) p.ket += ' ' + linkHtml;
+//     });
+// }    
     
 //* ===== NAV ===== */    
-let historyStack=[];    
-function hideAll(){document.querySelectorAll("section").forEach(s=>s.classList.add("hidden"))}    
-function back(){const f=historyStack.pop();if(f){hideAll();f();}}    
-function clearActive(){document.querySelectorAll(".menu-active").forEach(x=>x.classList.remove("menu-active"))}    
-    
-/* ===== INTERNET ===== */    
-function openInternet(b){    
- clearActive();b.classList.add("menu-active");    
- historyStack.push(()=>home.classList.remove("hidden"));    
- hideAll();internet.classList.remove("hidden");    
- operatorList.innerHTML="";    
- Object.keys(operators).forEach(o=>{    
-  operatorList.innerHTML+=`<div class="card" onclick="openTypes('${o}')">${o}</div>`;    
- });    
+let historyStack = [];    
+function hideAll() {
+    document.querySelectorAll("section").forEach(s => s.classList.add("hidden"));
 }    
-function openTypes(op){    
- historyStack.push(()=>internet.classList.remove("hidden"));    
- hideAll();paketTypes.classList.remove("hidden");    
- paketTitle.innerText=op;    
- paketTypeList.innerHTML="";    
- Object.keys(operators[op]).forEach(t=>{    
-  paketTypeList.innerHTML+=`<div class="card" onclick="openPaket('${op}','${t}')">${t}</div>`;    
- });    
-}    
-function openPaket(op, cat) {
-  historyStack.push(() => paketTypes.classList.remove("hidden"));
-  hideAll();
-  operatorDetail.classList.remove("hidden");
-  operatorTitle.innerText = op + " - " + cat;
-  paketList.innerHTML = "";
-  operators[op][cat].forEach((p, i) => {
-    paketList.innerHTML += `
-      <div class="card">
-        <div style="flex:1">${p.nama} <span class="price">${p.harga}</span></div>
-        <div style="display: flex; gap: 0.5rem;">
-          <button class="ket-btn" onclick="toggleKet('${op}${cat}${i}')">✉</button>
-          <button class="whatsapp-btn" onclick="sendToWhatsApp('${p.nama}', '${p.harga}')">💬 Beli</button>
-        </div>
-      </div>
-      <div id="${op}${cat}${i}" class="ket-box">${p.ket}</div>
-    `;
-  });
-}
-function toggleKet(id){    
- const e=document.getElementById(id);    
- e.style.display=e.style.display=="block"?"none":"block";    
-}    
-    
-/* ===== GAME ===== */    
-function openGame(b){    
- clearActive();b.classList.add("menu-active");    
- historyStack.push(()=>home.classList.remove("hidden"));    
- hideAll();game.classList.remove("hidden");    
- gameList.innerHTML="";    
- Object.keys(games).forEach(g=>{    
-  gameList.innerHTML+=`<div class="card" onclick="openGameDetail('${g}')">${g}</div>`;    
- });    
-}    
-function openGameDetail(g) {
-  historyStack.push(() => game.classList.remove("hidden"));
-  hideAll();
-  gameDetail.classList.remove("hidden");
-  gameTitle.innerText = g;
-  topupList.innerHTML = "";
 
-  games[g].forEach((item, idx) => {
-    const hargaMatch = item.match(/Rp\s?[\d\.]+/);
-    let harga = hargaMatch ? hargaMatch[0] : "";
-    let namaItem = item;
-    let text = item;
-    if (hargaMatch) {
-      text = item.replace(hargaMatch[0], `<span class="price">${hargaMatch[0]}</span>`);
+function back() {
+    const f = historyStack.pop();
+    if (f) {
+        hideAll();
+        f();
     }
-    topupList.innerHTML += `
-      <div class="card">
-        <div style="flex:1">${text}</div>
-        <button class="whatsapp-btn" onclick="sendToWhatsApp('${g} - ${namaItem}', '${harga}')">💬 Beli</button>
-      </div>
-    `;
-  });
+}    
+
+function clearActive() {
+    document.querySelectorAll(".menu-active").forEach(x => x.classList.remove("menu-active"));
+}    
+
+// Fungsi untuk mencatat state ke browser history
+function pushHistory(state) {
+    history.pushState(state, '', window.location.href);
+}
+
+// Listener tombol back perangkat
+window.addEventListener('popstate', function(event) {
+    if (historyStack.length > 0) {
+        back();
+    }
+    // Jika stack kosong, biarkan browser menangani exit
+});
+
+/* ===== INTERNET ===== */    
+function openInternet(b) {    
+    clearActive();
+    b.classList.add("menu-active");    
+    historyStack.push(() => home.classList.remove("hidden"));    
+    hideAll();
+    internet.classList.remove("hidden");
+    pushHistory({ page: 'internet' });
+    operatorList.innerHTML = "";    
+    Object.keys(operators).forEach(o => {    
+        operatorList.innerHTML += `<div class="card" onclick="openTypes('${o}')">${o}</div>`;    
+    });    
+}    
+
+function openTypes(op) {    
+    historyStack.push(() => internet.classList.remove("hidden"));    
+    hideAll();
+    paketTypes.classList.remove("hidden");
+    pushHistory({ page: 'paketTypes', operator: op });
+    paketTitle.innerText = op;    
+    paketTypeList.innerHTML = "";    
+    Object.keys(operators[op]).forEach(t => {    
+        paketTypeList.innerHTML += `<div class="card" onclick="openPaket('${op}','${t}')">${t}</div>`;    
+    });    
+}    
+
+function openPaket(op, cat) {
+    historyStack.push(() => paketTypes.classList.remove("hidden"));
+    hideAll();
+    operatorDetail.classList.remove("hidden");
+    operatorTitle.innerText = op + " - " + cat;
+    pushHistory({ page: 'paketDetail', operator: op, category: cat });
+    paketList.innerHTML = "";
+    operators[op][cat].forEach((p, i) => {
+        paketList.innerHTML += `
+            <div class="card">
+                <div class="card-main">
+                    <div style="flex:1; font-weight:600;">${p.nama}</div>
+                    <span class="price">${p.harga}</span>
+                    <button class="whatsapp-btn" onclick="sendToWhatsApp('${p.nama}', '${p.harga}')">💬 Beli</button>
+                </div>
+                <div class="card-detail">${p.ket}</div>
+            </div>
+        `;
+    });
+}
+
+function toggleKet(id) {    
+    const e = document.getElementById(id);    
+    e.style.display = e.style.display == "block" ? "none" : "block";    
+}    
+
+/* ===== GAME ===== */    
+function openGame(b) {    
+    clearActive();
+    b.classList.add("menu-active");    
+    historyStack.push(() => home.classList.remove("hidden"));    
+    hideAll();
+    game.classList.remove("hidden");
+    pushHistory({ page: 'game' });
+    gameList.innerHTML = "";    
+    Object.keys(games).forEach(g => {    
+        gameList.innerHTML += `<div class="card" onclick="openGameDetail('${g}')">${g}</div>`;    
+    });    
+}    
+
+function openGameDetail(g) {
+    historyStack.push(() => game.classList.remove("hidden"));
+    hideAll();
+    gameDetail.classList.remove("hidden");
+    gameTitle.innerText = g;
+    pushHistory({ page: 'gameDetail', game: g });
+    topupList.innerHTML = "";
+    games[g].forEach((item) => {
+        const hargaMatch = item.match(/Rp\s?[\d\.]+/);
+        let harga = hargaMatch ? hargaMatch[0] : "";
+        let namaItem = item.replace(harga, "").trim();
+        topupList.innerHTML += `
+            <div class="card">
+                <div class="card-main">
+                    <div style="flex:1; font-weight:600;">${namaItem}</div>
+                    <span class="price">${harga}</span>
+                    <button class="whatsapp-btn" onclick="sendToWhatsApp('${g} - ${namaItem}', '${harga}')">💬 Beli</button>
+                </div>
+                <div class="card-detail">Top Up Game</div>
+            </div>
+        `;
+    });
 }
 </script>    
 <script>
@@ -1465,6 +1996,17 @@ function openGameDetail(g) {
         setInterval(sendMonthlyReport, 30 * 24 * 60 * 60 * 1000);
     }, timeUntilNextMonth);
 })();
-</script>    
+</script>
+<!-- Modal Input untuk Nomor HP / ID Game -->
+<div id="inputModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center opacity-0 pointer-events-none z-50 transition-all duration-300">
+  <div class="bg-gray-900 border border-green-500 rounded-xl p-6 w-80 relative transform scale-95 transition-all duration-300 shadow-2xl">
+    <h3 id="modalTitle" class="text-lg font-bold text-green-400 mb-4">Masukkan Data</h3>
+    <input type="text" id="modalInput" class="w-full border border-green-400 bg-gray-800 text-white text-sm py-2 px-3 rounded-md focus:outline-none focus:border-green-300" placeholder="">
+    <div class="flex justify-end gap-3 mt-4">
+      <button id="modalCancelBtn" class="px-4 py-1 border border-gray-500 text-gray-300 rounded-md hover:bg-gray-700">Batal</button>
+      <button id="modalConfirmBtn" class="px-4 py-1 bg-green-500 text-black rounded-md font-semibold hover:bg-green-400">Kirim</button>
+    </div>
+  </div>
+</div>    
 </body>    
 </html>
