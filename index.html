@@ -9,65 +9,10 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
-        }
-
-        /* VARIABLES DEFAULT (DARK MODE - SABER HIJAU) */
-        :root {
-            --bg-body: radial-gradient(circle at 20% 30%, #0a1210, #010302);
-            --bg-container: rgba(10, 20, 16, 0.75);
-            --border-glow: 1px solid rgba(70, 230, 110, 0.5);
-            --shadow-glow: 0 0 25px rgba(60, 220, 90, 0.2);
-            --card-bg: rgba(5, 25, 12, 0.75);
-            --card-border: 1px solid #4eff7a;
-            --card-shadow: 0 0 12px rgba(70, 255, 110, 0.3);
-            --text-primary: #f0fff0;
-            --text-secondary: #bcffd4;
-            --accent-color: #4eff7a;
-            --accent-glow: #2eff6e;
-            --panel-bg: rgba(0, 15, 6, 0.6);
-            --panel-border: 1px solid #3eff7a30;
-            --input-bg: #081f12;
-            --input-border: 1.8px solid #3eff7a;
-            --input-focus: #5eff86;
-            --table-header-bg: #0a281a;
-            --table-border: 1px solid #4eff7a80;
-            --row-hover: rgba(70, 255, 120, 0.1);
-            --footer-color: #8bc9a2;
-            --btn-reset-bg: rgba(0, 0, 0, 0.65);
-            --btn-reset-border: 1.5px solid #5eff8a;
-            --btn-reset-hover: #1e482e;
-        }
-
-        /* LIGHT MODE - NEON HIJAU & BIRU */
-        body.light-mode {
-            --bg-body: linear-gradient(145deg, #e0f2fe, #bae6fd);
-            --bg-container: rgba(255, 255, 255, 0.85);
-            --border-glow: 1px solid rgba(0, 150, 200, 0.5);
-            --shadow-glow: 0 0 20px rgba(0, 160, 210, 0.25);
-            --card-bg: rgba(245, 255, 250, 0.9);
-            --card-border: 1px solid #2ecc71;
-            --card-shadow: 0 0 12px rgba(46, 204, 113, 0.3);
-            --text-primary: #1a4d3e;
-            --text-secondary: #0f6b4c;
-            --accent-color: #1abc9c;
-            --accent-glow: #0fe0b0;
-            --panel-bg: rgba(240, 255, 245, 0.8);
-            --panel-border: 1px solid #2ecc7130;
-            --input-bg: #ffffff;
-            --input-border: 1.8px solid #1abc9c;
-            --input-focus: #2ecc71;
-            --table-header-bg: #d0f0e0;
-            --table-border: 1px solid #2ecc7180;
-            --row-hover: rgba(26, 188, 156, 0.1);
-            --footer-color: #2c7a5e;
-            --btn-reset-bg: rgba(240, 248, 245, 0.9);
-            --btn-reset-border: 1.5px solid #1abc9c;
-            --btn-reset-hover: #d4f4e6;
         }
 
         body {
-            background: var(--bg-body);
+            background: radial-gradient(circle at 20% 30%, #0a1210, #010302);
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -79,37 +24,33 @@
         .app-container {
             max-width: 1100px;
             width: 100%;
-            background: var(--bg-container);
+            background: rgba(10, 20, 16, 0.65);
             backdrop-filter: blur(14px);
             border-radius: 2rem;
-            border: var(--border-glow);
-            box-shadow: var(--shadow-glow), 0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(70, 230, 110, 0.5);
+            box-shadow: 0 0 25px rgba(60, 220, 90, 0.2), 0 8px 32px rgba(0, 0, 0, 0.5);
             overflow: hidden;
         }
 
-        /* header dengan tombol toggle tema */
+        /* header */
         .app-header {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 1rem 2rem;
-            border-bottom: 1px solid var(--accent-color);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 1.2rem 2rem;
+            border-bottom: 1px solid #3eff7a40;
         }
 
         .title-section {
             display: flex;
+            justify-content: space-between;
             align-items: baseline;
-            gap: 1rem;
             flex-wrap: wrap;
+            gap: 0.8rem;
         }
 
         .title-section h1 {
             font-size: 1.7rem;
             font-weight: 700;
-            background: linear-gradient(135deg, var(--text-primary), var(--accent-color));
+            background: linear-gradient(135deg, #c8ffc2, #2eff7a);
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
@@ -117,40 +58,13 @@
         }
 
         .badge {
-            background: var(--panel-bg);
+            background: #1e3a2a;
             padding: 0.2rem 0.9rem;
             border-radius: 40px;
             font-size: 0.7rem;
-            color: var(--text-secondary);
-            border: 1px solid var(--accent-color);
+            color: #b9ffc4;
+            border: 1px solid #4eff7a;
             font-weight: 500;
-        }
-
-        /* tombol toggle tema kecil & profesional */
-        .theme-toggle {
-            background: var(--btn-reset-bg);
-            border: var(--btn-reset-border);
-            border-radius: 3rem;
-            padding: 0.4rem 1rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            transition: all 0.2s;
-            backdrop-filter: blur(4px);
-        }
-
-        .theme-toggle:hover {
-            background: var(--btn-reset-hover);
-            transform: translateY(-1px);
-            box-shadow: 0 0 10px var(--accent-color);
-        }
-
-        .theme-toggle:active {
-            transform: scale(0.97);
         }
 
         /* input panels */
@@ -159,16 +73,16 @@
         }
 
         .panel {
-            background: var(--panel-bg);
+            background: rgba(0, 15, 6, 0.6);
             border-radius: 1.5rem;
             padding: 1rem 1.5rem;
             margin-bottom: 1.2rem;
-            border: var(--panel-border);
+            border: 1px solid #3eff7a30;
             transition: all 0.2s ease;
         }
 
         .panel:hover {
-            border-color: var(--accent-color);
+            border-color: #6eff9a;
             box-shadow: 0 0 12px rgba(80, 255, 120, 0.2);
         }
 
@@ -183,12 +97,12 @@
             font-size: 0.75rem;
             text-transform: uppercase;
             font-weight: 700;
-            background: var(--card-bg);
+            background: #1b3a28;
             padding: 0.25rem 0.8rem;
             border-radius: 24px;
-            color: var(--text-secondary);
+            color: #d5ffdf;
             letter-spacing: 0.5px;
-            border: 1px solid var(--accent-color);
+            border: 1px solid #4eff7a60;
         }
 
         .voucher-row {
@@ -208,51 +122,51 @@
         .voucher-name {
             font-size: 0.75rem;
             font-weight: 700;
-            color: var(--text-secondary);
-            background: var(--card-bg);
+            color: #c4ffd4;
+            background: #0f2a1c;
             display: inline-block;
             padding: 0.2rem 0.8rem;
             border-radius: 20px;
             width: fit-content;
-            border: 1px solid var(--accent-color);
+            border: 1px solid #4eff7a60;
         }
 
         .voucher-name small {
-            color: var(--accent-color);
+            color: #9affb0;
             font-size: 0.65rem;
             margin-left: 5px;
         }
 
         .input-mini {
-            background: var(--input-bg);
-            border: var(--input-border);
+            background: #081f12;
+            border: 1.8px solid #3eff7a;
             border-radius: 1.2rem;
             padding: 0.55rem 0.7rem;
             width: 95px;
             font-size: 0.9rem;
             font-weight: 600;
             text-align: center;
-            color: var(--text-primary);
+            color: #eaffec;
             font-family: 'Inter', monospace;
             transition: all 0.2s;
-            box-shadow: 0 0 4px var(--accent-color);
+            box-shadow: 0 0 4px #46ff7a;
         }
 
         .input-mini:focus {
             outline: none;
-            border-color: var(--input-focus);
-            box-shadow: 0 0 12px var(--accent-glow);
-            background: var(--panel-bg);
+            border-color: #aaffb0;
+            box-shadow: 0 0 12px #5eff86;
+            background: #0d2c1a;
             transform: scale(1.01);
         }
 
         .input-mini::placeholder {
-            color: var(--footer-color);
+            color: #4f8868;
             font-size: 0.7rem;
             font-weight: 400;
         }
 
-        /* tombol reset */
+        /* tombol reset premium */
         .action-bar {
             display: flex;
             justify-content: center;
@@ -260,33 +174,34 @@
         }
 
         .btn-reset {
-            background: var(--btn-reset-bg);
-            border: var(--btn-reset-border);
+            background: rgba(0, 0, 0, 0.65);
+            border: 1.5px solid #5eff8a;
             padding: 0.65rem 2rem;
             border-radius: 3rem;
             font-weight: 700;
             font-size: 0.85rem;
             cursor: pointer;
-            color: var(--text-primary);
+            color: #e2ffe8;
             backdrop-filter: blur(5px);
             font-family: inherit;
             transition: all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
             letter-spacing: 0.3px;
-            box-shadow: 0 0 6px var(--accent-color);
+            box-shadow: 0 0 6px #3eff7a;
         }
 
         .btn-reset:hover {
-            background: var(--btn-reset-hover);
-            border-color: var(--accent-color);
+            background: #1e482e;
+            border-color: #a5ffb5;
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 20px rgba(80, 255, 120, 0.4);
         }
 
         .btn-reset:active {
             transform: scale(0.96);
+            transition: transform 0.05s;
         }
 
-        /* hasil statistik */
+        /* area hasil - statistik tanpa animasi kedip, hanya glow lembut */
         .result-area {
             padding: 0 2rem 1.8rem;
         }
@@ -298,15 +213,17 @@
             margin-bottom: 1.8rem;
         }
 
+        /* efek neon statis (glow) tanpa animasi kedip */
         .stat-card {
             flex: 1;
-            background: var(--card-bg);
+            background: rgba(5, 25, 12, 0.75);
             backdrop-filter: blur(8px);
             border-radius: 1.4rem;
             padding: 0.9rem 0.5rem;
             text-align: center;
-            border: var(--card-border);
-            box-shadow: var(--card-shadow);
+            border: 1px solid #4eff7a;
+            box-shadow: 0 0 12px rgba(70, 255, 110, 0.3);
+            transition: none;
         }
 
         .stat-label {
@@ -314,41 +231,41 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             font-weight: 700;
-            color: var(--text-secondary);
+            color: #bcffd4;
         }
 
         .stat-value {
             font-size: 1.65rem;
             font-weight: 800;
-            color: var(--text-primary);
-            text-shadow: 0 0 6px var(--accent-glow);
+            color: #f0fff0;
+            text-shadow: 0 0 6px #2eff6e;
             margin: 0.3rem 0;
         }
 
         .stat-value.profit {
-            color: var(--text-primary);
+            color: #dcffd0;
         }
 
         .stat-value.setoran {
-            color: var(--text-primary);
+            color: #ffe1b3;
         }
 
         .stat-desc {
             font-size: 0.65rem;
-            color: var(--text-secondary);
+            color: #c2f0cf;
             font-weight: 500;
             letter-spacing: 0.3px;
             margin-top: 4px;
             opacity: 0.9;
         }
 
-        /* tabel */
+        /* tabel premium dengan efek neon glow tanpa kedip */
         .table-wrapper {
-            background: var(--panel-bg);
+            background: rgba(0, 18, 8, 0.75);
             border-radius: 1.4rem;
             overflow-x: auto;
-            border: var(--card-border);
-            box-shadow: var(--card-shadow);
+            border: 1px solid #4eff7a;
+            box-shadow: 0 0 12px rgba(70, 255, 110, 0.25);
         }
 
         table {
@@ -358,12 +275,12 @@
         }
 
         th {
-            background: var(--table-header-bg);
+            background: #0a281a;
             padding: 14px 8px;
-            color: var(--text-primary);
+            color: #e0ffe8;
             font-weight: 700;
             text-align: center;
-            border-bottom: var(--table-border);
+            border-bottom: 1px solid #4eff7a80;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             font-size: 0.75rem;
@@ -372,8 +289,8 @@
         td {
             padding: 10px 6px;
             text-align: center;
-            border-bottom: 1px solid var(--accent-color);
-            color: var(--text-primary);
+            border-bottom: 1px solid #3eff7a30;
+            color: #e2f5e8;
             font-weight: 500;
         }
 
@@ -382,26 +299,26 @@
         }
 
         tr:hover td {
-            background: var(--row-hover);
+            background: rgba(70, 255, 120, 0.1);
         }
 
         .voucher-badge {
-            background: var(--card-bg);
+            background: #19492e;
             padding: 4px 12px;
             border-radius: 40px;
             display: inline-block;
             font-weight: 700;
             font-size: 0.75rem;
-            border: 1px solid var(--accent-color);
-            color: var(--text-primary);
+            border: 1px solid #6eff9a;
+            color: #e2ffe8;
         }
 
         .footer {
             margin-top: 1.5rem;
             text-align: center;
             font-size: 0.7rem;
-            color: var(--footer-color);
-            border-top: 1px solid var(--accent-color);
+            color: #8bc9a2;
+            border-top: 1px solid #4eff7a40;
             padding-top: 1rem;
             display: flex;
             justify-content: space-between;
@@ -415,10 +332,11 @@
 
         .footer .developer {
             font-weight: 600;
-            background: var(--card-bg);
+            background: #0e2a1c;
             padding: 0.2rem 1rem;
             border-radius: 40px;
             letter-spacing: 0.3px;
+            color: #c0ffd0;
         }
 
         @media (max-width: 720px) {
@@ -436,12 +354,12 @@
                 font-size: 0.7rem;
                 padding: 8px 4px;
             }
-            .app-header {
-                flex-direction: column;
-                align-items: stretch;
+            .voucher-badge {
+                padding: 2px 8px;
             }
-            .theme-toggle {
-                align-self: flex-end;
+            .footer {
+                flex-direction: column;
+                text-align: center;
             }
         }
     </style>
@@ -453,9 +371,6 @@
             <h1>📊 Hitung Penjualan Voucher</h1>
             <div class="badge">realtime | setoran & komisi</div>
         </div>
-        <button class="theme-toggle" id="themeToggleBtn">
-            🌓 Tema Mode
-        </button>
     </div>
 
     <div class="input-panels">
@@ -612,4 +527,51 @@
             if (!tbody) return;
             tbody.innerHTML = '';
             for (let item of details) {
-                const row = tbody.i
+                const row = tbody.insertRow();
+                const cellName = row.insertCell(0);
+                cellName.innerHTML = `<span class="voucher-badge">${item.name}</span>`;
+                const cellSold = row.insertCell(1);
+                cellSold.textContent = item.sold;
+                cellSold.style.fontWeight = 'bold';
+                const cellIncome = row.insertCell(2);
+                cellIncome.textContent = formatRp(item.income);
+                const cellProfit = row.insertCell(3);
+                cellProfit.textContent = formatRp(item.profit);
+                const cellSetoran = row.insertCell(4);
+                cellSetoran.textContent = formatRp(item.setoran);
+            }
+            if (details.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">🔢 Masukkan jumlah stok awal dan akhir</td></tr>';
+            }
+        }
+
+        function resetAll() {
+            document.getElementById('awal_5000').value = '';
+            document.getElementById('akhir_5000').value = '';
+            document.getElementById('awal_3000').value = '';
+            document.getElementById('akhir_3000').value = '';
+            document.getElementById('awal_10000').value = '';
+            document.getElementById('akhir_10000').value = '';
+            render();
+            const resetBtn = document.getElementById('resetBtn');
+            if (resetBtn) {
+                resetBtn.style.transform = 'scale(0.97)';
+                setTimeout(() => { resetBtn.style.transform = ''; }, 120);
+            }
+        }
+
+        function bindEvents() {
+            const inputs = document.querySelectorAll('.input-mini');
+            inputs.forEach(input => {
+                input.addEventListener('input', () => render());
+            });
+            const resetBtn = document.getElementById('resetBtn');
+            if (resetBtn) resetBtn.addEventListener('click', resetAll);
+        }
+
+        bindEvents();
+        render();
+    })();
+</script>
+</body>
+</html>
